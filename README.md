@@ -4,15 +4,15 @@ TODO: Give a short introduction of your project. Let this section explain the ob
 # Getting Started
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
 1.	Installation nodejs
-2.	Installation angular cli version6 :
-3.	Installation sequelize
-4.	Install API references
+2.	Installation angular cli version6
+3. Install and setup Ionic framework
 
 # Build and Test
-1. Run server : node server.js 
-2. Run client cd client
-3. Run user: ng serve
-4. Run admin : ng serve
+1. Install library: cd server -> npm install
+2. Run server : node server.js 
+3. Run client cd client
+4. Run user: ng serve
+5. Run admin : ng serve
 # Contribute
 TODO: Explain how other users and developers can contribute to make your code better. 
 
