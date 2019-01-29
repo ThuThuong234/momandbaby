@@ -6759,3 +6759,8 @@ server/node_modules/shebang-command/readme.md
 server/node_modules/shebang-command/package.json
 server/node_modules/shebang-command/license
 server/node_modules/shebang-command/index.js
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/source.iml
+.idea/modules.xml
+.idea/misc.xml
