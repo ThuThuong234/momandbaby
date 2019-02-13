@@ -1,0 +1,17 @@
+.footer {
+  top: 0;
+  text-align: center;
+  padding: 10px 60px 20px 60px;
+  background-color: #192433;
+  color: #fff;
+}
+.footer ul.bottom {
+  border-top: #000;
+  font-weight: 700;
+  display: flex;
+  list-style: none;
+}
+.footer ul.bottom  li{
+  font-size: 10px;
+  margin-left: 30px;
+}

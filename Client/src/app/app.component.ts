@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'Body',
+  template: '<router-outlet></router-outlet>'
 })
-export class AppComponent {
-  title = 'Client';
+export class AppComponent implements OnInit  {
+
+  public birthday: Date;
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      window.scrollTo(0, 0);
+    });
+  }
 }

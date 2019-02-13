@@ -7,7 +7,7 @@ TODO: Guide users through getting your code up and running on their own system. 
 2.	Installation angular cli version6
 3. Install and setup Ionic framework
 
-# Build and Test1
+# Build and Test
 1. Install library: cd server -> npm install
 2. Run server : node server.js
 3. Run client cd client
