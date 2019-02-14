@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
 import { NavbarComponent } from './views/navbar/navbar.component';
 import { FooterComponent } from './views/footer/footer.component';
+import { CarouselComponent } from './views/carousel/carousel.component';
 
 import { AccordionModule } from 'primeng/components/accordion/accordion';
 import { PanelModule } from 'primeng/components/panel/panel';
@@ -29,7 +30,8 @@ import { AppRoutingModule } from './app.routing';
     P404Component,
     P500Component,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,
