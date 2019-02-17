@@ -11,11 +11,14 @@ import { HomeComponent } from './views/home/home.component';
 import { NavbarComponent } from './views/navbar/navbar.component';
 import { FooterComponent } from './views/footer/footer.component';
 import { CarouselComponent } from './views/carousel/carousel.component';
+import { HotComponent } from './views/carousel/hot.component';
+import { LoginComponent } from './views/login/login.component';
 
 import { AccordionModule } from 'primeng/components/accordion/accordion';
 import { PanelModule } from 'primeng/components/panel/panel';
 import { ButtonModule } from 'primeng/components/button/button';
 import { RadioButtonModule } from 'primeng/components/radioButton/radioButton';
+import {CarouselModule} from 'primeng/carousel';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -31,7 +34,9 @@ import { AppRoutingModule } from './app.routing';
     P500Component,
     NavbarComponent,
     FooterComponent,
-    CarouselComponent
+    CarouselComponent,
+    HotComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +48,8 @@ import { AppRoutingModule } from './app.routing';
     AccordionModule,
     PanelModule,
     ButtonModule,
-    RadioButtonModule
+    RadioButtonModule,
+    CarouselModule
   ],
   providers: [Title],
   bootstrap: [
