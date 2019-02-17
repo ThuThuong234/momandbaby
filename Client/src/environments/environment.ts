@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:3000',
+  apiHeaderKey: 'x-api-key',
+  apiHeaderValue: '123@mom_and_baby_tool',
+  apiHeaderAuth: 'x-access-token',
 };
 
 /*
