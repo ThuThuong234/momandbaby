@@ -6,7 +6,6 @@ const Promise = require('bluebird');
 const auth_utils = require('../config/auth_utils');
 const models = require('../db/models');
 
-
 exports.login = function (account, password) {
     return new Promise(function (resolve, reject) {
         console.log(account);

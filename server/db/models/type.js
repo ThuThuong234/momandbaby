@@ -15,13 +15,14 @@ module.exports = function (sequelize, DataTypes) {
                 }
             },
             underscored: true,
-            tableName: 'users'
+            tableName: 'types'
         });
 
     Type.associate = function (models) {
         Type.Topics = Type.hasMany(models.Topic, { foreignKey: 'type_id' });
+        Type.Topics = Type.hasMany(models.Type, { foreignKey: 'parent_id' });
         Type.belongsTo(models.Type);
     };
 
-    return Role;
+    return Type;
 };

@@ -9,41 +9,18 @@ const models = require('../db/models');
 
 exports.getALLTypes = function () {
     return new Promise(function (resolve, reject) {
-        models..findOne({
-            where: {
-                account: account,
-                password: password
-            },
-            attributes: ['id', 'account', 'fullname'],
-            include: [
-                {
-                    model: models.Role,
-                    required: false,
-                    attributes: ['code', 'name']
-                }
-            ]
+        models.Type.findAll({
+            attributes: ['id', 'name', 'parent_id'],
         })
-            .then(user => {
-                if (user == null) {
-                    throw {
-                        message: errors.AUTHENTICATE_01,
-                        code: 'AUTHENTICATE_01'
+            .then(result => {
+                let types = result.map(type => {
+                    return {
+                        id: type.id,
+                        name: type.name,
+                        parent_id: type.parent_id,
                     };
-                }
-                let resultData = {
-                    id: user.id,
-                    account: user.account,
-                    fullname: user.fullname,
-                    role: user.Role
-                };
-                let token = auth_utils.getToken(resultData);
-                resultData.token = token;
-
-                user.last_login = new Date();
-                return Promise.all([resultData, user.save()]);
-            })
-            .then(([resultData]) => {
-                return resolve(resultData);
+                });
+                return resolve(types);
             })
             .catch(error => {
                 logger.error(error);

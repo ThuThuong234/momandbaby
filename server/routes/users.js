@@ -10,6 +10,32 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+/**
+ * @api {post} /users/login Login
+ * @apiVersion 1.0.0
+ * @apiGroup Users
+ *
+ * @apiUse AccessHeader
+ *
+ * @apiParam (Body) {String} account User account
+ * @apiParam (Body) {String} password User password
+ *
+ * @apiSuccessExample {json} Success Response
+ *  HTTP/1.1 200 OK
+ *  {
+ *    "success": true,
+ *    "data": {
+ *      "account": "account",
+ *      "fullname": "User",
+ *      "role": {
+ *        "code": "user"
+ *        "name": "User"
+ *      },
+ *      "token": "abcdxfvz1234567--*324"
+ *    }
+ *  }
+ * @apiUse FailedResponse
+ */
 router.post('/login', function(req, res) {
     let account = req.body.account;
     let password = req.body.password;

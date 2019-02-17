@@ -45,24 +45,4 @@
  * @apiParam {Number} [current_page = 1] Current page value
  * @apiParam {Number} [page_size = 10] Number of items per page value
  */
-/**
- * @api {get} /users/options Get Users For Select
- * @apiVersion 1.0.0
- * @apiPermission Hr
- * @apiGroup Users
- *
- * @apiUse TokenHeader
- *
- * @apiSuccessExample {json} Success Response
- *  HTTP/1.1 200 OK
- *  {
- *    "success": true,
- *    "data": [{
- *      "id": 5,
- *      "fullname": "Micky Mouse"
- *    }]
- *  }
- * @apiUse FailedResponse
- */
-
-
+/
