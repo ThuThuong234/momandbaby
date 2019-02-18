@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { CalendarModule} from "primeng/calendar";
 
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './views/home/home.component';
 import { NavbarComponent } from './views/navbar/navbar.component';
 import { FooterComponent } from './views/footer/footer.component';
@@ -26,6 +27,10 @@ import { P500Component } from './views/error/500.component';
 
 
 import { AppRoutingModule } from './app.routing';
+import {TypeService} from "./services/reader/type_services";
+import {SpinService} from "./services/spin.service";
+import {ToastrModule} from "ngx-toastr";
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -49,9 +54,17 @@ import { AppRoutingModule } from './app.routing';
     PanelModule,
     ButtonModule,
     RadioButtonModule,
-    CarouselModule
+    CarouselModule,
+    HttpClientModule,
+    ToastrModule.forRoot({
+      progressBar: true,
+      preventDuplicates: true,
+    }),
   ],
-  providers: [Title],
+  providers: [Title,
+    SpinService,
+    TypeService
+  ],
   bootstrap: [
     AppComponent
   ]

@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
  *  }
  * @apiUse FailedResponse
  */
-router.get('/types', function(req, res) {
+router.get('/types', auth_utils.authorizeHeader, function(req, res) {
     typeServices.getALLTypes()
         .then(data => {
             res.json(utils.successResponse(data));
