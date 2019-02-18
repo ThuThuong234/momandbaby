@@ -9,16 +9,18 @@
 # STEPS TO START API SERVER
 #--------------------------------------------------------
 1. Install node.js (version >= 8) --> restart computer (check: node -v)
-2. Install mysql  (https://www.postgresql.org/download/) by using EnterpriseDB bundle
+2. Install xampp and run mysql  (https://www.apachefriends.org/download.html)
+    + Open xampp and start apache + mysql
 3. Go to /server, run: npm install
-4. Create pa_tool database. Run database migration to generate db schema.
+4. Create mom_and_baby_tool database.
+    + Go to http://localhost:port/phpmyadmin/ and create database name : baby_forums
+5. Run database migration to generate db schema.
   + npm install sequelize-cli -g
 	+ sequelize db:migrate
 	+ sequelize db:seed:all
-5. Start server without checking changed: npm start
-6. Start server with checking changed
-	+ npm install nodemon -g
-	+ nodemon server.js
+6. Start server without checking changed: npm start
+7. Start server with checking changed
+	+ npm start
 
 
 #--------------------------------------------------------

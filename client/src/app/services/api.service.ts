@@ -58,6 +58,11 @@ export class APIService {
           params: params,
           headers: headers
         });
+      case 'get':
+        return this.httpClient.get<T>(url, {
+          headers: headers,
+          params: params
+        });
       default:
         return this.httpClient.get<T>(url, {
           headers: headers,
