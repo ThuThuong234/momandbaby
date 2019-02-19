@@ -10,7 +10,7 @@ import {ToastrService} from 'ngx-toastr';
   templateUrl: 'home.component.html'
 })
 export class HomeComponent implements OnInit{
-  typePaging: TypePaging = new TypePaging
+  typePaging: TypePaging = new TypePaging();
   constructor(
     private typeService: TypeService,
     private toastr: ToastrService) { }
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit{
   private getTypes() {
     this.typeService.getTypes().subscribe(res => {
         if (res.success && res.data) {
-          console.log(res.data);
+          console.log(res);
           this.typePaging = plainToClass(TypePaging, res.data);
         } else {
           this.toastr.error(" res is not succeeds" + res.message);

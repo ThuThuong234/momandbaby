@@ -15,14 +15,16 @@
   <div>
     <h1>new</h1>
     <nav class="navbar navbar-default">
-    <div class="container-fluid">
-    <div class="navbar-header">
-    <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav" *ngFor="let type of typePaging.Items">
-    <li><a href="#">{{type.type_name}}</a></li>
-    </ul>
-    </div>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <div *ngIf="typePaging">
+          <ul class="nav navbar-nav" *ngFor="let t of typePaging">
+            <li><a href="#">{{t.name}}</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
   </div>
   <app-footer></app-footer>

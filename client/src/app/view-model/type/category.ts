@@ -1,4 +1,5 @@
 export class Category {
-  type_id: number;
-  type_name: string;
+  id: number;
+  name: string;
+  parent_id: number;
 }
