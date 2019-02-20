@@ -13,7 +13,7 @@
     + Open xampp and start apache + mysql
 3. Go to /server, run: npm install
 4. Create mom_and_baby_tool database.
-    + Go to http://localhost:port/phpmyadmin/ and create database name : baby_forums
+    + Go to http://localhost:port/phpmyadmin/ and create database name : baby_forums (choose utf8_unicode_ci for language of database)
 5. Run database migration to generate db schema.
   + npm install sequelize-cli -g
 	+ sequelize db:migrate

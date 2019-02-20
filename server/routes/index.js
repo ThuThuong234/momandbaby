@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
  * @apiUse FailedResponse
  */
 router.get('/types', auth_utils.authorizeHeader, function(req, res) {
-    typeServices.getALLTypes()
+    typeServices.getALLRootTypes()
         .then(data => {
             res.json(utils.successResponse(data));
         })
