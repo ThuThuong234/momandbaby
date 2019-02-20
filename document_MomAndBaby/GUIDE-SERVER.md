@@ -15,12 +15,12 @@
 4. Create mom_and_baby_tool database.
     + Go to http://localhost:port/phpmyadmin/ and create database name : baby_forums (choose utf8_unicode_ci for language of database)
 5. Run database migration to generate db schema.
-  + npm install sequelize-cli -g
-	+ sequelize db:migrate
-	+ sequelize db:seed:all
-6. Start server without checking changed: npm start
-7. Start server with checking changed
-	+ npm start
+    + Run cmd: npm install sequelize-cli -g
+    + Go to D:\hoctap\hocki8\DOANTOTNGHIEP\baocao\code\server\db
+	+ Run cmd: sequelize db:migrate
+	+ Run cmd: sequelize db:seed:all
+6. Start server without checking changed:
+    + Run cmd: npm start
 
 
 #--------------------------------------------------------
@@ -29,5 +29,4 @@
 1. Run command: npm install apidoc -g
 2. Go to /server folder
 3. Run command: npm run apidoc
-
 4. Open file: server/apidoc/index.html
