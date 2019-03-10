@@ -3,8 +3,8 @@
 const log4js = require('log4js');
 const logger = log4js.getLogger();
 const Promise = require('bluebird');
-const auth_utils = require('../config/auth_utils');
-const models = require('../db/models');
+const auth_utils = require('../../config/auth_utils');
+const models = require('../../db/models/index');
 
 
 exports.getALLTypes = function () {
