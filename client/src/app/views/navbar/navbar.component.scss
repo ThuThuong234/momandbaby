@@ -3,6 +3,10 @@
   text-align: center;
   padding: 10px 60px 20px 60px;
   background-color: #8C0014;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
 }
 
 .navbar li {

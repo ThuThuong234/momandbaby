@@ -10,18 +10,10 @@ import { Router } from "@angular/router";
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(
-    private router: Router
-  ) {
+  constructor( private router: Router) {
     // console.log(translate.data);
   }
 
   ngOnInit() {}
-  logout() {
-    this.router.navigate(["/"]);
-  }
 
-  setLang(lang: string) {
-    // console.log("Language", lang);
-  }
 }

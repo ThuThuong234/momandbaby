@@ -7,18 +7,24 @@ import {ToastrService} from 'ngx-toastr';
 @Component({
 
   selector: 'home-root',
-  templateUrl: 'home.component.html'
+  templateUrl: 'home.component.html',
+  styleUrls: ["home.component.scss"]
 })
 export class HomeComponent implements OnInit{
   typePaging: TypePaging = new TypePaging();
+  private bodyText: string;
   constructor(
     private typeService: TypeService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService ){ }
 
 
   ngOnInit() {
     this.getTypes();
+    this.bodyText = 'This text can be updated in modal 1';
+    console.log("out");
+
   }
+
 
   private getTypes() {
     this.typeService.getTypes().subscribe(res => {

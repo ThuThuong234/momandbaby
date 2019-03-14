@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
+
 @Component({
   selector: 'Body',
   template: '<router-outlet></router-outlet>'
 })
 export class AppComponent implements OnInit  {
 
-  public birthday: Date;
   constructor(private router: Router) {}
 
   ngOnInit() {
@@ -15,4 +15,5 @@ export class AppComponent implements OnInit  {
       window.scrollTo(0, 0);
     });
   }
+
 }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
 import { CalendarModule} from "primeng/calendar";
@@ -13,37 +13,40 @@ import { NavbarComponent } from './views/navbar/navbar.component';
 import { FooterComponent } from './views/footer/footer.component';
 import { CarouselComponent } from './views/carousel/carousel.component';
 import { HotComponent } from './views/carousel/hot.component';
-import { LoginComponent } from './views/login/login.component';
 
 import { AccordionModule } from 'primeng/components/accordion/accordion';
 import { PanelModule } from 'primeng/components/panel/panel';
 import { ButtonModule } from 'primeng/components/button/button';
 import { RadioButtonModule } from 'primeng/components/radioButton/radioButton';
-import {CarouselModule} from 'primeng/carousel';
-
-import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
-
+import { CarouselModule} from 'primeng/carousel';
+import { ModalComponent} from "./views/home/modal/modal.component";
 
 
 import { AppRoutingModule } from './app.routing';
 import {TypeService} from "./services/reader/type_services";
 import {SpinService} from "./services/spin.service";
 import {ToastrModule} from "ngx-toastr";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {LoginComponent} from "./views/navbar/login/login.component";
+
+
+
 
 @NgModule({
   declarations: [
     HomeComponent,
     AppComponent,
-    P404Component,
-    P500Component,
     NavbarComponent,
     FooterComponent,
     CarouselComponent,
     HotComponent,
-    LoginComponent
+    LoginComponent,
+    ModalComponent
   ],
   imports: [
+    NgbModule.forRoot(),
+    ReactiveFormsModule,
     CommonModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -56,12 +59,14 @@ import {ToastrModule} from "ngx-toastr";
     RadioButtonModule,
     CarouselModule,
     HttpClientModule,
+    FontAwesomeModule,
     ToastrModule.forRoot({
       progressBar: true,
       preventDuplicates: true,
     }),
   ],
-  providers: [Title,
+  providers: [
+    Title,
     SpinService,
     TypeService
   ],
