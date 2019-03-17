@@ -20,6 +20,8 @@ import { ButtonModule } from 'primeng/components/button/button';
 import { RadioButtonModule } from 'primeng/components/radioButton/radioButton';
 import { CarouselModule} from 'primeng/carousel';
 import { ModalComponent} from "./views/home/modal/modal.component";
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 
 
 import { AppRoutingModule } from './app.routing';
@@ -29,6 +31,8 @@ import {ToastrModule} from "ngx-toastr";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {LoginComponent} from "./views/navbar/login/login.component";
+import { AdminComponent } from './views/admin/admin.component';
+import {SidebarComponent} from "./views/admin/sidebar/sidebar.component";
 
 
 
@@ -42,7 +46,8 @@ import {LoginComponent} from "./views/navbar/login/login.component";
     CarouselComponent,
     HotComponent,
     LoginComponent,
-    ModalComponent
+    ModalComponent,
+    AdminComponent,SidebarComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -60,6 +65,7 @@ import {LoginComponent} from "./views/navbar/login/login.component";
     CarouselModule,
     HttpClientModule,
     FontAwesomeModule,
+    AngularFontAwesomeModule,
     ToastrModule.forRoot({
       progressBar: true,
       preventDuplicates: true,

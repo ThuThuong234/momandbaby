@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './views/home/home.component';
+import {AdminComponent} from "./views/admin/admin.component";
 
 export const routes: Routes = [
   {
@@ -14,6 +15,13 @@ export const routes: Routes = [
     component: HomeComponent,
     data: {
       title: 'Home'
+    }
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    data: {
+      title: 'Admin'
     }
   }
 ];
