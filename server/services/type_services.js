@@ -18,15 +18,15 @@ exports.getTypesForMenuBar = function () {
         })
             .then(result => {
                 let types = result.map(type => {
-                    // var child = await (helpers.getChildOfCategory(type.id));
+                    var childs =  (helpers.getChildOfCategory(type.id));
                     return {
                         id: type.id,
                         name: type.name,
-                        // child: child,
+                        child:  helpers.getChildOfCategory(type.id),
                     };
                 });
 
-                // console.log(types);
+                console.log(types);
                 return resolve(types);
             })
             .catch(error => {

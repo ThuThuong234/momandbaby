@@ -14,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
             active: {type: DataTypes.BOOLEAN, defaultValue: true},
             role_id: DataTypes.INTEGER,
             last_login: DataTypes.DATE,
-            position_id: DataTypes.INTEGER,
+            password: DataTypes.STRING,
             image_url: DataTypes.STRING
         },
         {

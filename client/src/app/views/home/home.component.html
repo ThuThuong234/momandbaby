@@ -18,6 +18,9 @@
         <div *ngIf="typePaging">
           <ul class="nav navbar-nav" *ngFor="let t of typePaging">
             <li><a href="#">{{t.name}}</a></li>
+            <div *ngIf="t.child">
+              <div>{{t.child}}</div>
+            </div>
           </ul>
         </div>
       </div>
