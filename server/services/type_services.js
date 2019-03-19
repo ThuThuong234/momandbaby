@@ -1,5 +1,4 @@
 'use strict';
-
 const log4js = require('log4js');
 const logger = log4js.getLogger();
 const Promise = require('bluebird');
@@ -8,26 +7,37 @@ const models = require('../db/models/index');
 const helpers = require('../helper/api_helper');
 
 
-exports.getTypesForMenuBar = function () {
+exports.getTypesForMenuBar = async function () {
     return new Promise(function (resolve, reject) {
         models.Type.findAll({
             attributes: ['id', 'name', 'parent_id'],
-            where:{
+            where: {
                 parent_id: null
-            }
+            },
+            include: [
+                {
+                    model: models.Type,
+                    required: false,
+                    as: 'Children',
+                    attributes: ['id', 'name', 'parent_id']
+                }
+            ]
         })
-            .then(result => {
-                let types = result.map(type => {
-                    var childs =  (helpers.getChildOfCategory(type.id));
+            .then(types => {
+                let result = types.map(type => {
                     return {
                         id: type.id,
                         name: type.name,
-                        child:  helpers.getChildOfCategory(type.id),
-                    };
-                });
+                        children: type.Children.map(child => {
+                            return {
+                                id: child.id,
+                                name: child.name,
+                            };
+                        })
 
-                console.log(types);
-                return resolve(types);
+                    }
+                })
+                return resolve(result);
             })
             .catch(error => {
                 logger.error(error);

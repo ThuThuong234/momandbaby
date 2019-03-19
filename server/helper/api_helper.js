@@ -59,26 +59,3 @@ exports.failedResponse = function (error = null) {
         code: 'SERVICE_01'
     };
 };
-
-exports.getChildOfCategory = async function (type_id) {
-    return new Promise(function (resolve, reject) {
-        models.Type.findAll({
-            attributes: ['id', 'name'],
-            where: {
-                parent_id: type_id
-            }
-        })
-            .then(result => {
-                let types = result.map(type => {
-                    return {
-                        name: type.name,
-                    };
-                });
-                return resolve(types);
-            })
-            .catch(error => {
-                logger.error(error);
-                return reject(error);
-            });
-    });
-}
