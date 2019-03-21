@@ -11,6 +11,8 @@ module.exports = function (sequelize, DataTypes) {
             address: DataTypes.STRING,
             phone: DataTypes.STRING,
             email: DataTypes.STRING,
+            facebook_account: DataTypes.STRING,
+            twitter_account: DataTypes.STRING,
             active: {type: DataTypes.BOOLEAN, defaultValue: true},
             role_id: DataTypes.INTEGER,
             last_login: DataTypes.DATE,
@@ -29,6 +31,8 @@ module.exports = function (sequelize, DataTypes) {
 
     User.associate = function (models) {
         User.belongsTo(models.Role);
+        User.Comments = User.hasMany(models.Comment, {foreignKey: 'user_id'});
+        User.Actions = User.hasMany(models.Action, {foreignKey: 'user_id'});
     };
 
     return User;

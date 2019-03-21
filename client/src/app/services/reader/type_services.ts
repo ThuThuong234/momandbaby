@@ -12,8 +12,8 @@ export class TypeService extends APIService {
   super(http, spintService);
 }
 
-public getTypes() {
-  return super.apiGet<GetTypesApiResult>('/types', null, false);
+public getTypesforMenu() {
+  return super.apiGet<GetTypesApiResult>('/typesforMenu', null, false);
 }
 
 }

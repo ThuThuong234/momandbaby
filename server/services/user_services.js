@@ -8,8 +8,6 @@ const models = require('../db/models');
 
 exports.login = function (account, password) {
     return new Promise(function (resolve, reject) {
-        console.log(account);
-        console.log(password);
         models.User.findOne({
             where: {
                 account: account,
@@ -25,6 +23,8 @@ exports.login = function (account, password) {
             ]
         })
             .then(user => {
+                console.log("user ");
+                console.log(user);
                 if (user == null) {
                     throw {
                         message: errors.AUTHENTICATE_01,
@@ -45,6 +45,29 @@ exports.login = function (account, password) {
             })
             .then(([resultData]) => {
                 return resolve(resultData);
+            })
+            .catch(error => {
+                logger.error(error);
+                return reject(error);
+            });
+    });
+};
+exports.getUser = function (id) {
+    return new Promise(function (resolve, reject) {
+        models.User.findOne({
+            where: {
+                id: id
+            },
+            attributes: ['id', 'account', 'fullname','address','phone', 'role_id','email','facebook_account','twitter_account','image_url']
+        })
+            .then(user => {
+                if (user == null) {
+                    throw {
+                        message: errors.USER_02,
+                        code: 'USER_02'
+                    };
+                }
+                return resolve(user);
             })
             .catch(error => {
                 logger.error(error);

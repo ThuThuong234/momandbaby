@@ -27,7 +27,10 @@ module.exports = {
                     address: {type: Sequelize.STRING},
                     phone: {type: Sequelize.STRING},
                     email: {type: Sequelize.STRING},
+                    facebook_account:Sequelize.STRING,
+                    twitter_account:Sequelize.STRING,
                     active: {type: Sequelize.BOOLEAN, defaultValue: true},
+                    image_url: Sequelize.STRING,
                     role_id: {
                         type: Sequelize.INTEGER,
                         references: {model: 'roles', key: 'id'}

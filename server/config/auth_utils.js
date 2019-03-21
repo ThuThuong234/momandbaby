@@ -7,7 +7,7 @@ const logger = log4js.getLogger('auth_utils');
 const constants = require('./constants');
 const enums = require('./enums');
 const errors = require('./errors');
-const utils = require('./utils');
+const helper = require('../helper/api_helper');
 
 function getToken(user) {
   return jwt.sign(user, constants.SECRET, { expiresIn: constants.AUTHENTICATE_EXPIRE });
@@ -87,7 +87,7 @@ exports.authorizeAdminMember = function (req, res, next) {
 exports.authorizeHeader = function (req, res, next) {
   let apiKey = req.headers['x-api-key'];
   if (apiKey != constants.API_KEY) {
-    res.json(utils.failedResponse({
+    res.json(helper.failedResponse({
       message: errors.AUTHORIZE_01,
       code: 'AUTHORIZE_01'
     }));

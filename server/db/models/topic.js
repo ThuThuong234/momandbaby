@@ -9,23 +9,23 @@ module.exports = function (sequelize, DataTypes) {
             title: DataTypes.STRING,
             content: DataTypes.STRING,
             type_id: DataTypes.INTEGER,
-            author_id: {type: DataTypes.INTEGER, defaultValue: true},
+            author_id: DataTypes.INTEGER,
+            status: DataTypes.INTEGER,
             views: DataTypes.INTEGER,
-            likes: DataTypes.INTEGER
+            likes: DataTypes.INTEGER,
+            share: DataTypes.INTEGER
         },
         {
-            classMethods: {
-                associate: function (models) {
-                    Topic.Type = Topic.belongsTo(models.Type, {foreignKey: 'type_id'});
-                }
-            },
             underscored: true,
             tableName: 'topics'
         });
 
     Topic.associate = function (models) {
-        Topic.belongsTo(models.Type);
-    };
+        Topic.belongsTo(models.Type, {foreignKey: 'type_id'});
+        Topic.Comments = Topic.hasMany(models.Comment, {foreignKey: 'topic_id'});
+        Topic.Actions = Topic.hasMany(models.Action, {foreignKey: 'topic_id'});
+        // Topic.Conversations = Topic.hasMany(models.Conversation, {foreignKey: 'topic_id'});
+    }
 
     return Topic;
 };
