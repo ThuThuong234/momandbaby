@@ -5,7 +5,7 @@ const constants = require('../config/constants');
 const utils = require('../helper/api_helper');
 const auth_utils = require('../config/auth_utils');
 
-/* GET home page. */
+/* GET index page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });

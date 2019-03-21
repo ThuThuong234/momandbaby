@@ -1,27 +1,59 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {HomeComponent} from './views/home/home.component';
-import {AdminComponent} from "./views/admin/admin.component";
+import {IndexComponent} from './views/index/index.component';
+import {ContactComponent} from "./views/contact/contact.component";
+import {AboutComponent} from "./views/about/about.component";
+import {BlogComponent} from "./views/blog/blog.component";
+import {ErrorpageComponent} from "./views/errorpage/errorpage.component";
+import {BlogOneComponent} from "./views/blog-one/blog-one.component";
 
 export const routes: Routes = [
   {
-    path: '', component: HomeComponent,
+    path: '', component: IndexComponent,
     data: {
-      title: 'home'
+      title: 'index'
     }
   },
   {
-    path: 'home',
-    component: HomeComponent,
+    path: 'index',
+    component: IndexComponent,
     data: {
       title: 'Home'
     }
   },
   {
-    path: 'admin',
-    component: AdminComponent,
+    path: 'contact',
+    component: ContactComponent,
     data: {
-      title: 'Admin'
+      title: 'contact'
+    }
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    data: {
+      title: 'about'
+    }
+  },
+  {
+    path: 'blog',
+    component: BlogComponent,
+    data: {
+      title: 'blog'
+    }
+  },
+  {
+    path: 'errorpage',
+    component: ErrorpageComponent,
+    data: {
+      title: 'errorpage'
+    }
+  },
+  {
+    path: 'BlogOne',
+    component: BlogOneComponent,
+    data: {
+      title: 'BlogOne'
     }
   }
 ];
