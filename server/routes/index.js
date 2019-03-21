@@ -6,11 +6,11 @@ const utils = require('../helper/api_helper');
 const auth_utils = require('../config/auth_utils');
 
 /* GET index page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', function (req, res, next) {
+    res.render('index', {title: 'Express'});
 });
 /**
- * @api {get} /typesforMenu/
+ * @api {get} /typesforMenu/ Get Type for Menu
  * @apiVersion 1.0.0
  * @apiGroup Types
  *
@@ -25,8 +25,6 @@ router.get('/', function(req, res, next) {
  *         "id": 1,
  *          "name": "Làm mẹ",
  *          "children": [
- *              {
- *                   "id": 8,
  *              {
  *                  "id": 9,
  *                  "name": "Trong khi mang thai"
@@ -88,11 +86,11 @@ router.get('/', function(req, res, next) {
  *              }
  *          ]
  *      }
- *  ]
-*}
+ *   ]
+ *}
  * @apiUse FailedResponse
  */
-router.get('/typesforMenu', auth_utils.authorizeHeader, function(req, res) {
+router.get('/typesforMenu', auth_utils.authorizeHeader, function (req, res) {
     typeServices.getTypesForMenuBar()
         .then(data => {
             res.json(utils.successResponse(data));

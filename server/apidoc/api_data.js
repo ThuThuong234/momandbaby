@@ -1,15 +1,52 @@
 define({ "api": [
   {
     "type": "get",
+    "url": "/topics/latest",
+    "title": "Get 10 Latest Topics",
+    "version": "1.0.0",
+    "group": "Topics",
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"data\": [\n    {\n        \"id\": 4,\n        \"title\": \"12345\",\n        \"content\": \"asdfghjkl\",\n        \"views\": null,\n        \"likes\": null,\n        \"shares\": null,\n       \"author\": \"Thuong Nguyen Thi Thu\",\n        \"type\": \"Kinh nghiệm hay\",\n        \"created_at\": \"2019-03-22T21:06:02.000Z\"\n   },\n    {\n        \"id\": 1,\n        \"title\": \"1 ngày làm mẹ\",\n        \"content\": \"<div class=\\\"postbody\\\"> <div class=\\\"postrow\\\">  <div class=\\\"content\\\"> <div id=\\\"post_message_36354571\\\"> <blockquote class=\\\"postcontent restore\\\"> <b>Tuổi thơ ai sinh ra và lớn lên cũng từng ít nhất 1 lần ăn trái ô mai trong đời, ăn thì ăn vậy thôi chứ ít ai b\",\n        \"views\": null,\n        \"likes\": null,\n        \"shares\": null,\n        \"author\": \"Admin\",\n        \"type\": \"Làm mẹ\",\n        \"created_at\": \"2019-03-21T21:06:02.000Z\"\n    }\n]\n}",
+          "type": "json"
+        },
+        {
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/topics.js",
+    "groupTitle": "Topics",
+    "name": "GetTopicsLatest",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>API key to access the server</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
     "url": "/typesforMenu/",
-    "title": "",
+    "title": "Get Type for Menu",
     "version": "1.0.0",
     "group": "Types",
     "success": {
       "examples": [
         {
           "title": "Success Response",
-          "content": " HTTP/1.1 200 OK\n {\n \"success\": true,\n \"data\": [\n     {\n        \"id\": 1,\n         \"name\": \"Làm mẹ\",\n         \"children\": [\n             {\n                  \"id\": 8,\n             {\n                 \"id\": 9,\n                 \"name\": \"Trong khi mang thai\"\n            },\n              {\n                 \"id\": 10,\n                 \"name\": \"Chăm sóc bé 0-12 tháng\"\n             },\n             {\n                 \"id\": 11,\n                 \"name\": \"Nuôi dạy bé 1-3 tuổi\"\n             },\n            {\n                  \"id\": 12,\n                 \"name\": \"Nuôi dạy bé 5-13 tuổi\"\n             }\n         ]\n     },\n     {\n         \"id\": 2,\n         \"name\": \"Kinh nghiệm hay\",\n         \"children\": [\n             {\n                 \"id\": 13,\n                  \"name\": \"Mua sữa cho mẹ bầu\"\n                },\n           },\n             {\n                 \"id\": 14,\n                 \"name\": \"Mua sữa cho bé\"\n             },\n             {\n                 \"id\": 15,\n                 \"name\": \"Món ngon cho bé\"\n             }\n         ]\n     },\n     {\n         \"id\": 3,\n         \"name\": \"Sức khỏe\",\n         \"children\": [\n             {\n                 \"id\": 6,\n                 \"name\": \"Chữa bệnh cho bé\"\n             },\n             {\n                 \"id\": 7,\n                 \"name\": \"Chữa bệnh cho mẹ\"\n             }\n         ]\n     },\n     {\n         \"id\": 4,\n         \"name\": \"Giải trí\",\n         \"children\": [\n             {\n                 \"id\": 5,\n                 \"name\": \"Sách, truyện cho bé\"\n             }\n         ]\n     }\n ]\n}",
+          "content": " HTTP/1.1 200 OK\n {\n \"success\": true,\n \"data\": [\n     {\n        \"id\": 1,\n         \"name\": \"Làm mẹ\",\n         \"children\": [\n             {\n                 \"id\": 9,\n                 \"name\": \"Trong khi mang thai\"\n            },\n              {\n                 \"id\": 10,\n                 \"name\": \"Chăm sóc bé 0-12 tháng\"\n             },\n             {\n                 \"id\": 11,\n                 \"name\": \"Nuôi dạy bé 1-3 tuổi\"\n             },\n            {\n                  \"id\": 12,\n                 \"name\": \"Nuôi dạy bé 5-13 tuổi\"\n             }\n         ]\n     },\n     {\n         \"id\": 2,\n         \"name\": \"Kinh nghiệm hay\",\n         \"children\": [\n             {\n                 \"id\": 13,\n                  \"name\": \"Mua sữa cho mẹ bầu\"\n                },\n           },\n             {\n                 \"id\": 14,\n                 \"name\": \"Mua sữa cho bé\"\n             },\n             {\n                 \"id\": 15,\n                 \"name\": \"Món ngon cho bé\"\n             }\n         ]\n     },\n     {\n         \"id\": 3,\n         \"name\": \"Sức khỏe\",\n         \"children\": [\n             {\n                 \"id\": 6,\n                 \"name\": \"Chữa bệnh cho bé\"\n             },\n             {\n                 \"id\": 7,\n                 \"name\": \"Chữa bệnh cho mẹ\"\n             }\n         ]\n     },\n     {\n         \"id\": 4,\n         \"name\": \"Giải trí\",\n         \"children\": [\n             {\n                 \"id\": 5,\n                 \"name\": \"Sách, truyện cho bé\"\n             }\n         ]\n     }\n  ]\n}",
           "type": "json"
         },
         {

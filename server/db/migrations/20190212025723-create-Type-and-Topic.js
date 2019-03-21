@@ -29,6 +29,7 @@ module.exports = {
                       references: {model: 'users', key: 'id'},
                   },
                   views: {type: Sequelize.INTEGER},
+                  shares: {type: Sequelize.INTEGER},
                   likes: {type: Sequelize.INTEGER}
               });
           });

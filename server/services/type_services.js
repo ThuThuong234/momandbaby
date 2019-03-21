@@ -7,7 +7,7 @@ const models = require('../db/models/index');
 const helpers = require('../helper/api_helper');
 
 
-exports.getTypesForMenuBar = async function () {
+exports.getTypesForMenuBar = function () {
     return new Promise(function (resolve, reject) {
         models.Type.findAll({
             attributes: ['id', 'name', 'parent_id'],

@@ -32,6 +32,7 @@ module.exports = function (sequelize, DataTypes) {
     User.associate = function (models) {
         User.belongsTo(models.Role);
         User.Comments = User.hasMany(models.Comment, {foreignKey: 'user_id'});
+        User.Topics = User.hasMany(models.Topic, {foreignKey: 'author_id'});
         User.Actions = User.hasMany(models.Action, {foreignKey: 'user_id'});
     };
 

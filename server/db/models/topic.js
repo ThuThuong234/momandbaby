@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
             status: DataTypes.INTEGER,
             views: DataTypes.INTEGER,
             likes: DataTypes.INTEGER,
-            share: DataTypes.INTEGER
+            shares: DataTypes.INTEGER
         },
         {
             underscored: true,
@@ -22,6 +22,7 @@ module.exports = function (sequelize, DataTypes) {
 
     Topic.associate = function (models) {
         Topic.belongsTo(models.Type, {foreignKey: 'type_id'});
+        Topic.belongsTo(models.User, {foreignKey: 'author_id'});
         Topic.Comments = Topic.hasMany(models.Comment, {foreignKey: 'topic_id'});
         Topic.Actions = Topic.hasMany(models.Action, {foreignKey: 'topic_id'});
         // Topic.Conversations = Topic.hasMany(models.Conversation, {foreignKey: 'topic_id'});
