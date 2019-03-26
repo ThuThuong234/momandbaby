@@ -4,6 +4,7 @@ const logger = log4js.getLogger();
 const Promise = require('bluebird');
 const auth_utils = require('../config/auth_utils');
 const models = require('../db/models/index');
+const errors = require('../lib/errors');
 
 exports.successResponse = function (data = null) {
     if (data == null) {
@@ -51,6 +52,14 @@ exports.failedResponse = function (error = null) {
                 code: 'SERVICE_01'
             };
         }
+        else{
+            return {
+                success: false,
+                message: error,
+                code: 'SERVICE_01'
+            };
+        }
+
     }
 
     return {

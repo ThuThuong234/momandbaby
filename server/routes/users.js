@@ -4,12 +4,70 @@ const userServices = require('../services/user_services');
 const constants = require('../config/constants');
 const utils = require('../helper/api_helper');
 const auth_utils = require('../config/auth_utils');
+const errors = require('../lib/errors');
+const {check, validationResult} = require('express-validator/check');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
-
+/**
+ * @api {post} /users/signup Sign up
+ * @apiVersion 1.0.0
+ * @apiGroup Users
+ *
+ * @apiUse AccessHeader
+ *
+ * @apiParam (Body) {String} account User account
+ * @apiParam (Body) {String} password User email
+ * @apiParam (Body) {String} password User fullname
+ * @apiParam (Body) {String} password User password
+ * @apiParam (Body) {String} password User address
+ * @apiParam (Body) {String} password User phone
+ * @apiParam (Body) {String} password User facebook_account
+ * @apiParam (Body) {String} password User twitter_account
+ * @apiParam (Body) {String} password User img_url
+ *
+ * @apiSuccessExample {json} Success Response
+ *  HTTP/1.1 200 OK
+ *  {
+ *    "success": true,
+ *  }
+ *  @apiDefine FailedResponse
+ */
+router.post('/signup', [
+    // if check, url, it can't be null?
+    check('email').isEmail().withMessage(errors.USER_EMAIL),
+    check('account').isLength({min: 5}).withMessage(errors.USER_ACCOUNT),
+    check('fullname').isLength({min: 1}).withMessage(errors.USER_FULLNAME),
+    check('password').isLength({min: 8}).withMessage(errors.USER_PASSWORD),
+    check('phone').optional().isMobilePhone().isLength({min: 10, max: 10}).withMessage(errors.USER_PHONE),
+    check('facebook_account').optional().isURL().withMessage(errors.USER_FB_ACCOUNT),
+    check('twitter_account').optional().isURL().withMessage(errors.USER_TWITTER_ACCOUNT),
+    check('active').optional().isBoolean().withMessage(errors.USER_ACTIVE),
+    check('img_url').optional().isURL().withMessage(errors.USER_IMG_URL),
+], (req, res) => {
+    let account = req.body.account;
+    let password = req.body.password;
+    let fullname = req.body.fullname;
+    let address = req.body.address;
+    let email = req.body.email;
+    let facebook_account = req.body.facebook_account;
+    let twitter_account = req.body.twitter_account;
+    let phone = req.body.phone;
+    let img_url = req.body.img_url;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.json(utils.failedResponse({errors: errors.array()}));
+    }
+    userServices.signup(fullname, account, password, address, email, facebook_account, twitter_account, phone, img_url)
+        .then(data => {
+            res.json(utils.successResponse());
+        })
+        .catch(error => {
+            res.json(utils.failedResponse(error));
+        });
+});
 /**
  * @api {post} /users/login Login
  * @apiVersion 1.0.0
@@ -35,14 +93,14 @@ router.get('/', function (req, res, next) {
  *      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudCI6InRodW9uZ250dCIsImZ1bGxuYW1lIjoiVGh1b25nIE5ndXllbiBUaGkgVGh1Iiwicm9sZSI6eyJjb2RlIjoibWVtYmVyIiwibmFtZSI6Ik1lbWJlciJ9LCJpYXQiOjE1NTMxOTg1MTYsImV4cCI6MTU1ODM4MjUxNn0.pogCJwMYCHHJgIW77zW5y2VNuIJQoC84It-xxb_9J6s"
  *    }
  *  }
- * @apiUse FailedResponse
+ *  @apiDefine FailedResponse
  */
 router.post('/login', function (req, res) {
     let account = req.body.account;
     let password = req.body.password;
     userServices.login(account, password)
         .then(data => {
-            res.json(utils.successResponse(data));
+            res.json(utils.successResponse());
         })
         .catch(error => {
             res.json(utils.failedResponse(error));

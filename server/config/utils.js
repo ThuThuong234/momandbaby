@@ -1,7 +1,7 @@
 'use strict';
 
 const crypto = require('crypto');
-const errors = require('./errors');
+const errors = require('../lib/errors');
 
 const genRandomString = function (length) {
   return crypto.randomBytes(Math.ceil(length / 2)).toString('hex').slice(0, length);

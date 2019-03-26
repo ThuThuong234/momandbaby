@@ -6,7 +6,7 @@ const log4js = require('log4js');
 const logger = log4js.getLogger('auth_utils');
 const constants = require('./constants');
 const enums = require('./enums');
-const errors = require('./errors');
+const errors = require('../lib/errors');
 const helper = require('../helper/api_helper');
 
 function getToken(user) {

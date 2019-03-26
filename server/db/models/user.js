@@ -14,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
             facebook_account: DataTypes.STRING,
             twitter_account: DataTypes.STRING,
             active: {type: DataTypes.BOOLEAN, defaultValue: true},
-            role_id: DataTypes.INTEGER,
+            role_id: {type: DataTypes.INTEGER, defaultValue: 2},
             last_login: DataTypes.DATE,
             password: DataTypes.STRING,
             image_url: DataTypes.STRING

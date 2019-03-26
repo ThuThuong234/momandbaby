@@ -5,6 +5,69 @@ const logger = log4js.getLogger();
 const Promise = require('bluebird');
 const auth_utils = require('../config/auth_utils');
 const models = require('../db/models');
+const errors = require('../lib/errors');
+const dateTime = require('node-datetime');
+
+exports.signup = function (fullname, account, password, address, email, facebook_account, twitter_account, phone, img_url) {
+    return new Promise(function (resolve, reject) {
+        models.User.findOne({
+            attributes: ['email'],
+            where: {
+                $or: [
+                    {
+                        account:
+                            {
+                                $eq: account,
+                            }
+                    },
+                    {
+                        email:
+                            {
+                                $eq: email,
+                            }
+                    },
+
+                ]
+            }
+
+        })
+            .then(user => {
+                if (user) {
+                    throw {
+                        message: errors.USER_01,
+                        code: 'USER_01'
+                    };
+                }
+                var dt = dateTime.create();
+                return models.User.create({
+                    created_at: dt,
+                    updated_ad:dt,
+                    account: account,
+                    password: password,
+                    fullname: fullname,
+                    address: address,
+                    phone: phone,
+                    email: email,
+                    facebook_account: facebook_account,
+                    twitter_account: twitter_account,
+                    image_url: img_url,
+                });
+            })
+            .then(result => {
+                if (result == null) {
+                    throw {
+                        message: errors.CREATE,
+                        code: 'CREATE'
+                    };
+                }
+                return resolve(result);
+            })
+            .catch(error => {
+                logger.error(error);
+                return reject(error);
+            });
+    });
+};
 
 exports.login = function (account, password) {
     return new Promise(function (resolve, reject) {
@@ -52,13 +115,14 @@ exports.login = function (account, password) {
             });
     });
 };
+
 exports.getUser = function (id) {
     return new Promise(function (resolve, reject) {
         models.User.findOne({
             where: {
                 id: id
             },
-            attributes: ['id', 'account', 'fullname','address','phone', 'role_id','email','facebook_account','twitter_account','image_url']
+            attributes: ['id', 'account', 'fullname', 'address', 'phone', 'role_id', 'email', 'facebook_account', 'twitter_account', 'image_url']
         })
             .then(user => {
                 if (user == null) {
