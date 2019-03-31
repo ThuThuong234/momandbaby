@@ -6,6 +6,7 @@ import {AboutComponent} from "./views/about/about.component";
 import {BlogComponent} from "./views/blog/blog.component";
 import {ErrorpageComponent} from "./views/errorpage/errorpage.component";
 import {BlogOneComponent} from "./views/blog-one/blog-one.component";
+import {LoginComponent} from "./views/login/login.component";
 
 export const routes: Routes = [
   {
@@ -19,6 +20,13 @@ export const routes: Routes = [
     component: IndexComponent,
     data: {
       title: 'Home'
+    }
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: {
+      title: 'Login'
     }
   },
   {

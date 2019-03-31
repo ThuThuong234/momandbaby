@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from "../../user.service";
+import { User} from "../../view-model/user/user";
 
 @Component({
   selector: 'app-index',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+   user: User;
+   users: User[];
+  constructor(private userService: UserService) { }
+
 
   ngOnInit() {
-  }
+    this.user = this.userService.getUser_root();
+    this.users = this.userService.getUsers();
+   }
 
 }

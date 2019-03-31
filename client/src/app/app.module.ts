@@ -17,6 +17,8 @@ import { AboutComponent } from './views/about/about.component';
 import { ErrorpageComponent } from './views/errorpage/errorpage.component';
 import { BlogComponent } from './views/blog/blog.component';
 import { BlogOneComponent } from './views/blog-one/blog-one.component';
+import { CheckloginComponent } from './views/checklogin/checklogin.component';
+import { LoginComponent } from './views/login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { BlogOneComponent } from './views/blog-one/blog-one.component';
     AboutComponent,
     ErrorpageComponent,
     BlogComponent,
-    BlogOneComponent
+    BlogOneComponent,
+    CheckloginComponent,
+    LoginComponent
   ],
   imports: [
     NgbModule.forRoot(),
