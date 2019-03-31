@@ -10,7 +10,8 @@ module.exports = function (sequelize, DataTypes) {
             name: DataTypes.STRING
         }, {
             underscored: true,
-            tableName: 'types'
+            tableName: 'types',
+            timestamps: false
         });
 
     Type.associate = function (models) {

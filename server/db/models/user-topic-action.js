@@ -11,7 +11,8 @@ module.exports = function (sequelize, DataTypes) {
         },
         {
             underscored: true,
-            tableName: 'user-topic-action'
+            tableName: 'user-topic-action',
+            timestamps: false
         });
 
     Action.associate = function (models) {

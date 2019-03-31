@@ -11,7 +11,8 @@ module.exports = function (sequelize, DataTypes) {
         },
         {
             underscored: true,
-            tableName: 'messages'
+            tableName: 'messages',
+            timestamps: false
         });
 
     Message.associate = function (models) {

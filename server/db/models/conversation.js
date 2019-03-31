@@ -9,7 +9,8 @@ module.exports = function (sequelize, DataTypes) {
         },
         {
             underscored: true,
-            tableName: 'conversations'
+            tableName: 'conversations',
+            timestamps: false
         });
     Conversation.associate = function (models) {
         Conversation.Messages = Conversation.hasMany(models.Message, { foreignKey: 'conversation_id' });
