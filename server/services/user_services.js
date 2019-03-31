@@ -39,9 +39,10 @@ exports.signup = function (fullname, account, password, address, email, facebook
                     };
                 }
                 var dt = dateTime.create();
+                var formatted = dt.format('Y-m-d H:M:S');
                 return models.User.create({
-                    created_at: dt,
-                    updated_ad:dt,
+                    created_at: formatted,
+                    updated_ad:formatted,
                     account: account,
                     password: password,
                     fullname: fullname,

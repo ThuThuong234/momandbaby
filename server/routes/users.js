@@ -68,6 +68,7 @@ router.post('/signup', [
             res.json(utils.failedResponse(error));
         });
 });
+
 /**
  * @api {post} /users/login Login
  * @apiVersion 1.0.0

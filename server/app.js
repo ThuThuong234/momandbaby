@@ -46,7 +46,7 @@ app.use('/', indexRouter);
 // app.use('/admin', auth_utils.authorizeHeader, admin_routes);
 app.use('/users', auth_utils.authorizeHeader, users_routes);
 app.use('/topics', auth_utils.authorizeHeader, topics_routes);
-// app.use('/types', auth_utils.authorizeHeader, types_routes);
+app.use('/types', auth_utils.authorizeHeader, types_routes);
 // app.use('/conversations', auth_utils.authorizeHeader, conversations_routes);
 
 // catch 404 and forward to error handler

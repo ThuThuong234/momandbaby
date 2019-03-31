@@ -12,7 +12,7 @@ module.exports = {
     DELETE: 'Something wrong! Cannot delete data.',
     TOPIC_01: 'Topic does not exist.',
     TOPIC_02: 'Topic has been created.',
-    REQUEST_02: 'Request for employee in this season has been created.',
+    CATEGORY_01: 'The name of type has already existed.',
     POSITION_01: 'Position does not exist.',
     POSITION_02: 'Can not delete this position.',
     QUESTION_01: 'Question does not exist.',
