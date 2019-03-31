@@ -1,6 +1,218 @@
 define({ "api": [
   {
     "type": "get",
+    "url": "/topics/id/comments",
+    "title": "Get Comments of Topic",
+    "version": "1.0.0",
+    "group": "Comments",
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"data\": [\n    {\n        \"id\": 2,\n        \"topic_id\": 2,\n        \"content\": \"Hay\",\n        \"User\": \"Admin\"\n    },\n    {\n        \"id\": 4,\n        \"topic_id\": 2,\n        \"content\": \"Tốt lắm\",\n        \"User\": \"Thuong Nguyen Thi Thu\"\n    }\n    ]\n}",
+          "type": "json"
+        },
+        {
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/topics.js",
+    "groupTitle": "Comments",
+    "name": "GetTopicsIdComments",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>API key to access the server</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "post",
+    "url": "/topics/:id/comments",
+    "title": "Comment Topic",
+    "version": "1.0.0",
+    "group": "Comments",
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User id</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "topic_id",
+            "description": "<p>Topic id</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "content",
+            "description": "<p>Content</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n}",
+          "type": "json"
+        },
+        {
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/topics.js",
+    "groupTitle": "Comments",
+    "name": "PostTopicsIdComments",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>API key to access the server</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/topics/id",
+    "title": "Get Topic By ID",
+    "version": "1.0.0",
+    "group": "Topics",
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": 4,\n    \"title\": \"12345\",\n    \"created_at\": \"2019-03-22T21:06:02.000Z\",\n    \"content\": \"asdfghjkl\",\n    \"views\": 1,\n    \"likes\": null,\n    \"shares\": null,\n    \"User\": \"Thuong Nguyen Thi Thu\",\n    \"Type\": \"Kinh nghiệm hay\"\n}\n}",
+          "type": "json"
+        },
+        {
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/topics.js",
+    "groupTitle": "Topics",
+    "name": "GetTopicsId",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>API key to access the server</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/topics/latest",
+    "title": "Get 10 Latest Topics",
+    "version": "1.0.0",
+    "group": "Topics",
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"data\": [\n    {\n        \"id\": 4,\n        \"title\": \"12345\",\n        \"content\": \"asdfghjkl\",\n        \"views\": null,\n        \"likes\": null,\n        \"shares\": null,\n       \"author\": \"Thuong Nguyen Thi Thu\",\n        \"type\": \"Kinh nghiệm hay\",\n        \"created_at\": \"2019-03-22T21:06:02.000Z\"\n   },\n    {\n        \"id\": 1,\n        \"title\": \"1 ngày làm mẹ\",\n        \"content\": \"<div class=\\\"postbody\\\"> <div class=\\\"postrow\\\">  <div class=\\\"content\\\"> <div id=\\\"post_message_36354571\\\"> <blockquote class=\\\"postcontent restore\\\"> <b>Tuổi thơ ai sinh ra và lớn lên cũng từng ít nhất 1 lần ăn trái ô mai trong đời, ăn thì ăn vậy thôi chứ ít ai b\",\n        \"views\": null,\n        \"likes\": null,\n        \"shares\": null,\n        \"author\": \"Admin\",\n        \"type\": \"Làm mẹ\",\n        \"created_at\": \"2019-03-21T21:06:02.000Z\"\n    }\n]\n}",
+          "type": "json"
+        },
+        {
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/topics.js",
+    "groupTitle": "Topics",
+    "name": "GetTopicsLatest",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>API key to access the server</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/topics/search/search_key",
+    "title": "Search Topic By Title",
+    "version": "1.0.0",
+    "group": "Topics",
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"data\": [\n    {\n        \"id\": 1,\n        \"title\": \"1 ngày làm mẹ\",\n        \"content\": \"<div class=\\\"postbody\\\"> <div class=\\\"postrow\\\">  <div class=\\\"content\\\"> <div id=\\\"post_message_36354571\\\"> <blockquote class=\\\"postcontent restore\\\"> <b>Tuổi thơ ai sinh ra và lớn lên cũng từng ít nhất 1 lần ăn trái ô mai trong đời, ăn thì ăn vậy thôi chứ ít ai b\",\n        \"views\": 9,\n        \"likes\": null,\n        \"shares\": null,\n        \"author\": \"Admin\",\n        \"type\": \"Làm mẹ\",\n        \"created_at\": \"2019-03-21T21:06:02.000Z\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Sức khỏe cho mẹ trong 3 tháng đầu\",\n        \"content\": \"<div class=\\\"postbody\\\"> <div class=\\\"postrow\\\">  <div class=\\\"content\\\"> <div id=\\\"post_message_36354571\\\"> <blockquote class=\\\"postcontent restore\\\"> <b>Tuổi thơ ai sinh ra và lớn lên cũng từng ít nhất 1 lần ăn trái ô mai trong đời, ăn thì ăn vậy thôi chứ ít ai b\",\n        \"views\": 7,\n        \"likes\": null,\n        \"shares\": null,\n        \"author\": \"Admin\",\n        \"type\": \"Sức khỏe\",\n        \"created_at\": \"2019-03-21T21:06:02.000Z\"\n    }\n]\n}",
+          "type": "json"
+        },
+        {
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/topics.js",
+    "groupTitle": "Topics",
+    "name": "GetTopicsSearchSearch_key",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>API key to access the server</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
     "url": "/typesforMenu/",
     "title": "Get Type for Menu",
     "version": "1.0.0",
@@ -13,8 +225,8 @@ define({ "api": [
           "type": "json"
         },
         {
-          "title": "Success Response",
-          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": 2,\n    \"account\": \"thuongntt\",\n    \"fullname\": \"Thuong Nguyen Thi Thu\",\n    \"role\": {\n        \"code\": \"member\",\n        \"name\": \"Member\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudCI6InRodW9uZ250dCIsImZ1bGxuYW1lIjoiVGh1b25nIE5ndXllbiBUaGkgVGh1Iiwicm9sZSI6eyJjb2RlIjoibWVtYmVyIiwibmFtZSI6Ik1lbWJlciJ9LCJpYXQiOjE1NTMxOTg1MTYsImV4cCI6MTU1ODM4MjUxNn0.pogCJwMYCHHJgIW77zW5y2VNuIJQoC84It-xxb_9J6s\"\n  }\n}",
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
           "type": "json"
         }
       ]
@@ -31,31 +243,6 @@ define({ "api": [
             "optional": false,
             "field": "x-api-key",
             "description": "<p>API key to access the server</p>"
-          }
-        ]
-      }
-    },
-    "use": [
-      {
-        "name": "AccessHeader"
-      }
-    ],
-    "parameter": {
-      "fields": {
-        "Body": [
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "account",
-            "description": "<p>User account</p>"
-          },
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": "<p>User password</p>"
           }
         ]
       }
@@ -84,22 +271,6 @@ define({ "api": [
             "field": "id",
             "description": "<p>User Id</p>"
           }
-        ],
-        "Body": [
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "account",
-            "description": "<p>User account</p>"
-          },
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "password",
-            "description": "<p>User password</p>"
-          }
         ]
       }
     },
@@ -111,8 +282,8 @@ define({ "api": [
           "type": "json"
         },
         {
-          "title": "Success Response",
-          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": 2,\n    \"account\": \"thuongntt\",\n    \"fullname\": \"Thuong Nguyen Thi Thu\",\n    \"role\": {\n        \"code\": \"member\",\n        \"name\": \"Member\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudCI6InRodW9uZ250dCIsImZ1bGxuYW1lIjoiVGh1b25nIE5ndXllbiBUaGkgVGh1Iiwicm9sZSI6eyJjb2RlIjoibWVtYmVyIiwibmFtZSI6Ik1lbWJlciJ9LCJpYXQiOjE1NTMxOTg1MTYsImV4cCI6MTU1ODM4MjUxNn0.pogCJwMYCHHJgIW77zW5y2VNuIJQoC84It-xxb_9J6s\"\n  }\n}",
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
           "type": "json"
         }
       ]
@@ -136,6 +307,169 @@ define({ "api": [
             "optional": false,
             "field": "x-access-token",
             "description": "<p>User token string to authorize</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "post",
+    "url": "/users/login",
+    "title": "Login",
+    "version": "1.0.0",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "account",
+            "description": "<p>User account</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>User password</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": 2,\n    \"account\": \"thuongntt\",\n    \"fullname\": \"Thuong Nguyen Thi Thu\",\n    \"role\": {\n        \"code\": \"member\",\n        \"name\": \"Member\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudCI6InRodW9uZ250dCIsImZ1bGxuYW1lIjoiVGh1b25nIE5ndXllbiBUaGkgVGh1Iiwicm9sZSI6eyJjb2RlIjoibWVtYmVyIiwibmFtZSI6Ik1lbWJlciJ9LCJpYXQiOjE1NTMxOTg1MTYsImV4cCI6MTU1ODM4MjUxNn0.pogCJwMYCHHJgIW77zW5y2VNuIJQoC84It-xxb_9J6s\"\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/users.js",
+    "groupTitle": "Users",
+    "name": "PostUsersLogin",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>API key to access the server</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "post",
+    "url": "/users/signup",
+    "title": "Sign up",
+    "version": "1.0.0",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "account",
+            "description": "<p>User account</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User email</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "fullname",
+            "description": "<p>User fullname</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>User password</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>User address</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>User phone</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "facebook_account",
+            "description": "<p>User facebook_account</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "twitter_account",
+            "description": "<p>User twitter_account</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "img_url",
+            "description": "<p>User img_url</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n}",
+          "type": "json"
+        },
+        {
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/users.js",
+    "groupTitle": "Users",
+    "name": "PostUsersSignup",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>API key to access the server</p>"
           }
         ]
       }

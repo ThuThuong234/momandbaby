@@ -43,7 +43,7 @@ exports.getLatestTopics = async function () {
                         created_at: topic.created_at,
 
                     }
-                })
+                });
                 return resolve(result);
             })
             .catch(error => {

@@ -3,15 +3,18 @@
 module.exports = function (sequelize, DataTypes) {
     const Comment = sequelize.define('Comment',
         {
-            id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+            id: {type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true},
             created_at: DataTypes.DATE,
             content: DataTypes.STRING,
             topic_id: DataTypes.INTEGER,
-            user_id: DataTypes.INTEGER
+            user_id: DataTypes.INTEGER,
         },
         {
             underscored: true,
-            tableName: 'comments'
+            tableName: 'comments',
+            timestamps: false
         });
 
     Comment.associate = function (models) {

@@ -19,21 +19,21 @@ router.get('/', function (req, res, next) {
  * @apiUse AccessHeader
  *
  * @apiParam (Body) {String} account User account
- * @apiParam (Body) {String} password User email
- * @apiParam (Body) {String} password User fullname
+ * @apiParam (Body) {String} email User email
+ * @apiParam (Body) {String} fullname User fullname
  * @apiParam (Body) {String} password User password
- * @apiParam (Body) {String} password User address
- * @apiParam (Body) {String} password User phone
- * @apiParam (Body) {String} password User facebook_account
- * @apiParam (Body) {String} password User twitter_account
- * @apiParam (Body) {String} password User img_url
+ * @apiParam (Body) {String} address User address
+ * @apiParam (Body) {String} phone User phone
+ * @apiParam (Body) {String} facebook_account User facebook_account
+ * @apiParam (Body) {String} twitter_account User twitter_account
+ * @apiParam (Body) {String} img_url User img_url
  *
  * @apiSuccessExample {json} Success Response
  *  HTTP/1.1 200 OK
  *  {
  *    "success": true,
  *  }
- *  @apiDefine FailedResponse
+ *  @apiUse FailedResponse
  */
 router.post('/signup', [
     // if check, url, it can't be null?
@@ -93,7 +93,7 @@ router.post('/signup', [
  *      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYWNjb3VudCI6InRodW9uZ250dCIsImZ1bGxuYW1lIjoiVGh1b25nIE5ndXllbiBUaGkgVGh1Iiwicm9sZSI6eyJjb2RlIjoibWVtYmVyIiwibmFtZSI6Ik1lbWJlciJ9LCJpYXQiOjE1NTMxOTg1MTYsImV4cCI6MTU1ODM4MjUxNn0.pogCJwMYCHHJgIW77zW5y2VNuIJQoC84It-xxb_9J6s"
  *    }
  *  }
- *  @apiDefine FailedResponse
+ *  @apiUse FailedResponse
  */
 router.post('/login', function (req, res) {
     let account = req.body.account;

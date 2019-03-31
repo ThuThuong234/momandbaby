@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 const topicServices = require('../services/topic_services');
-const constants = require('../config/constants');
+const commentServices = require('../services/comments_services');
+const errors = require('../lib/errors');
 const utils = require('../helper/api_helper');
 const auth_utils = require('../config/auth_utils');
+const {check, validationResult} = require('express-validator/check');
 
 /**
  * @api {get} /topics/latest  Get 10 Latest Topics
@@ -41,7 +43,7 @@ const auth_utils = require('../config/auth_utils');
  *      }
  *  ]
  *  }
- *  @apiDefine FailedResponse
+ *  @apiUse FailedResponse
  */
 router.get('/latest', function (req, res) {
     topicServices.getLatestTopics()
@@ -76,7 +78,7 @@ router.get('/latest', function (req, res) {
  *      "Type": "Kinh nghiệm hay"
  *  }
  *  }
- *  @apiDefine FailedResponse
+ *  @apiUse FailedResponse
  */
 router.get('/:id', function (req, res) {
     let requestId = req.params.id;
@@ -90,7 +92,7 @@ router.get('/:id', function (req, res) {
 });
 
 /**
- * @api {get} /topics/search/search_key  Get Topic By ID
+ * @api {get} /topics/search/search_key  Search Topic By Title
  * @apiVersion 1.0.0
  * @apiGroup Topics
  *
@@ -125,7 +127,7 @@ router.get('/:id', function (req, res) {
  *      }
  *  ]
  *  }
- *  @apiDefine FailedResponse
+ *  @apiUse FailedResponse
  */
 router.get('/search/:search_key', function (req, res) {
     let requestId = req.params.search_key;
@@ -138,5 +140,84 @@ router.get('/search/:search_key', function (req, res) {
         });
 });
 
+/**
+ * @api {get} /topics/id/comments  Get Comments of Topic
+ * @apiVersion 1.0.0
+ * @apiGroup Comments
+ *
+ * @apiUse AccessHeader
+ *
+ * @apiSuccessExample {json} Success Response
+ *  HTTP/1.1 200 OK
+ *  {
+ *    "success": true,
+ *    "data": [
+ *      {
+ *          "id": 2,
+ *          "topic_id": 2,
+ *          "content": "Hay",
+ *          "User": "Admin"
+ *      },
+ *      {
+ *          "id": 4,
+ *          "topic_id": 2,
+ *          "content": "Tốt lắm",
+ *          "User": "Thuong Nguyen Thi Thu"
+ *      }
+ *      ]
+ *  }
+ *  @apiUse FailedResponse
+ */
+router.get('/:id/comments', function (req, res) {
+    let requestId = req.params.id;
+    commentServices.getTopicCommentByTopicID(requestId)
+        .then(data => {
+            res.json(utils.successResponse(data));
+        })
+        .catch(error => {
+            res.json(utils.failedResponse(error));
+        });
+});
+
+/**
+ * @api {post} /topics/:id/comments Comment Topic
+ * @apiVersion 1.0.0
+ * @apiGroup Comments
+ *
+ * @apiUse AccessHeader
+ *
+ * @apiParam (Body) {String} user_id User id
+ * @apiParam (Body) {String} topic_id Topic id
+ * @apiParam (Body) {String} content Content
+ *
+ * @apiSuccessExample {json} Success Response
+ *  HTTP/1.1 200 OK
+ *  {
+ *    "success": true,
+ *  }
+ *  @apiUse FailedResponse
+ */
+router.post('/:id/comments', [
+    check('user_id').isLength({min: 1}).withMessage(errors.USER_ACCOUNT),
+    check('topic_id').isLength({min: 1}).withMessage(errors.TOPIC_01),
+    check('content').isLength({min: 1}).withMessage(errors.INFORMATION_01),
+], (req, res) => {
+    let user_id = req.body.user_id;
+    let topic_id = req.body.topic_id;
+    let content = req.body.content;
+    const errors = validationResult(req);
+    console.log("content "+content);
+    if (!errors.isEmpty()) {
+        return res.json(utils.failedResponse({errors: errors.array()}));
+    }
+    commentServices.addComment(user_id, topic_id, content)
+        .then(data => {
+            res.json(utils.successResponse());
+        })
+        .catch(error => {
+            console.log("user_id");
+            res.json(utils.failedResponse(error));
+        });
+});
 
 module.exports = router;
