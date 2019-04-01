@@ -140,3 +140,50 @@ exports.getUser = function (id) {
             });
     });
 };
+
+exports.updateUser = function (userId, fullname, password,address, phone, facebook_account, twitter_account, image_url)
+{
+    return new Promise(function (resolve, reject) {
+        models.User.findOne({
+            attributes: ['email'],
+            where: {
+                id: userId
+            }
+
+        })
+            .then(user => {
+                if (user == null) {
+                    throw {
+                        message: errors.USER_02,
+                        code: 'USER_02'
+                    };
+                }
+                var dt = dateTime.create();
+                var formatted = dt.format('Y-m-d H:M:S');
+                return models.User.update({
+                    updated_ad:formatted,
+                    last_login: formatted,
+                    password: password,
+                    fullname: fullname,
+                    address: address,
+                    phone: phone,
+                    facebook_account: facebook_account,
+                    twitter_account: twitter_account,
+                    image_url: image_url,
+                });
+            })
+            .then(result => {
+                if (result == null) {
+                    throw {
+                        message: errors.UPDATE,
+                        code: 'UPDATE'
+                    };
+                }
+                return resolve(result);
+            })
+            .catch(error => {
+                logger.error(error);
+                return reject(error);
+            });
+    });
+};

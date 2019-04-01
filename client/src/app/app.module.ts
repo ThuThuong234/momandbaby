@@ -19,6 +19,8 @@ import { BlogComponent } from './views/blog/blog.component';
 import { BlogOneComponent } from './views/blog-one/blog-one.component';
 import { CheckloginComponent } from './views/checklogin/checklogin.component';
 import { LoginComponent } from './views/login/login.component';
+import { DefaultLayoutComponent } from './views/default-layout/default-layout.component';
+import { DefaulAdminLayoutComponent } from './views/admin/defaul-admin-layout/defaul-admin-layout.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { LoginComponent } from './views/login/login.component';
     BlogComponent,
     BlogOneComponent,
     CheckloginComponent,
-    LoginComponent
+    LoginComponent,
+    DefaultLayoutComponent,
+    DefaulAdminLayoutComponent
   ],
   imports: [
     NgbModule.forRoot(),

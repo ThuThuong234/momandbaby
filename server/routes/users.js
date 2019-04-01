@@ -137,7 +137,7 @@ router.post('/login', function (req, res) {
  *  }
  * @apiUse FailedResponse
  */
-router.get('/:id', auth_utils.authorizeMember, function (req, res) {
+router.get('/:id', auth_utils.authorizeAdmin(), function (req, res) {
     let userId = req.params.id;
     userServices.getUser(userId)
         .then(data => {
@@ -148,9 +148,59 @@ router.get('/:id', auth_utils.authorizeMember, function (req, res) {
         });
 });
 
-
-router.post('/', function (req, res, next) {
-    res.send('respond with a resource');
+/**
+ * @api {put} /users/:id/ Update infomation of User
+ * @apiVersion 1.0.0
+ * @apiGroup Users
+ *
+ * @apiUse AccessHeader
+ *
+ * @apiParam (Body) {String} fullname User fullname
+ * @apiParam (Body) {String} password User password
+ * @apiParam (Body) {String} address User address
+ * @apiParam (Body) {String} phone User phone
+ * @apiParam (Body) {String} facebook_account User facebook_account
+ * @apiParam (Body) {String} twitter_account User twitter_account
+ * @apiParam (Body) {String} img_url User img_url
+ *
+ * @apiSuccessExample {json} Success Response
+ *  HTTP/1.1 200 OK
+ *  {
+ *    "success": true,
+ *  }
+ *  @apiUse FailedResponse
+ */
+router.put('/:id', [
+    // if check, url, it can't be null?
+    check('fullname').isLength({min: 1}).withMessage(errors.USER_FULLNAME),
+    check('password').isLength({min: 8}).withMessage(errors.USER_PASSWORD),
+    check('phone').optional().isMobilePhone().isLength({min: 10, max: 10}).withMessage(errors.USER_PHONE),
+    check('facebook_account').optional().isURL().withMessage(errors.USER_FB_ACCOUNT),
+    check('twitter_account').optional().isURL().withMessage(errors.USER_TWITTER_ACCOUNT),
+    check('active').optional().isBoolean().withMessage(errors.USER_ACTIVE),
+    check('img_url').optional().isURL().withMessage(errors.USER_IMG_URL),
+], auth_utils.authorizeAdminMember(), function (req, res) {
+    let userId = req.params.id;
+    let password = req.body.password;
+    let fullname = req.body.fullname;
+    let address = req.body.address;
+    let facebook_account = req.body.facebook_account;
+    let twitter_account = req.body.twitter_account;
+    let phone = req.body.phone;
+    let image_url = req.body.img_url;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.json(utils.failedResponse({errors: errors.array()}));
+    }
+    userServices.updateUser(userId, fullname, password,address, phone, facebook_account, twitter_account, image_url)
+        .then(data => {
+            res.json(utils.successResponse(data));
+        })
+        .catch(error => {
+            res.json(utils.failedResponse(error));
+        });
 });
+
+
 
 module.exports = router;

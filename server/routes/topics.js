@@ -168,7 +168,7 @@ router.get('/search/:search_key', function (req, res) {
  *  }
  *  @apiUse FailedResponse
  */
-router.get('/:id/comments', function (req, res) {
+router.get('/:id/comments', auth_utils.authorizeAdminMember(), function (req, res) {
     let requestId = req.params.id;
     commentServices.getTopicCommentByTopicID(requestId)
         .then(data => {
@@ -197,7 +197,7 @@ router.get('/:id/comments', function (req, res) {
  *  }
  *  @apiUse FailedResponse
  */
-router.post('/:id/comments', [
+router.post('/:id/comments', auth_utils.authorizeAdminMember(), [
     check('user_id').isLength({min: 1}).withMessage(errors.USER_ACCOUNT),
     check('topic_id').isLength({min: 1}).withMessage(errors.TOPIC_01),
     check('content').isLength({min: 1}).withMessage(errors.INFORMATION_01),
