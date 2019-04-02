@@ -137,7 +137,7 @@ router.post('/login', function (req, res) {
  *  }
  * @apiUse FailedResponse
  */
-router.get('/:id', auth_utils.authorizeAdmin(), function (req, res) {
+router.get('/:id', auth_utils.authorizeAdmin, function (req, res) {
     let userId = req.params.id;
     userServices.getUser(userId)
         .then(data => {
@@ -179,7 +179,7 @@ router.put('/:id', [
     check('twitter_account').optional().isURL().withMessage(errors.USER_TWITTER_ACCOUNT),
     check('active').optional().isBoolean().withMessage(errors.USER_ACTIVE),
     check('img_url').optional().isURL().withMessage(errors.USER_IMG_URL),
-], auth_utils.authorizeAdminMember(), function (req, res) {
+], auth_utils.authorizeAdminMember, function (req, res) {
     let userId = req.params.id;
     let password = req.body.password;
     let fullname = req.body.fullname;
