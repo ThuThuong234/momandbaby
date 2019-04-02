@@ -28,7 +28,7 @@ const {check, validationResult} = require('express-validator/check');
 router.post('/', [
     // if check, url, it can't be null?
     check('name').isLength({min: 1}).withMessage(errors.USER_EMAIL),
-    check('parent_id').isLength({min: 1}).withMessage(errors.USER_EMAIL),
+    check('parent_id').optional().isLength({min: 1}).withMessage(errors.TYPE_PARENT_ID),
 ], (req, res) => {
     console.log("afdsf ");
     let name = req.body.name;

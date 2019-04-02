@@ -25,13 +25,6 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'login',
-        component: LoginComponent,
-        data: {
-          title: 'Login'
-        }
-      },
-      {
         path: 'contact',
         component: ContactComponent,
         data: {
@@ -67,6 +60,14 @@ export const routes: Routes = [
         }
       }
     ]
+  },
+
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: {
+      title: 'Login'
+    }
   },
   // {
   //   path: 'admin',

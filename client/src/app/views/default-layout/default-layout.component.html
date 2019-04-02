@@ -20,10 +20,11 @@
           <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
         </ul>
       </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent" *ngIf="navItems">
         <ul class="navbar-nav ">
           <li class="nav-item active">
             <a class="nav-link" href="index">Home <span class="sr-only">(current)</span></a>
@@ -31,20 +32,29 @@
           <li class="nav-item">
             <a href="about" class="nav-link">About</a>
           </li>
-          <li class="nav-item">
-            <a href="service" class="nav-link">Service</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Pages
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="nav-link" href="errorpage">404 Page</a>
-              <a class="nav-link " href="typography">Typography</a>
-              <a class="nav-link " href="blog">Blog</a>
-              <a class="nav-link " href="blog_one">Blog-1</a>
-            </div>
-          </li>
+          <span *ngFor="let nav of navItems">
+            <span *ngIf="nav.children.length > 0 ;else other_content">
+              <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
+                {{nav.name}}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <span *ngFor="let child of nav.children">
+                   <a class="nav-link" href="#">{{child.name}}</a>
+                </span>
+              </div>
+            </li>
+            </span>
+              <ng-template #other_content>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" role="button" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                    {{nav.name}}
+                  </a>
+                </li>
+              </ng-template>
+          </span>
           <li class="nav-item">
             <a href="contact" class="nav-link">Contact</a>
           </li>
@@ -129,7 +139,8 @@
 <router-outlet></router-outlet>
 <footer>
   <div class="footer-bottom py-lg-4 py-3 text-center">
-    <p>©2018 Inside-Art. All Rights Reserved | Design by <a href="http://www.W3Layouts.com" target="_blank">W3Layouts</a></p>
+    <p>©2018 Inside-Art. All Rights Reserved | Design by <a href="http://www.W3Layouts.com"
+                                                            target="_blank">W3Layouts</a></p>
   </div>
 </footer>
 <script>
@@ -138,8 +149,8 @@
     // Slideshow 4
     $("#slider4").responsiveSlides({
       auto: true,
-      pager:true ,
-      nav:false,
+      pager: true,
+      nav: false,
       speed: 900,
       namespace: "callbacks",
       before: function () {
@@ -159,7 +170,7 @@
     itemsToScroll: 1,
     autoPlay: {
       enable: true,
-      interval:2000,
+      interval: 2000,
       pauseOnHover: true
     }
   });

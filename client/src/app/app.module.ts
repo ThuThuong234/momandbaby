@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -21,6 +21,16 @@ import { CheckloginComponent } from './views/checklogin/checklogin.component';
 import { LoginComponent } from './views/login/login.component';
 import { DefaultLayoutComponent } from './views/default-layout/default-layout.component';
 import { DefaulAdminLayoutComponent } from './views/admin/defaul-admin-layout/defaul-admin-layout.component';
+import {AuthenticateService} from "./services/authenticate.service";
+import {ToastrModule} from "ngx-toastr";
+import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -34,7 +44,7 @@ import { DefaulAdminLayoutComponent } from './views/admin/defaul-admin-layout/de
     CheckloginComponent,
     LoginComponent,
     DefaultLayoutComponent,
-    DefaulAdminLayoutComponent
+    DefaulAdminLayoutComponent,
   ],
   imports: [
     NgbModule.forRoot(),
@@ -45,12 +55,24 @@ import { DefaulAdminLayoutComponent } from './views/admin/defaul-admin-layout/de
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ToastrModule.forRoot({
+      progressBar: true,
+      preventDuplicates: true,
+    }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
 
   ],
   providers: [
     Title,
     SpinService,
-    TypeService
+    TypeService,
+    AuthenticateService,
   ],
   bootstrap: [
     AppComponent
