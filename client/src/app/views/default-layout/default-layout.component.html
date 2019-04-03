@@ -40,9 +40,7 @@
                 {{nav.name}}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <span *ngFor="let child of nav.children">
-                   <a class="nav-link" href="#">{{child.name}}</a>
-                </span>
+                   <a *ngFor="let child of nav.children" class="nav-link" href="#">{{child.name}}</a>
               </div>
             </li>
             </span>
