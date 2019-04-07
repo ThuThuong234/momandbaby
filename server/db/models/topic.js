@@ -8,6 +8,8 @@ module.exports = function (sequelize, DataTypes) {
             updated_at: DataTypes.DATE,
             title: DataTypes.STRING,
             content: DataTypes.STRING,
+            summary: DataTypes.STRING,
+            img: DataTypes.STRING,
             type_id: DataTypes.INTEGER,
             author_id: DataTypes.INTEGER,
             status: DataTypes.INTEGER,

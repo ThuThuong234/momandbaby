@@ -1,9 +1,9 @@
 import { Type } from 'class-transformer';
 
 import { Paging } from '../paging';
-import {Category} from './category';
+import {Topic} from './topic';
 
-export class TypePaging extends Paging {
-  @Type(() => Category)
-  Items: Category[];
+export class TopicPaging extends Paging {
+  @Type(() => Topic)
+  Items: Topic[];
 }

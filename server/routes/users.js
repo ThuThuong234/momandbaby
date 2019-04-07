@@ -101,7 +101,7 @@ router.post('/login', function (req, res) {
     let password = req.body.password;
     userServices.login(account, password)
         .then(data => {
-            res.json(utils.successResponse());
+            res.json(utils.successResponse(data));
         })
         .catch(error => {
             res.json(utils.failedResponse(error));

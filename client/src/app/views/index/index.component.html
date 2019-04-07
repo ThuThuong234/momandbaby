@@ -4,25 +4,23 @@
 <section class="py-md-3 py-sm-3 py-3">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-8" *ngIf="lastestTopic">
         <!--Blog-one -->
-        <div class="about-agile-img ">
+        <div class="about-agile-img " *ngFor="let topic of lastestTopic">
           <div class="row blog-bloged-about ">
             <div class="col-lg-7 col-md-7 about-wthree-info">
-              <h4 class="my-3"> Lorem ipsum</h4>
-              <h4> <span>id: </span>{{user.id}}</h4>
+              <h4 class="my-3"> {{topic.title}}</h4>
+              <h4> <span>Author: </span>{{topic.author}}</h4>
               <div class="news-date-list">
                 <ul>
-                  <li ><a href="singlepage" class="text-muted">12/June/2019</a></li>
-                  <li><a href="singlepage" class="text-muted">3 Tags</a></li>
+                  <li><a href="singlepage" class="text-muted">{{topic.views}}</a></li>
+                  <li><a href="singlepage" class="text-muted">{{topic.likes}}</a></li>
+                  <li><a href="singlepage" class="text-muted">{{topic.shares}}</a></li>
                 </ul>
               </div>
-              <h5 class="my-lg-4 mt-md-3 mt-3">velit sagittis vehicula. Duis posuere ex in mollis iaculis. Suspendisse</h5>
+              <h5 class="my-lg-4 mt-md-3 mt-3">{{topic.summary}}</h5>
               <div class="line-w3ls-title">
                 <!-- Just It is line -->
-              </div>
-              <div class="about-blog-agile">
-                <p>Suspendisse tincidunt velit velit sagittis vehicula. Duis posuere  mollis iaculis.</p>
               </div>
               <div class="row blog-img-center">
                 <div class="col-lg-5 col-md-6 col-sm-6 outs_more-buttn">
@@ -46,153 +44,10 @@
           </div>
           <div class="blog-img-top">
             <!-- Just a image -->
+            <img src="{{topic.img}}"/>
           </div>
         </div>
         <!--//Blog-one -->
-        <!-- Blog-Two -->
-        <div class="blog-text">
-          <div class="blog-two-img">
-            <!-- Just a image -->
-          </div>
-          <div class="blog-agile-text-middle">
-            <h4>eiusmod tempor</h4>
-            <h5 class="pt-3">consectetur adipiscing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit amet tempor incididunt Lorem ipsum sit amet tempor incididunt Lorem ipsum</h5>
-            <div class="news-date-list text-sm-right">
-              <ul>
-                <li ><a href="singlepage" class="text-muted">12/June/2019</a></li>
-                <li><a href="singlepage" class="text-muted">3 Tags</a></li>
-              </ul>
-            </div>
-            <div class="row blog-img-center">
-              <div class="col-lg-6 col-md-6 col-sm-6 outs_more-buttn">
-                <a href="singlepage">Read More</a>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 icons text-sm-right mt-3">
-                <ul>
-                  <li><a href="singlepage"><span class="fab fa-facebook-f"></span></a></li>
-                  <li><a href="singlepage"><span class="fas fa-envelope"></span></a></li>
-                  <li><a href="singlepage"><span class="fab fa-twitter"></span></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- //Blog-Two -->
-        <!-- //Blog-three -->
-        <div class="mt-lg-5 mt-md-5 mt-sm-4 mt-3 about-agile-img">
-          <div class="row blog-bloged-about">
-            <div class="col-lg-5 col-md-5">
-              <!--There is no contant empty Div for position Img-->
-            </div>
-            <div class="col-lg-7 col-md-7 about-wthree-info">
-              <h4 class="my-3"> Lorem ipsum</h4>
-              <div class="news-date-list">
-                <ul>
-                  <li ><a href="singlepage" class="text-muted" >12/June/2019</a></li>
-                  <li><a href="singlepage" class="text-muted" >3 Tags</a></li>
-                </ul>
-              </div>
-              <h5 class="my-lg-4 mt-md-3 mt-3">velit sagittis vehicula. Duis posuere ex in mollis iaculis. Suspendisse</h5>
-              <div class="line-w3ls-title">
-                <!-- Just It is line -->
-              </div>
-              <div class="about-blog-agile">
-                <p>Suspendisse tincidunt velit velit sagittis vehicula. Duis posuere  mollis iaculis.</p>
-              </div>
-              <div class="row blog-img-center">
-                <div class="col-lg-5 col-md-6 col-sm-6 outs_more-buttn">
-                  <a href="singlepage">Read More</a>
-                </div>
-                <div class="col-lg-7 col-md-6 col-sm-6 icons mt-lg-3 mt-3 px-0">
-                  <ul>
-                    <li class="mt-2">
-                      <h6> Share</h6>
-                    </li>
-                    <li><a href="singlepage"><span class="fab fa-facebook-f"></span></a></li>
-                    <li><a href="singlepage"><span class="fas fa-envelope"></span></a></li>
-                    <li><a href="singlepage"><span class="fab fa-twitter"></span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="blog-img-left text-center">
-            <!-- Just a image -->
-          </div>
-        </div>
-        <!-- //Blog-three -->
-        <!-- Blog-four -->
-        <div class="blog-text">
-          <div class="blog-two-img">
-          </div>
-          <div class="blog-agile-text-middle">
-            <h4>eiusmod tempor</h4>
-            <h5 class="pt-3">consectetur adipiscing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit amet tempor incididunt Lorem ipsum sit amet tempor incididunt Lorem ipsum</h5>
-            <div class="news-date-list text-sm-right">
-              <ul>
-                <li ><a href="singlepage" class="text-muted">12/June/2019</a></li>
-                <li><a href="singlepage" class="text-muted" >3 Tags</a></li>
-              </ul>
-            </div>
-            <div class="row blog-img-center">
-              <div class="col-lg-6 col-md-6 col-sm-6 outs_more-buttn">
-                <a href="singlepage">Read More</a>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 icons text-sm-right mt-3">
-                <ul>
-                  <li><a href="singlepage"><span class="fab fa-facebook-f"></span></a></li>
-                  <li><a href="singlepage"><span class="fas fa-envelope"></span></a></li>
-                  <li><a href="singlepage"><span class="fab fa-twitter"></span></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- //Blog-four-->
-        <!-- //Blog-five -->
-        <div class="row blog-text mt-0 info-grids-blog">
-          <div class="col-lg-6 col-md-6 blog-grid-w3layouts-img">
-            <div class="blog-three-img">
-              <!-- Just a image -->
-            </div>
-            <div class="blog-agile-text text-center p-lg-4 p-3">
-              <h4>eiusmod tempor</h4>
-              <h5 class="pt-3">consectetur adipiscing elit, sed do eiusmod tempor incididunt Lorem ipsum </h5>
-              <div class="news-date-list text-center mt-2">
-                <ul>
-                  <li><a href="singlepage" class="text-muted">12/June/2019</a></li>
-                  <li><a href="singlepage" class="text-muted">3 Tags</a></li>
-                </ul>
-              </div>
-              <div class="blog-bloged">
-                <div class="outs_more-buttn">
-                  <a href="singlepage">Read More</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6 blog-grid-w3layouts-img">
-            <div class="blog-three-img">
-              <!-- Just a image -->
-            </div>
-            <div class="blog-agile-text text-center p-lg-4 p-3">
-              <h4>eiusmod tempor</h4>
-              <h5 class="pt-3">consectetur adipiscing elit, sed do eiusmod tempor incididunt Lorem ipsum </h5>
-              <div class="news-date-list text-center mt-2">
-                <ul>
-                  <li><a href="singlepage" class="text-muted">12/June/2019</a></li>
-                  <li><a href="singlepage" class="text-muted">3 Tags</a></li>
-                </ul>
-              </div>
-              <div class="blog-bloged">
-                <div class="outs_more-buttn">
-                  <a href="singlepage">Read More</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--//Blog-five-->
         <!-- pagination-blog-->
         <div class="pagination-blog">
           <nav aria-label="Page navigation example">

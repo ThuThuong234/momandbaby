@@ -25,6 +25,7 @@ import {AuthenticateService} from "./services/authenticate.service";
 import {ToastrModule} from "ngx-toastr";
 import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {TopicService} from "./services/reader/topic_services";
 
 
 // AoT requires an exported function for factories
@@ -72,6 +73,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     Title,
     SpinService,
     TypeService,
+    TopicService,
     AuthenticateService,
   ],
   bootstrap: [

@@ -251,7 +251,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/types/",
-    "title": "Add Category",
+    "title": "Add Topic",
     "version": "1.0.0",
     "group": "Types",
     "parameter": {
@@ -262,14 +262,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "name",
-            "description": "<p>Category name</p>"
+            "description": "<p>Topic name</p>"
           },
           {
             "group": "Body",
             "type": "String",
             "optional": false,
             "field": "parent_id",
-            "description": "<p>Category parent</p>"
+            "description": "<p>Topic parent</p>"
           }
         ]
       }

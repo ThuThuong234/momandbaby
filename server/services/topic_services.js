@@ -11,7 +11,7 @@ const Op = (require('sequelize')).Op;
 exports.getLatestTopics = async function () {
     return new Promise(function (resolve, reject) {
         models.Topic.findAll({
-            attributes: ['id', 'title', 'created_at', 'content', 'views', 'likes', 'shares'],
+            attributes: ['id', 'title', 'created_at', 'content', 'views', 'likes', 'shares','summary','img'],
             include: [
                 {
                     model: models.User,
@@ -58,7 +58,7 @@ exports.getLatestTopics = async function () {
 exports.getTopicByID = function (id) {
     return new Promise(function (resolve, reject) {
         models.Topic.findOne({
-            attributes: ['id', 'title', 'created_at', 'content', 'views', 'likes', 'shares'],
+            attributes: ['id', 'title', 'created_at', 'content', 'views', 'likes', 'shares','summary','img'],
             include: [
                 {
                     model: models.User,
@@ -118,7 +118,7 @@ exports.getTopicByID = function (id) {
 exports.searchTopic = function (search_key){
     return new Promise(function (resolve, reject) {
         models.Topic.findAll({
-            attributes: ['id', 'title', 'created_at', 'content', 'views', 'likes', 'shares'],
+            attributes: ['id', 'title', 'created_at', 'content', 'views', 'likes', 'shares','summary','img'],
             include: [
                 {
                     model: models.User,

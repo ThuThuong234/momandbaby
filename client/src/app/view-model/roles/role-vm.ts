@@ -1,4 +1,4 @@
-export class RoleVM {
+export class Role {
   static ROLES = {
     ADMIN: 'admin',
     MEMBER: 'member'

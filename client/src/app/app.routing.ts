@@ -9,7 +9,7 @@ import {BlogOneComponent} from "./views/blog-one/blog-one.component";
 import {LoginComponent} from "./views/login/login.component";
 import {DefaultLayoutComponent} from './views/default-layout/default-layout.component';
 import {AuthorizeService} from './services/authorize.service';
-import {RoleVM} from './view-model/roles/role-vm';
+import {Role} from './view-model/roles/role-vm';
 import {DefaulAdminLayoutComponent} from './views/admin/defaul-admin-layout/defaul-admin-layout.component';
 
 export const routes: Routes = [
@@ -18,7 +18,7 @@ export const routes: Routes = [
     component: DefaultLayoutComponent,
     children: [
       {
-        path: '',
+        path: '' ,
         component: IndexComponent,
         data: {
           title: 'Home'
@@ -76,7 +76,7 @@ export const routes: Routes = [
   //     // {
   //     //   path: '',
   //     //   canActivate: [AuthorizeService],
-  //     //   data: {roles: [RoleVM.ROLES.ADMIN]},
+  //     //   data: {roles: [Role.ROLES.ADMIN]},
   //     //   loadChildren: './views/users/users.module#UsersModule'
   //     // },
   //     {

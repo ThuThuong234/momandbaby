@@ -470,22 +470,22 @@ padding: 2em 1em;
 .about-agile-img {
 position: relative;
 }
-.blog-img-top {
-background: url(../images/aa22.jpg) no-repeat 0px 0px;
+.blog-img-top img{
+/*background: url(../images/aa22.jpg) no-repeat 0px 0px;*/
 right: 11px;
 }
-.blog-img-left {
+.blog-img-left img{
 background: url(../images/aa11.jpg) no-repeat 0px 0px;
 top: -5%;
 left: -6px;
 }
-.blog-img-top,.blog-img-left{  
+.blog-img-top img,.blog-img-left{
 box-shadow: -3px 11px 20px 0px #808080;
-min-height: 478px;
+min-height: 310px;
 background-size: cover;
 width: 42%;
 z-index: 99;
-top:-5%;
+top:5%;
 position: absolute;
 }
 .blog-three-img {
@@ -980,7 +980,7 @@ padding: 8px 18px;
 margin-top: 17px;
 }
 .blog-img-top, .blog-img-left {
-min-height: 462px;
+/*min-height: 462px;*/
 top: -7%;
 }
 .blog-text {

@@ -9,14 +9,14 @@ const errors = require('../lib/errors');
 const {check, validationResult} = require('express-validator/check');
 
 /**
- * @api {post} /types/ Add Category
+ * @api {post} /types/ Add Topic
  * @apiVersion 1.0.0
  * @apiGroup Types
  *
  * @apiUse AccessHeader
  *
- * @apiParam (Body) {String} name Category name
- * @apiParam (Body) {String} parent_id Category parent
+ * @apiParam (Body) {String} name Topic name
+ * @apiParam (Body) {String} parent_id Topic parent
  *
  * @apiSuccessExample {json} Success Response
  *  HTTP/1.1 200 OK

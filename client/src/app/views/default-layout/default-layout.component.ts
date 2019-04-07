@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {TranslateService} from "@ngx-translate/core";
 import {SessionVM} from "../../view-model/session/session-vm";
-import {RoleVM} from "../../view-model/roles/role-vm";
+import {Role} from "../../view-model/roles/role-vm";
 import {TypeService} from "../../services/reader/type_services";
 
 @Component({
@@ -31,11 +31,11 @@ export class DefaultLayoutComponent implements OnInit {
     //     this.session = data;
     //     if (this.session && this.session.token != null && this.session.role != null) {
     //       switch (this.session.role.code) {
-    //         case RoleVM.ROLES.ADMIN: {
+    //         case Role.ROLES.ADMIN: {
     //           this.navItems = adminNavItems;
     //           break;
     //         }
-    //         case RoleVM.ROLES.MEMBER: {
+    //         case Role.ROLES.MEMBER: {
     //           this.navItems = hrNavItems;
     //           break;
     //         }

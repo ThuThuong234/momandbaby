@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthenticateService } from './authenticate.service';
 
 import { SessionVM } from '../view-model/session/session-vm';
-import { RoleVM } from '../view-model/roles/role-vm';
+import {Role} from '../view-model/roles/role-vm';
 
 @Injectable()
 export class AuthorizeService implements CanActivate {
@@ -34,7 +34,7 @@ export class AuthorizeService implements CanActivate {
   updateRedirectRoute(state: RouterStateSnapshot) {
     if (this.session) {
       this.toastr.error(this.translate.instant('AUTHORIZE.FAILED'));
-      if (this.session.role.code === RoleVM.ROLES.ADMIN) {
+      if (this.session.role.code === Role.ROLES.ADMIN) {
         this.router.navigate(['/users']);
       } else {
         this.router.navigate(['/dashboard']);

@@ -1,6 +1,6 @@
 import { ApiResult } from '../api-result';
-import {TypePaging} from '../../view-model/type/type-paging';
+import {TopicPaging} from '../../view-model/topic/topic-paging';
 
 export class GetTypesApiResult extends ApiResult {
-  data: TypePaging;
+  data: TopicPaging;
 }

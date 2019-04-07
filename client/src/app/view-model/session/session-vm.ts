@@ -1,15 +1,15 @@
 import { Type } from 'class-transformer';
 
-import { RoleVM } from '../roles/role-vm';
+import { Role } from '../roles/role-vm';
 
 export class SessionVM {
   token: string;
   fullname: string;
   account: string;
-  @Type(() => RoleVM)
-  role: RoleVM;
+  @Type(() => Role)
+  role: Role;
 
-  constructor(token: string, role: RoleVM, fullname: string, account: string) {
+  constructor(token: string, role: Role, fullname: string, account: string) {
     this.token = token;
     this.role = role;
     this.fullname = fullname;
