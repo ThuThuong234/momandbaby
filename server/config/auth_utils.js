@@ -80,7 +80,7 @@ exports.authorizeAdminMember = function (req, res, next) {
     next();
   })
     .catch(error => {
-      res.json(utils.failedResponse(error));
+      res.json(helper.failedResponse(error));
     });
 };
 
