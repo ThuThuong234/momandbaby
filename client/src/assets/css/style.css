@@ -937,6 +937,15 @@ opacity: 0;
 -moz-opacity: 0;
 filter: alpha(opacity=0);
 }
+.search-text{
+  border-radius: 25px;
+}
+.fas.fa-search{
+  top: 20px;
+  position: absolute;
+  left: 200px;
+  color: #7a86ce;
+}
 /*-- //to-top --*/
 /*--responsive--*/
 @media(max-width:1920px){
@@ -1276,7 +1285,7 @@ min-height: 410px;
 min-height: 350px;
 }
 .address_mail_footer_grids {
-margin-top: 35px;
+margin-top: 0px !important;
 }
 .sent-butnn, .click-me {
 font-size: 18px;
