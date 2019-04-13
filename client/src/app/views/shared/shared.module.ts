@@ -7,6 +7,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { TopicInformationComponent } from './topic-information/topic-information.component';
 import { ListTopicsComponent } from './list-topics/list-topics.component';
+import { BannerComponent } from './banner/banner.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { ListTopicsComponent } from './list-topics/list-topics.component';
     PaginationComponent,
     ConfirmComponent,
     ListTopicsComponent,
+    BannerComponent,
   ],
   entryComponents: [
     ConfirmComponent
@@ -30,6 +32,7 @@ import { ListTopicsComponent } from './list-topics/list-topics.component';
     ConfirmComponent,
     TopicInformationComponent,
     ListTopicsComponent,
+    BannerComponent,
   ]
 })
 export class SharedModule { }
