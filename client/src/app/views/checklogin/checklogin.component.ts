@@ -5,7 +5,7 @@ import {UserService} from "../../user.service";
 @Component({
   selector: 'app-checklogin',
   templateUrl: './checklogin.component.html',
-  styleUrls: ['./checklogin.component.css']
+  styleUrls: ['./checklogin.component.scss']
 })
 export class CheckloginComponent implements OnInit {
 
