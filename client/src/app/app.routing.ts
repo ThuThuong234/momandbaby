@@ -11,6 +11,8 @@ import {DefaultLayoutComponent} from './views/default-layout/default-layout.comp
 import {AuthorizeService} from './services/authorize.service';
 import {Role} from './view-model/roles/role-vm';
 import {DefaulAdminLayoutComponent} from './views/admin/defaul-admin-layout/defaul-admin-layout.component';
+import {AppComponent} from "./app.component";
+import {SearchTopicComponent} from "./views/topics/search-topic/search-topic.component";
 
 export const routes: Routes = [
   {
@@ -57,8 +59,22 @@ export const routes: Routes = [
         component: BlogOneComponent,
         data: {
           title: 'BlogOne'
-        }
-      }
+        },
+      },
+      {
+        path: 'topics/search/:search_key',
+        component: SearchTopicComponent,
+        data: {
+          title: 'Search'
+        },
+      },
+      // {
+      //   path: 'types/:id/topics/',
+      //   // component: ListComponent,
+      //   data: {
+      //     title: 'Search'
+      //   },
+      // },
     ]
   },
 
@@ -139,3 +155,8 @@ export const routes: Routes = [
 })
 export class AppRoutingModule {
 }
+export const routingCoponents = [
+  AppComponent,
+  IndexComponent,
+  LoginComponent,
+]

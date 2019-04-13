@@ -7889,3 +7889,4 @@ server/node_modules/express-validator/check/runner.js
 server/node_modules/express-validator/check/one-of.js
 server/node_modules/express-validator/check/one-of.d.ts
 server/node_modules/express-validator/check/location.d.ts
+server/logs/

@@ -28,7 +28,7 @@ export class IndexComponent implements OnInit {
 
 
   ngOnInit() {
-    this.user = this.userService.getUser_root();
+    // this.user = this.userService.getUser_root();
     this.users = this.userService.getUsers();
     this.getLatestTopic();
    }

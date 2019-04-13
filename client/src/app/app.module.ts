@@ -6,7 +6,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 //root
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app.routing';
+import {AppRoutingModule,routingCoponents} from './app.routing';
 //server
 import {TypeService} from "./services/reader/type_services";
 import {SpinService} from "./services/spin.service";
@@ -26,6 +26,8 @@ import {ToastrModule} from "ngx-toastr";
 import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TopicService} from "./services/reader/topic_services";
+import { SearchTopicComponent } from './views/topics/search-topic/search-topic.component';
+import {SharedModule} from "./views/shared/shared.module";
 
 
 // AoT requires an exported function for factories
@@ -36,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    routingCoponents,
     IndexComponent,
     ContactComponent,
     AboutComponent,
@@ -46,6 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     DefaultLayoutComponent,
     DefaulAdminLayoutComponent,
+    SearchTopicComponent,
   ],
   imports: [
     NgbModule.forRoot(),
@@ -56,6 +60,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    SharedModule,
     ToastrModule.forRoot({
       progressBar: true,
       preventDuplicates: true,

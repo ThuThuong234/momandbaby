@@ -1614,6 +1614,7 @@ font-size: 31px;
 font-size: 13px;
 }
 .line-w3ls-title {
+  width: 100%;
 margin: 6px 0px 9px;
 }
 .address_mail_footer_grids iframe {
@@ -1633,6 +1634,12 @@ line-height: 28px;
 font-size: 33px;
 }
 }
+
+@media(max-width:770px){
+  .blog-img-top img{
+    display: none;
+  }
+}
 @media(max-width:414px){
 .header-w3layouts {
 top: 11%;
@@ -1649,6 +1656,9 @@ padding: 7px 18px;
 .bottom-para h6 a {
 line-height: 20px;
 }
+  .blog-img-top img, .blog-img-left{
+    display: none;
+  }
 }
 @media(max-width:384px){
 .slider-img {
