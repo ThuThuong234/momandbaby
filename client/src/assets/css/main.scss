@@ -1,5 +1,6 @@
 // color variables
 $title_color: #F90CE5;
+$background-white: #fff;
 
 //commons
 
@@ -14,4 +15,29 @@ $title_color: #F90CE5;
   &.active, &:active {
     color: $title_color;
   }
+}
+.page-name{
+  color: $title_color;
+  font-family: cursive;
+}
+.fas.fa-search {
+  top: 10px;
+  position: absolute;
+  left: 220px;
+  color: $title_color;
+  font-size: 20px;
+}
+.icons:hover{
+  .search-text{
+    display: block;
+  }
+}
+.btn-login{
+  border: 1px solid $title_color;
+  a{
+    color: $title_color;
+  }
+}
+.search-text{
+  display: none;
 }
