@@ -1,2 +1,4 @@
-<h2 class="text-success">Search Topic: </h2>
-<app-list-topics [topicsList]="topicsList"></app-list-topics>
+<div class="container">
+  <h4 class="text-success"> Found {{topicsList ? topicsList.length : 0}} results:</h4>
+</div>
+<app-list-topics *ngIf="topicsList && topicsList.length > 0 " [topicsList]="topicsList"></app-list-topics>

@@ -16,4 +16,8 @@ export class TopicService extends APIService {
     return super.apiGet<GetTypesApiResult>('/topics/latest', null, false);
   }
 
+  public searchTopicbyTitle(search_key: string) {
+    return super.apiGet<GetTypesApiResult>('/topics/search/'+ search_key, null, false);
+  }
+
 }

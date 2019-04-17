@@ -9,5 +9,5 @@ export class Topic {
   shares:string;
   author:string;
   type:string;
-  created_at;
+  created_at:string;
 }

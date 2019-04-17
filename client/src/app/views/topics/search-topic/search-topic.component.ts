@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticateService} from "../../../services/authenticate.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
+import {TranslateService} from "@ngx-translate/core";
+import {TypeService} from "../../../services/reader/type_services";
+import {TopicService} from "../../../services/reader/topic_services";
+import {TopicPaging} from "../../../view-model/topic/topic-paging";
+import {plainToClass} from "class-transformer";
 
 @Component({
   selector: 'app-search-topic',
@@ -7,13 +15,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchTopicComponent implements OnInit {
 
-  topicsList: any[];
+  topicsList: TopicPaging;
 
-  constructor() { }
+  constructor(private authService: AuthenticateService,
+              private router: Router,
+              private route : ActivatedRoute,
+              private toast: ToastrService,
+              private translate: TranslateService,
+              private topicService: TopicService) { }
 
   ngOnInit() {
+    let title =this.route.snapshot.paramMap.get('search_key');
+    console.log(title)
+    this.getSearchTopic(title);
   }
   getSearchTopic(search_key){
+    this.topicService.searchTopicbyTitle(search_key).subscribe(
+      res => {
+        if (res.success && res.data) {
+          console.log(" res data ")
+          console.log(res.data);
+          this.topicsList = plainToClass(TopicPaging,res.data);
+        } else {
+          this.toast.error(res.message);
+        }
+      },
+      error => {
+        this.toast.error(this.translate.instant('COMMON.GET.FAILED'));
+      });
 
   }
 
