@@ -7,7 +7,7 @@
     window.scrollTo(0, 1);
   }
 </script>
-<div class="header-outs" id="header">
+<div class="header-outs fixed-top" id="header">
   <div class="headder-nav-icon">
     <div class="container mt-2">
       <div class="row">
@@ -18,8 +18,10 @@
         <div class="col-8">
           <div class="row justify-content-end pt-2">
             <div class="col-md-4 icons pr-0">
-              <input type="text" class="form-control bg-light search-text input-sm" placeholder="enter title to search">
-              <i class="fas fa-search" (click)="search()"></i>
+              <form (submit)="search()">
+                <input type="text" class="form-control bg-light search-text input-sm" name="search_key" placeholder="enter title to search" [(ngModel)]="search_key">
+                <i class="fas fa-search" (click)="search()"></i>
+              </form>
             </div>
             <div class="col-md-2">
               <button class="btn btn-login bg-white btn-sm"><app-checklogin></app-checklogin></button>
@@ -78,7 +80,8 @@
     </div>
   </div>
 </div>
-<router-outlet></router-outlet>
+<div class="content"><router-outlet></router-outlet></div>
+
 <footer>
   <div class="footer-bottom py-lg-4 py-3 text-center">
     <p>©2018 Inside-Art. All Rights Reserved | Design by <a href="http://www.W3Layouts.com"

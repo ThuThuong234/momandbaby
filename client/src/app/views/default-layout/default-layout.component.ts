@@ -78,6 +78,7 @@ export class DefaultLayoutComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   search(){
+    console.log(this.search_key);
     this.router.navigate(['/topics/search', this.search_key]);
   }
 
