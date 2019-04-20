@@ -13,6 +13,7 @@ import {Role} from './view-model/roles/role-vm';
 import {DefaulAdminLayoutComponent} from './views/admin/defaul-admin-layout/defaul-admin-layout.component';
 import {AppComponent} from "./app.component";
 import {SearchTopicComponent} from "./views/topics/search-topic/search-topic.component";
+import {RegistrationComponent} from "./views/registration/registration.component";
 
 export const routes: Routes = [
   {
@@ -59,14 +60,28 @@ export const routes: Routes = [
         component: BlogOneComponent,
         data: {
           title: 'BlogOne'
-        },
+        }
       },
       {
         path: 'topics/search/:search_key',
         component: SearchTopicComponent,
         data: {
           title: 'Search'
-        },
+        }
+      },
+      {
+        path: 'registration',
+        component: RegistrationComponent,
+        data: {
+          title: 'Registration'
+        }
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+        data: {
+          title: 'Login'
+        }
       },
       // {
       //   path: 'types/:id/topics/',
@@ -76,15 +91,7 @@ export const routes: Routes = [
       //   },
       // },
     ]
-  },
-
-  {
-    path: 'login',
-    component: LoginComponent,
-    data: {
-      title: 'Login'
-    }
-  },
+  }
   // {
   //   path: 'admin',
   //   component: DefaulAdminLayoutComponent,
@@ -159,4 +166,4 @@ export const routingCoponents = [
   AppComponent,
   IndexComponent,
   LoginComponent,
-]
+];
