@@ -28,7 +28,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {TopicService} from "./services/reader/topic_services";
 import { SearchTopicComponent } from './views/topics/search-topic/search-topic.component';
 import {SharedModule} from "./views/shared/shared.module";
-import { RegistrationComponent } from './views/registration/registration.component';
+import { SignupComponent } from './views/signup/signup.component';
 
 
 // AoT requires an exported function for factories
@@ -51,7 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DefaultLayoutComponent,
     DefaulAdminLayoutComponent,
     SearchTopicComponent,
-    RegistrationComponent
+    SignupComponent
   ],
   imports: [
     NgbModule.forRoot(),

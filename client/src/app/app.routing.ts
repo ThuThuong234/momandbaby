@@ -13,7 +13,7 @@ import {Role} from './view-model/roles/role-vm';
 import {DefaulAdminLayoutComponent} from './views/admin/defaul-admin-layout/defaul-admin-layout.component';
 import {AppComponent} from "./app.component";
 import {SearchTopicComponent} from "./views/topics/search-topic/search-topic.component";
-import {RegistrationComponent} from "./views/registration/registration.component";
+import {SignupComponent} from "./views/signup/signup.component";
 
 export const routes: Routes = [
   {
@@ -70,10 +70,10 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'registration',
-        component: RegistrationComponent,
+        path: 'signup',
+        component: SignupComponent,
         data: {
-          title: 'Registration'
+          title: 'Signup'
         }
       },
       {
