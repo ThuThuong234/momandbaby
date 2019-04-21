@@ -8,8 +8,8 @@ import {GetTypesApiResult} from "../data-transfer/types/getTypes.api-result";
 @Injectable()
 export class UserService extends APIService {
 
-  constructor( private  http: HttpClient, private  spinService: SpinService){
-    super(http, spinService);
+  constructor(private http: HttpClient, private spintService: SpinService) {
+    super(http, spintService);
   }
   public  login( loginModel: LoginModel ){
     return super.apiPost<GetTypesApiResult>('/users/login', loginModel);
