@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../../user.service";
 import { User} from "../../view-model/user/user";
 import {AuthenticateService} from "../../services/authenticate.service";
 import {Router} from "@angular/router";
@@ -19,7 +18,7 @@ export class IndexComponent implements OnInit {
    user: User;
    users: User[];
    lastestTopic: {};
-  constructor(private userService: UserService,
+  constructor(
               private authService: AuthenticateService,
               private router: Router,
               private toastr: ToastrService,
@@ -29,7 +28,6 @@ export class IndexComponent implements OnInit {
 
   ngOnInit() {
     // this.user = this.userService.getUser_root();
-    this.users = this.userService.getUsers();
     this.getLatestTopic();
    }
   getLatestTopic(){

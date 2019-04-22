@@ -3,7 +3,7 @@ import {APIService} from "./api.service";
 import {HttpClient} from "@angular/common/http";
 import {SpinService} from "./spin.service";
 import {LoginModel} from "../view-model/user/login-model";
-import {GetTypesApiResult} from "../data-transfer/types/getTypes.api-result";
+import {LoginApiResult} from "../view-model/user/login.api-result";
 
 @Injectable()
 export class UserService extends APIService {
@@ -12,6 +12,6 @@ export class UserService extends APIService {
     super(http, spintService);
   }
   public  login( loginModel: LoginModel ){
-    return super.apiPost<GetTypesApiResult>('/users/login', loginModel);
+    return super.apiPost<LoginApiResult>('/users/login', loginModel);
   }
 }
