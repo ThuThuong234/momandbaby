@@ -99,7 +99,7 @@ exports.login = function (account, password) {
                     id: user.id,
                     account: user.account,
                     fullname: user.fullname,
-                    role: user.Role
+                    role: user.Role.name,
                 };
                 let token = auth_utils.getToken(resultData);
                 resultData.token = token;

@@ -29,10 +29,13 @@
               "src/assets/css/style.css",
               "src/assets/css/main.scss",
               "src/assets/css/lightbox.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.bubble.css",
+              "node_modules/quill/dist/quill.snow.css"
             ],
             "scripts": [
-              "src/assets/js/jquery-2.2.3.min.js",
+              "src/assets/js/jquery-3.2.1.js",
               "src/assets/js/easing.js",
               "src/assets/js/move-top.js",
               "src/assets/js/jquery.flexisel.js",
@@ -40,7 +43,9 @@
               "src/assets/js/responsiveslides.min.js",
               "src/assets/js/jquery.waypoints.min.js",
               "src/assets/js/bootstrap.min.js",
-              "src/assets/js/jquery.countup.js"
+              "src/assets/js/jquery.countup.js",
+              "node_modules/quill/dist/quill.core.js",
+              "node_modules/quill/dist/quill.js"
             ]
           },
           "configurations": {

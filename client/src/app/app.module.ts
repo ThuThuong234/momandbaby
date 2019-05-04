@@ -29,6 +29,8 @@ import {TopicService} from "./services/reader/topic_services";
 import { SearchTopicComponent } from './views/topics/search-topic/search-topic.component';
 import {SharedModule} from "./views/shared/shared.module";
 import { SignupComponent } from './views/signup/signup.component';
+import { CreateTopicComponent } from './views/topics/create-topic/create-topic.component';
+import { QuillModule } from 'ngx-quill'
 
 
 // AoT requires an exported function for factories
@@ -51,7 +53,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DefaultLayoutComponent,
     DefaulAdminLayoutComponent,
     SearchTopicComponent,
-    SignupComponent
+    SignupComponent,
+    CreateTopicComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -74,6 +77,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    QuillModule
 
   ],
   providers: [

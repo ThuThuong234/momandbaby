@@ -6,6 +6,7 @@ export class SessionVM {
   token: string;
   fullname: string;
   account: string;
+  id: number ;
   @Type(() => Role)
   role: Role;
 

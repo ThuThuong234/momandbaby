@@ -14,6 +14,7 @@ import {DefaulAdminLayoutComponent} from './views/admin/defaul-admin-layout/defa
 import {AppComponent} from "./app.component";
 import {SearchTopicComponent} from "./views/topics/search-topic/search-topic.component";
 import {SignupComponent} from "./views/signup/signup.component";
+import {CreateTopicComponent} from "./views/topics/create-topic/create-topic.component";
 
 export const routes: Routes = [
   {
@@ -67,6 +68,14 @@ export const routes: Routes = [
         component: SearchTopicComponent,
         data: {
           title: 'Search'
+        }
+      },
+
+      {
+        path: 'topics/new',
+        component: CreateTopicComponent,
+        data: {
+          title: 'New Topic'
         }
       },
       {

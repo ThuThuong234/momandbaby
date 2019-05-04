@@ -1,5 +1,9 @@
-<a *ngIf="user.id==''" href="/login">Login</a>
-<a *ngIf="user.id!=''" class="nav-link"><span>ID:</span>{{user.id}}</a>
-
+<div *ngIf="user.id==null">
+  <a  href="/login">Login</a>
+</div>
+<div *ngIf="user.id!=null">
+<a  class="nav-link"><span>ID:</span>{{user.fullname}}</a>
+<i class="post-topic far fa-plus-square"></i>
+</div>
 
 
