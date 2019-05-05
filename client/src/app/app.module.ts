@@ -31,6 +31,7 @@ import {SharedModule} from "./views/shared/shared.module";
 import { SignupComponent } from './views/signup/signup.component';
 import { CreateTopicComponent } from './views/topics/create-topic/create-topic.component';
 import { QuillModule } from 'ngx-quill'
+import {UserService} from "./services/user.service";
 
 
 // AoT requires an exported function for factories
@@ -86,6 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TypeService,
     TopicService,
     AuthenticateService,
+    UserService,
   ],
   bootstrap: [
     AppComponent

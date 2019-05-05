@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
           if( res.data && res.data.token ){
             const newSession = new SessionVM(res.data.token, res.data.role, res.data.fullname, res.data.account);
             this.authService.setSession(newSession);
+            console.log(newSession);
             if(newSession.role.code === Role.ROLES.ADMIN || newSession.role.code === Role.ROLES.MEMBER){
               this.router.navigate(['/']);
             }
