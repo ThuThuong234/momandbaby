@@ -42,6 +42,7 @@
               "src/assets/js/lightbox-plus-jquery.min.js",
               "src/assets/js/responsiveslides.min.js",
               "src/assets/js/jquery.waypoints.min.js",
+              "node_modules/popper.js/dist/umd/popper.js",
               "src/assets/js/bootstrap.min.js",
               "src/assets/js/jquery.countup.js",
               "node_modules/quill/dist/quill.core.js",

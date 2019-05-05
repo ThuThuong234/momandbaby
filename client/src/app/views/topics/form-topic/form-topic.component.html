@@ -1,0 +1,30 @@
+<div class="text-center pb-4"><h3>{{title}}</h3></div>
+<div class="row">
+  <div class="col-sm-2 pb-2">Title</div>
+  <div class="col-sm-10 pb-2">
+    <input class="form-control" name="title">
+  </div>
+  <div class="col-sm-2 pb-2">Type</div>
+  <div class="col-sm-10 pb-2">
+    <div class="dropdown type-dropdown">
+      <button type="button" class="btn bg-white border dropdown-toggle" data-toggle="dropdown" >
+        Select type...
+      </button>
+      <div class="dropdown-menu type-menu">
+        <a class="dropdown-item" (click)="redirectPostTopic()">
+          <i class="post-topic far fa-plus-square"></i> Post a topic</a>
+        <a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2 pb-2">Content</div>
+  <div class="col-sm-10 pb-2">
+    <quill-editor></quill-editor>
+  </div>
+  <div class="col-sm-2 pb-2">Thumbnail</div>
+  <div class="col-sm-10 pb-2">
+    <input type="file" name="thumbnail">
+  </div>
+
+  <div class="col-sm-12 text-center pb-2"><button class="btn btn-primary">{{buttonText}}</button></div>
+</div>

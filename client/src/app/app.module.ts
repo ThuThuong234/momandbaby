@@ -32,6 +32,7 @@ import { SignupComponent } from './views/signup/signup.component';
 import { CreateTopicComponent } from './views/topics/create-topic/create-topic.component';
 import { QuillModule } from 'ngx-quill'
 import {UserService} from "./services/user.service";
+import { FormTopicComponent } from './views/topics/form-topic/form-topic.component';
 
 
 // AoT requires an exported function for factories
@@ -55,7 +56,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DefaulAdminLayoutComponent,
     SearchTopicComponent,
     SignupComponent,
-    CreateTopicComponent
+    CreateTopicComponent,
+    FormTopicComponent
   ],
   imports: [
     NgbModule.forRoot(),

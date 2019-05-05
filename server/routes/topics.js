@@ -7,6 +7,57 @@ const utils = require('../helper/api_helper');
 const auth_utils = require('../config/auth_utils');
 const {check, validationResult} = require('express-validator/check');
 
+
+/**
+ * @api {post} /topics/ Comment Topic
+ * @apiVersion 1.0.0
+ * @apiGroup Comments
+ *
+ * @apiUse AccessHeader
+ *
+ * @apiParam (Body) {String} user_id User id
+ * @apiParam (Body) {String} title Topic title
+ * @apiParam (Body) {String} content Topic content
+ * @apiParam (Body) {String} summary Topic summary
+ * @apiParam (Body) {String} img Topic img
+ * @apiParam (Body) {String} type_id Topic type_id
+ *
+ * @apiSuccessExample {json} Success Response
+ *  HTTP/1.1 200 OK
+ *  {
+ *    "success": true,
+ *  }
+ *  @apiUse FailedResponse
+ */
+router.post('/', auth_utils.authorizeAdminMember, [
+    check('user_id').isLength({min: 1}).withMessage(errors.USER_ACCOUNT),
+    check('title').isLength({min: 1}).withMessage(errors.TOPIC_01),
+    check('content').isLength({min: 1}).withMessage(errors.INFORMATION_01),
+    check('summary').isLength({min: 1}).withMessage(errors.INFORMATION_01),
+    check('img').isLength({min: 1}).withMessage(errors.INFORMATION_01),
+    check('type_id').isLength({min: 1}).withMessage(errors.INFORMATION_01),
+], (req, res) => {
+    let user_id = req.body.user_id;
+    let title = req.body.title;
+    let content = req.body.content;
+    let summary = req.body.summary;
+    let img = req.body.img;
+    let type_id = req.body.type_id;
+    const errors = validationResult(req);
+    console.log("content "+content);
+    if (!errors.isEmpty()) {
+        return res.json(utils.failedResponse({errors: errors.array()}));
+    }
+    topicServices.addTopic(user_id,title,content,summary,img,type_id)
+        .then(data => {
+            res.json(utils.successResponse());
+        })
+        .catch(error => {
+            console.log("user_id");
+            res.json(utils.failedResponse(error));
+        });
+});
+
 /**
  * @api {get} /topics/latest  Get 10 Latest Topics
  * @apiVersion 1.0.0

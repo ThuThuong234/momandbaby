@@ -72,11 +72,7 @@ export class DefaultLayoutComponent implements OnInit {
       });
   }
 
-  logout() {
-    this.authService.clearSession();
-    this.toastr.success(this.translate.instant('LOGOUT.SUCCESS'));
-    this.router.navigate(['/login']);
-  }
+
   search(){
     console.log(this.search_key);
     this.router.navigate(['/topics/search', this.search_key]);

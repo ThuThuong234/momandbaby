@@ -7,6 +7,7 @@ const models = require('../db/models/index');
 const helpers = require('../helper/api_helper');
 const errors = require('../lib/errors');
 const Op = (require('sequelize')).Op;
+const dateTime = require('node-datetime');
 
 exports.getLatestTopics = async function () {
     return new Promise(function (resolve, reject) {
@@ -160,6 +161,54 @@ exports.searchTopic = function (search_key){
 
                     }
                 })
+                return resolve(result);
+            })
+            .catch(error => {
+                logger.error(error);
+                return reject(error);
+            });
+    });
+};
+exports.addTopic = function (user_id,title,content,summary,img,type_id) {
+    console.log("content " + content);
+    return new Promise(function (resolve, reject) {
+        models.Topic.findOne({
+            attributes: ['email'],
+            where: {
+                title: title
+            }
+
+        })
+          .then(topic => {
+            if (topic!= null) {
+                throw {
+                    message: errors.TOPIC_01,
+                    code: 'TOPIC_01'
+                };
+            }
+            var dt = dateTime.create();
+            var formatted = dt.format('Y-m-d H:M:S');
+
+            console.log(formatted);
+            // console.log(locale);
+            return models.Topic.create({
+                created_at: formatted,
+                title: title,
+                content: content,
+                summary: summary,
+                img: img,
+                type_id: type_id,
+                status: 0,
+                author_id: user_id
+            });
+        })
+            .then(result => {
+                if (result == null) {
+                    throw {
+                        message: errors.CREATE,
+                        code: 'CREATE'
+                    };
+                }
                 return resolve(result);
             })
             .catch(error => {

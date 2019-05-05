@@ -1731,8 +1731,8 @@ $title_color: #F90CE5;
 $background-white: #fff;
 
 //commons
-.post-topic{
-  font-size: 30px;
+.post-topic, .fa-sign-out-alt{
+  font-size: 15px;
   color: $title_color;
 }
 .content{
@@ -1769,10 +1769,35 @@ $background-white: #fff;
 }
 .btn-login{
   border: 1px solid $title_color;
-  a{
-    color: $title_color;
-  }
+  color: $title_color;
+
 }
 .search-text{
   display: none;
+}
+
+.user-menu{
+  min-width: 9rem;
+}
+.dropdown-item{
+  font-size: 12px;
+}
+.type-dropdown{
+  button{
+    width: 100%;
+    text-align: left;
+  }
+  button:after{
+    float: right;
+    margin-top: 10px;
+  }
+}
+
+.btn-profile:focus{
+  box-shadow: none;
+}
+
+quill-editor{
+  display: inline-block;
+  height: 250px;
 }
