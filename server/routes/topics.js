@@ -30,14 +30,13 @@ const {check, validationResult} = require('express-validator/check');
  *  @apiUse FailedResponse
  */
 router.post('/', auth_utils.authorizeAdminMember, [
-    check('user_id').isLength({min: 1}).withMessage(errors.USER_ACCOUNT),
+    check('author').isLength({min: 1}).withMessage(errors.USER_ACCOUNT),
     check('title').isLength({min: 1}).withMessage(errors.TOPIC_01),
-    check('content').isLength({min: 1}).withMessage(errors.INFORMATION_01),
-    check('summary').isLength({min: 1}).withMessage(errors.INFORMATION_01),
-    check('img').isLength({min: 1}).withMessage(errors.INFORMATION_01),
-    check('type_id').isLength({min: 1}).withMessage(errors.INFORMATION_01),
+    check('content').isLength({min: 1}).withMessage(errors.CONTENT),
+    check('summary').isLength({min: 1}).withMessage(errors.SUMMARY),
+    check('type').isLength({min: 1}).withMessage(errors.TYPE_ID),
 ], (req, res) => {
-    let user_id = req.body.user_id;
+    let user_id = req.body.author;
     let title = req.body.title;
     let content = req.body.content;
     let summary = req.body.summary;

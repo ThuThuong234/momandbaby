@@ -7,7 +7,7 @@ export class Topic {
   views:string;
   likes:string;
   shares:string;
-  author:string;
-  type:string;
+  author:number;
+  type:number;
   created_at:string;
 }

@@ -17,7 +17,6 @@ module.exports = {
     POSITION_02: 'Can not delete this position.',
     QUESTION_01: 'Question does not exist.',
     SECTION_01: 'Section does not exist.',
-    INFORMATION_01: 'Conttent is not allowed null.',
     INFORMATION_02: 'Completed season cannot be delete.',
     TEMPLATE_01: 'Template does not have item.',
     TEMPLATE_02: 'Can not delete this template.',
@@ -36,5 +35,12 @@ module.exports = {
     USER_PHONE: 'Invalid mobile phone format',
 
 //    Errors for Type Infomation
-    TYPE_PARENT_ID: 'This parent ID is invalid',
+    TYPE_PARENT_ID: ' parent ID is invalid',
+    TYPE_ID: 'TYPE_ID is invalid',
+
+
+    CONTENT: 'Content is not allowed null.',
+    SUMMARY: 'SUMMARY is not allowed null.',
+    TITLE: 'TITLE is not allowed null.',
+    IMG: 'IMG is not allowed null.',
 };

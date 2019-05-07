@@ -2,29 +2,29 @@
 <div class="row">
   <div class="col-sm-2 pb-2">Title</div>
   <div class="col-sm-10 pb-2">
-    <input class="form-control" name="title">
+    <input class="form-control" name="title" [(ngModel)]="topicData.title">
   </div>
   <div class="col-sm-2 pb-2">Type</div>
   <div class="col-sm-10 pb-2">
-    <div class="dropdown type-dropdown">
-      <button type="button" class="btn bg-white border dropdown-toggle" data-toggle="dropdown" >
-        Select type...
-      </button>
-      <div class="dropdown-menu type-menu">
-        <a class="dropdown-item" (click)="redirectPostTopic()">
-          <i class="post-topic far fa-plus-square"></i> Post a topic</a>
-        <a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
-      </div>
-    </div>
+    <select class="type-dropdown form-control" *ngIf="typeList" [(ngModel)]="topicData.type">
+      <option class=" type-menu" *ngFor="let type of typeList" value="{{type.id}}" >
+
+          {{type.name}}
+      </option>
+    </select>
+  </div>
+  <div class="col-sm-2 pb-2">Summary</div>
+  <div class="col-sm-10 pb-2">
+    <input class="form-control" name="title" [(ngModel)]="topicData.summary">
   </div>
   <div class="col-sm-2 pb-2">Content</div>
   <div class="col-sm-10 pb-2">
-    <quill-editor></quill-editor>
+    <quill-editor [(ngModel)]="topicData.content"></quill-editor>
   </div>
   <div class="col-sm-2 pb-2">Thumbnail</div>
   <div class="col-sm-10 pb-2">
-    <input type="file" name="thumbnail">
+    <input type="file" name="thumbnail" (change)="onInputFileChange($event.target.files)" >
   </div>
 
-  <div class="col-sm-12 text-center pb-2"><button class="btn btn-primary">{{buttonText}}</button></div>
+  <div class="col-sm-12 text-center pb-2"><button class="btn btn-primary" (click)="submitTopic()">{{buttonText}}</button></div>
 </div>

@@ -16,4 +16,8 @@ public getTypesforMenu() {
   return super.apiGet<GetTypesApiResult>('/typesforMenu', null, false);
 }
 
+  public getAllType() {
+    return super.apiGet<GetTypesApiResult>('/types', null, false);
+  }
+
 }

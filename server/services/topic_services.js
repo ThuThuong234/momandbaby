@@ -173,7 +173,7 @@ exports.addTopic = function (user_id,title,content,summary,img,type_id) {
     console.log("content " + content);
     return new Promise(function (resolve, reject) {
         models.Topic.findOne({
-            attributes: ['email'],
+            attributes: ['title'],
             where: {
                 title: title
             }

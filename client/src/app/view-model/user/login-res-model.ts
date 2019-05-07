@@ -4,6 +4,7 @@ import {Role} from "../roles/role-vm";
 
 export class LoginResVM
 {
+  id:number;
   account: string;
   fullname: string;
   token: string;

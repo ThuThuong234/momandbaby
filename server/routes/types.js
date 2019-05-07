@@ -9,15 +9,84 @@ const errors = require('../lib/errors');
 const {check, validationResult} = require('express-validator/check');
 
 /**
- * @api {post} /types/ Add Topic
+ * @api {get} /types/ Get All Types
  * @apiVersion 1.0.0
  * @apiGroup Types
  *
  * @apiUse AccessHeader
  *
- * @apiParam (Body) {String} name Topic name
- * @apiParam (Body) {String} parent_id Topic parent
- *
+ * @apiSuccessExample {json} Success Response
+ *  HTTP/1.1 200 OK
+ *  {
+ *  "success": true,
+ *  "data": [
+ *      {
+ *         "id": 1,
+ *          "name": "Làm mẹ",
+ *          "children": [
+ *              {
+ *                  "id": 9,
+ *                  "name": "Trong khi mang thai"
+ *             },
+ *               {
+ *                  "id": 10,
+ *                  "name": "Chăm sóc bé 0-12 tháng"
+ *              },
+ *              {
+ *                  "id": 11,
+ *                  "name": "Nuôi dạy bé 1-3 tuổi"
+ *              },
+ *             {
+ *                   "id": 12,
+ *                  "name": "Nuôi dạy bé 5-13 tuổi"
+ *              }
+ *          ]
+ *      },
+ *      {
+ *          "id": 2,
+ *          "name": "Kinh nghiệm hay",
+ *          "children": [
+ *              {
+ *                  "id": 13,
+ *                   "name": "Mua sữa cho mẹ bầu"
+ *                 },
+ *            },
+ *              {
+ *                  "id": 14,
+ *                  "name": "Mua sữa cho bé"
+ *              },
+ *              {
+ *                  "id": 15,
+ *                  "name": "Món ngon cho bé"
+ *              }
+ *          ]
+ *      },
+ *      {
+ *          "id": 3,
+ *          "name": "Sức khỏe",
+ *          "children": [
+ *              {
+ *                  "id": 6,
+ *                  "name": "Chữa bệnh cho bé"
+ *              },
+ *              {
+ *                  "id": 7,
+ *                  "name": "Chữa bệnh cho mẹ"
+ *              }
+ *          ]
+ *      },
+ *      {
+ *          "id": 4,
+ *          "name": "Giải trí",
+ *          "children": [
+ *              {
+ *                  "id": 5,
+ *                  "name": "Sách, truyện cho bé"
+ *              }
+ *          ]
+ *      }
+ *   ]
+ *}
  * @apiSuccessExample {json} Success Response
  *  HTTP/1.1 200 OK
  *  {
@@ -25,26 +94,105 @@ const {check, validationResult} = require('express-validator/check');
  *  }
  *  @apiUse FailedResponse
  */
-router.post('/', [
-    // if check, url, it can't be null?
-    check('name').isLength({min: 1}).withMessage(errors.USER_EMAIL),
-    check('parent_id').optional().isLength({min: 1}).withMessage(errors.TYPE_PARENT_ID),
-], (req, res) => {
-    console.log("afdsf ");
-    let name = req.body.name;
-    let parent_id = req.body.parent_id;
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.json(utils.failedResponse({errors: errors.array()}));
-    }
-    typeServicesAdmin.addCategory(name,parent_id)
+router.get('/', (req, res) => {
+    typeServicesAdmin.getALLTypes()
         .then(data => {
-            res.json(utils.successResponse());
+            res.json(utils.successResponse(data));
         })
         .catch(error => {
             res.json(utils.failedResponse(error));
         });
 });
 
+/**
+ * @api {get} /typesforMenu/ Get Type for Menu
+ * @apiVersion 1.0.0
+ * @apiGroup Types
+ *
+ * @apiUse AccessHeader
+ *
+ * @apiSuccessExample {json} Success Response
+ *  HTTP/1.1 200 OK
+ *  {
+ *  "success": true,
+ *  "data": [
+ *      {
+ *         "id": 1,
+ *          "name": "Làm mẹ",
+ *          "children": [
+ *              {
+ *                  "id": 9,
+ *                  "name": "Trong khi mang thai"
+ *             },
+ *               {
+ *                  "id": 10,
+ *                  "name": "Chăm sóc bé 0-12 tháng"
+ *              },
+ *              {
+ *                  "id": 11,
+ *                  "name": "Nuôi dạy bé 1-3 tuổi"
+ *              },
+ *             {
+ *                   "id": 12,
+ *                  "name": "Nuôi dạy bé 5-13 tuổi"
+ *              }
+ *          ]
+ *      },
+ *      {
+ *          "id": 2,
+ *          "name": "Kinh nghiệm hay",
+ *          "children": [
+ *              {
+ *                  "id": 13,
+ *                   "name": "Mua sữa cho mẹ bầu"
+ *                 },
+ *            },
+ *              {
+ *                  "id": 14,
+ *                  "name": "Mua sữa cho bé"
+ *              },
+ *              {
+ *                  "id": 15,
+ *                  "name": "Món ngon cho bé"
+ *              }
+ *          ]
+ *      },
+ *      {
+ *          "id": 3,
+ *          "name": "Sức khỏe",
+ *          "children": [
+ *              {
+ *                  "id": 6,
+ *                  "name": "Chữa bệnh cho bé"
+ *              },
+ *              {
+ *                  "id": 7,
+ *                  "name": "Chữa bệnh cho mẹ"
+ *              }
+ *          ]
+ *      },
+ *      {
+ *          "id": 4,
+ *          "name": "Giải trí",
+ *          "children": [
+ *              {
+ *                  "id": 5,
+ *                  "name": "Sách, truyện cho bé"
+ *              }
+ *          ]
+ *      }
+ *   ]
+ *}
+ * @apiUse FailedResponse
+ */
+router.get('/typesforMenu', auth_utils.authorizeHeader, function (req, res) {
+    typeServices.getTypesForMenuBar()
+        .then(data => {
+            res.json(utils.successResponse(data));
+        })
+        .catch(error => {
+            res.json(utils.failedResponse(error));
+        });
+});
 
 module.exports = router;

@@ -46,4 +46,26 @@ exports.getTypesForMenuBar = function () {
     });
 };
 
+exports.getAllType = function () {
+    return new Promise(function (resolve, reject) {
+        models.Type.findAll({
+            attributes: ['id', 'name',],
+        })
+            .then(types => {
+                let result = types.map(type => {
+                    return {
+                        id: type.id,
+                        name: type.name,
+
+                    }
+                })
+                return resolve(result);
+            })
+            .catch(error => {
+                logger.error(error);
+                return reject(error);
+            });
+    });
+};
+
 

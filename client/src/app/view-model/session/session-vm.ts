@@ -10,7 +10,8 @@ export class SessionVM {
   @Type(() => Role)
   role: Role;
 
-  constructor(token: string, role: Role, fullname: string, account: string) {
+  constructor(id:number,token: string, role: Role, fullname: string, account: string) {
+    this.id = id;
     this.token = token;
     this.role = role;
     this.fullname = fullname;

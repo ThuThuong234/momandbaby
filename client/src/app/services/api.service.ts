@@ -6,6 +6,7 @@ import { deserialize } from 'class-transformer';
 import { SpinService } from './spin.service';
 
 import { ApiConstants } from '../lib/api-constants';
+import {SessionVM} from "../view-model/session/session-vm";
 // import { SessionVM } from '../view-models/session/session-vm';
 
 @Injectable()
@@ -37,7 +38,7 @@ export class APIService {
     let headers = new HttpHeaders();
     headers = this.appendHeader(headers);
     if (hasToken) {
-      // headers = this.appendAuthorizationHeader(headers);
+      headers = this.appendAuthorizationHeader(headers);
     }
 
     this.spinService.start();
@@ -83,15 +84,15 @@ export class APIService {
     return headers;
   }
 
-  // private appendAuthorizationHeader(headers: HttpHeaders) {
-  //   const currentUser = localStorage.getItem('currentUser');
-  //   if (currentUser != null) {
-  //     const session = deserialize(SessionVM, currentUser);
-  //     if (session && session.token) {
-  //       headers = headers.set(ApiConstants.HEADER_AUTH, session.token);
-  //     }
-  //   }
-  //
-  //   return headers;
-  // }
+  private appendAuthorizationHeader(headers: HttpHeaders) {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser != null) {
+      const session = deserialize(SessionVM, currentUser);
+      if (session && session.token) {
+        headers = headers.set(ApiConstants.HEADER_AUTH, session.token);
+      }
+    }
+
+    return headers;
+  }
 }

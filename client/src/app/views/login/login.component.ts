@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       this.userService.login(this.model).subscribe(
         res => {
           if( res.data && res.data.token ){
-            const newSession = new SessionVM(res.data.token, res.data.role, res.data.fullname, res.data.account);
+            const newSession = new SessionVM(res.data.id, res.data.token, res.data.role, res.data.fullname, res.data.account);
             this.authService.setSession(newSession);
             console.log(newSession);
             if(newSession.role.code === Role.ROLES.ADMIN || newSession.role.code === Role.ROLES.MEMBER){
