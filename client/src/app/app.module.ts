@@ -33,6 +33,7 @@ import { CreateTopicComponent } from './views/topics/create-topic/create-topic.c
 import { QuillModule } from 'ngx-quill'
 import {UserService} from "./services/user.service";
 import { FormTopicComponent } from './views/topics/form-topic/form-topic.component';
+import {UploadFileService} from "./services/uploadfile.service";
 
 
 // AoT requires an exported function for factories
@@ -90,6 +91,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TopicService,
     AuthenticateService,
     UserService,
+    UploadFileService,
   ],
   bootstrap: [
     AppComponent

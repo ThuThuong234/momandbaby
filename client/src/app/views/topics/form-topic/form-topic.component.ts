@@ -9,6 +9,7 @@ import {deserialize, plainToClass} from "class-transformer";
 import {HttpClient} from "@angular/common/http";
 import {TopicService} from "../../../services/reader/topic_services";
 import {SessionVM} from "../../../view-model/session/session-vm";
+import {UploadFileService} from "../../../services/uploadfile.service";
 
 @Component({
   selector: 'app-form-topic',
@@ -23,6 +24,7 @@ export class FormTopicComponent implements OnInit {
   typeList: TypePaging;
   topicData: Topic = new Topic();
   thumbnail: File = null;
+  selectedFiles: FileList;
 
   constructor(
     private router: Router,
@@ -30,7 +32,9 @@ export class FormTopicComponent implements OnInit {
     private translate: TranslateService,
     private typeService: TypeService,
     private topicService: TopicService,
-    private http:HttpClient) { }
+    private http:HttpClient,
+    private uploadService: UploadFileService
+  ) { }
 
   ngOnInit() {
     if(this.isEdit) {
@@ -59,12 +63,22 @@ export class FormTopicComponent implements OnInit {
   }
 
   submitTopic(){
+    // upload image
+    const file = this.selectedFiles.item(0);
+    console.log("upload file: ");
+    var dataFile = this.uploadService.uploadFile(file);
+    // console.log(dataFile);
+    // get current user
     const currentUser = localStorage.getItem('currentUser');
-    if (currentUser != null) {
+
+    if (currentUser != null && dataFile != null) {
       const session = deserialize(SessionVM, currentUser);
       this.topicData.author= session.id;
+      this.topicData.img = dataFile['Location'];
+      console.log(dataFile['Location']);
       this.topicService.insertTopic(this.topicData).subscribe(
         res => {
+          console.log(res);
           if (res.success) {
             this.toastr.success(this.translate.instant('COMMON.CREATE.SUCCESS'));
           } else {
@@ -78,6 +92,10 @@ export class FormTopicComponent implements OnInit {
       this.toastr.error(this.translate.instant('COMMON.CREATE.FAILED'));
     }
 
+  }
+
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
   }
 
   onInputFileChange(files:FileList){

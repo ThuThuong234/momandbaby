@@ -23,7 +23,7 @@
   </div>
   <div class="col-sm-2 pb-2">Thumbnail</div>
   <div class="col-sm-10 pb-2">
-    <input type="file" name="thumbnail" (change)="onInputFileChange($event.target.files)" >
+    <input type="file" name="thumbnail" (change)="selectFile($event)" >
   </div>
 
   <div class="col-sm-12 text-center pb-2"><button class="btn btn-primary" (click)="submitTopic()">{{buttonText}}</button></div>
