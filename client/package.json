@@ -39,7 +39,7 @@
     "ngx-bootstrap": "^4.0.1",
     "ngx-quill": "^4.8.0",
     "ngx-summernote": "^0.6.4",
-    "ngx-toastr": "^9.1.2",
+    "ngx-toastr": "^9.2.0",
     "popper.js": "^1.15.0",
     "primeicons": "^1.0.0",
     "primeng": "^7.0.5",
@@ -47,10 +47,11 @@
     "rxjs": "^6.4.0",
     "rxjs-compat": "^6.4.0",
     "summernote": "^0.8.11",
+    "toastr": "^2.1.4",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.13.8",
+    "@angular-devkit/build-angular": "^0.13.9",
     "@angular/cli": "^6.1.5",
     "@angular/compiler": "^6.1.10",
     "@angular/compiler-cli": "^7.2.8",

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent implements OnInit  {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,  private toastr: ToastrService) {}
 
   ngOnInit() {
     this.router.events.subscribe((evt) => {

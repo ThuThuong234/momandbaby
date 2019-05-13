@@ -1,10 +1,11 @@
-<div *ngIf="!session || session.token==null">
-  <button class="btn btn-login bg-white btn-sm" (click)="login()">Login</button>
+<div class="row" *ngIf="!session || session.token==null">
+  <a class="btn btn-login bg-white col-sm-5" (click)="login()">Login</a>
+  <a class="btn btn-login bg-white col-sm-5" href="/signup">SignUp</a>
 </div>
 <div *ngIf="session && session.token!=null">
   <div class="dropdown">
     <button type="button" class="btn-profile btn bg-white btn-sm dropdown-toggle" data-toggle="dropdown">
-      <img class="rounded-circle" width="45" height="45" src="../../../assets/img/member_thuong.jpg">
+      <img class="rounded-circle" width="45" height="45" src="../../../assets/img/thuongntt.jpg">
     </button>
     <div class="dropdown-menu user-menu">
       <a class="dropdown-item" (click)="redirectPostTopic()">

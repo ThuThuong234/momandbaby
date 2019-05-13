@@ -71,7 +71,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     SharedModule,
     ToastrModule.forRoot({
-      progressBar: true,
+      timeOut: 500,
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
     TranslateModule.forRoot({
