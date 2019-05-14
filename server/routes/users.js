@@ -7,6 +7,19 @@ const auth_utils = require('../config/auth_utils');
 const errors = require('../lib/errors');
 const {check, validationResult} = require('express-validator/check');
 
+const Chatkit = require('@pusher/chatkit-server');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+/**
+ * create chatkit.
+ */
+const chatkit = new Chatkit.default({
+//   instanceLocator: process.env.CHATKIT_INSTANCE_LOCATOR,
+//   key: process.env.CHATKIT_SECRET_KEY,
+    instanceLocator: 'v1:us1:d3b47aed-c439-4dc3-ae2a-06e6cf178edb',
+    key: '0a4c726a-991e-4c9e-8ff0-02b715f115d7:R0cMAfGfDoNMkNi23hOUMz8dHCbyzs476CEd4ZKqxMA=',
+});
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     res.send('respond with a resource');
@@ -204,5 +217,35 @@ router.put('/:id', [
 });
 
 
+// router.use(cors());
+// router.use(bodyParser.json());
+// router.use(bodyParser.urlencoded({ extended: true }));
+// chat box
+router.post('/newUserChat', (req, res) => {
+    const { username } = req.body;
+  
+    chatkit
+      .createUser({
+        id: username,
+        name: username,
+      })
+      .then(() => {
+        res.sendStatus(201);
+      })
+      .catch(err => {
+        if (err.error === 'services/chatkit/user_already_exists') {
+          res.sendStatus(200);
+        } else {
+          res.status(err.status).json(err);
+        }
+      });
+  });
+  
+  router.post('/auth', (req, res) => {
+    const authData = chatkit.authenticate({
+      userId: req.query.user_id,
+    });
+    res.status(authData.status).send(authData.body);
+  });
 
 module.exports = router;

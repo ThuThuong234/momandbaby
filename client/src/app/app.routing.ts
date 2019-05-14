@@ -15,6 +15,7 @@ import {AppComponent} from "./app.component";
 import {SearchTopicComponent} from "./views/topics/search-topic/search-topic.component";
 import {SignupComponent} from "./views/signup/signup.component";
 import {CreateTopicComponent} from "./views/topics/create-topic/create-topic.component";
+import {EmbedComponent} from "./views/embed/embed.component";
 
 export const routes: Routes = [
   {
@@ -90,6 +91,13 @@ export const routes: Routes = [
         component: LoginComponent,
         data: {
           title: 'Login'
+        }
+      },
+      {
+        path: 'embed',
+        component: EmbedComponent,
+        data: {
+          title: 'Embed'
         }
       },
       // {

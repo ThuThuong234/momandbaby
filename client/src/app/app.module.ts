@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { NgChatModule } from 'ng-chat';
+import { BrowserModule } from '@angular/platform-browser';
 //root
 import { AppComponent } from './app.component';
 import {AppRoutingModule,routingCoponents} from './app.routing';
@@ -38,6 +40,7 @@ import {UploadFileService} from "./services/uploadfile.service";
 import { UsersComponent } from './views/users/users.component';
 import { UserComponent } from './views/user/user.component';
 
+import { EmbedComponent } from './views/embed/embed.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -63,7 +66,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreateTopicComponent,
     FormTopicComponent,
     UsersComponent,
-    UserComponent
+    UserComponent,
+    EmbedComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -88,7 +92,13 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    QuillModule
+    QuillModule,
+    FormsModule,
+    HttpClientModule,
+    NgChatModule,
+
+     BrowserModule,
+     FormsModule
 
   ],
   providers: [
@@ -102,6 +112,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [
     AppComponent
+   
   ]
 })
 export class AppModule { }
