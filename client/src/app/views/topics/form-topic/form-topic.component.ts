@@ -66,19 +66,21 @@ export class FormTopicComponent implements OnInit {
     // upload image
     const file = this.selectedFiles.item(0);
     console.log("upload file: ");
-    var dataFile = this.uploadService.uploadFile(file);
-    // console.log(dataFile);
+    this.uploadService.getuploadFile(file).subscribe( dataFile =>{
+      // this.topicData.img = dataFile['Location'];
+      console.log("RES  ");
+      console.log(dataFile);
     // get current user
     const currentUser = localStorage.getItem('currentUser');
 
-    if (currentUser != null && dataFile != null) {
+
+    if (currentUser != null) {
       const session = deserialize(SessionVM, currentUser);
       this.topicData.author= session.id;
-      this.topicData.img = dataFile['Location'];
-      console.log(dataFile['Location']);
+      this.topicData.img=  dataFile;
+      console.log(dataFile);
       this.topicService.insertTopic(this.topicData).subscribe(
         res => {
-          console.log(res);
           if (res.success) {
             this.toastr.success(this.translate.instant('COMMON.CREATE.SUCCESS'));
           } else {
@@ -91,6 +93,8 @@ export class FormTopicComponent implements OnInit {
     } else {
       this.toastr.error(this.translate.instant('COMMON.CREATE.FAILED'));
     }
+    } );
+
 
   }
 
