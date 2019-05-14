@@ -38,6 +38,91 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/topics/",
+    "title": "Comment Topic",
+    "version": "1.0.0",
+    "group": "Comments",
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User id</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Topic title</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "content",
+            "description": "<p>Topic content</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "summary",
+            "description": "<p>Topic summary</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "img",
+            "description": "<p>Topic img</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "type_id",
+            "description": "<p>Topic type_id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n}",
+          "type": "json"
+        },
+        {
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/topics.js",
+    "groupTitle": "Comments",
+    "name": "PostTopics",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>API key to access the server</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "post",
     "url": "/topics/:id/comments",
     "title": "Comment Topic",
     "version": "1.0.0",
@@ -213,6 +298,48 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/types/",
+    "title": "Get All Types",
+    "version": "1.0.0",
+    "group": "Types",
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": " HTTP/1.1 200 OK\n {\n \"success\": true,\n \"data\": [\n     {\n        \"id\": 1,\n         \"name\": \"Làm mẹ\",\n         \"children\": [\n             {\n                 \"id\": 9,\n                 \"name\": \"Trong khi mang thai\"\n            },\n              {\n                 \"id\": 10,\n                 \"name\": \"Chăm sóc bé 0-12 tháng\"\n             },\n             {\n                 \"id\": 11,\n                 \"name\": \"Nuôi dạy bé 1-3 tuổi\"\n             },\n            {\n                  \"id\": 12,\n                 \"name\": \"Nuôi dạy bé 5-13 tuổi\"\n             }\n         ]\n     },\n     {\n         \"id\": 2,\n         \"name\": \"Kinh nghiệm hay\",\n         \"children\": [\n             {\n                 \"id\": 13,\n                  \"name\": \"Mua sữa cho mẹ bầu\"\n                },\n           },\n             {\n                 \"id\": 14,\n                 \"name\": \"Mua sữa cho bé\"\n             },\n             {\n                 \"id\": 15,\n                 \"name\": \"Món ngon cho bé\"\n             }\n         ]\n     },\n     {\n         \"id\": 3,\n         \"name\": \"Sức khỏe\",\n         \"children\": [\n             {\n                 \"id\": 6,\n                 \"name\": \"Chữa bệnh cho bé\"\n             },\n             {\n                 \"id\": 7,\n                 \"name\": \"Chữa bệnh cho mẹ\"\n             }\n         ]\n     },\n     {\n         \"id\": 4,\n         \"name\": \"Giải trí\",\n         \"children\": [\n             {\n                 \"id\": 5,\n                 \"name\": \"Sách, truyện cho bé\"\n             }\n         ]\n     }\n  ]\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n}",
+          "type": "json"
+        },
+        {
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/types.js",
+    "groupTitle": "Types",
+    "name": "GetTypes",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>API key to access the server</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
     "url": "/typesforMenu/",
     "title": "Get Type for Menu",
     "version": "1.0.0",
@@ -249,36 +376,16 @@ define({ "api": [
     }
   },
   {
-    "type": "post",
-    "url": "/types/",
-    "title": "Add Topic",
+    "type": "get",
+    "url": "/typesforMenu/",
+    "title": "Get Type for Menu",
     "version": "1.0.0",
     "group": "Types",
-    "parameter": {
-      "fields": {
-        "Body": [
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>Topic name</p>"
-          },
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "parent_id",
-            "description": "<p>Topic parent</p>"
-          }
-        ]
-      }
-    },
     "success": {
       "examples": [
         {
           "title": "Success Response",
-          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n}",
+          "content": " HTTP/1.1 200 OK\n {\n \"success\": true,\n \"data\": [\n     {\n        \"id\": 1,\n         \"name\": \"Làm mẹ\",\n         \"children\": [\n             {\n                 \"id\": 9,\n                 \"name\": \"Trong khi mang thai\"\n            },\n              {\n                 \"id\": 10,\n                 \"name\": \"Chăm sóc bé 0-12 tháng\"\n             },\n             {\n                 \"id\": 11,\n                 \"name\": \"Nuôi dạy bé 1-3 tuổi\"\n             },\n            {\n                  \"id\": 12,\n                 \"name\": \"Nuôi dạy bé 5-13 tuổi\"\n             }\n         ]\n     },\n     {\n         \"id\": 2,\n         \"name\": \"Kinh nghiệm hay\",\n         \"children\": [\n             {\n                 \"id\": 13,\n                  \"name\": \"Mua sữa cho mẹ bầu\"\n                },\n           },\n             {\n                 \"id\": 14,\n                 \"name\": \"Mua sữa cho bé\"\n             },\n             {\n                 \"id\": 15,\n                 \"name\": \"Món ngon cho bé\"\n             }\n         ]\n     },\n     {\n         \"id\": 3,\n         \"name\": \"Sức khỏe\",\n         \"children\": [\n             {\n                 \"id\": 6,\n                 \"name\": \"Chữa bệnh cho bé\"\n             },\n             {\n                 \"id\": 7,\n                 \"name\": \"Chữa bệnh cho mẹ\"\n             }\n         ]\n     },\n     {\n         \"id\": 4,\n         \"name\": \"Giải trí\",\n         \"children\": [\n             {\n                 \"id\": 5,\n                 \"name\": \"Sách, truyện cho bé\"\n             }\n         ]\n     }\n  ]\n}",
           "type": "json"
         },
         {
@@ -290,7 +397,7 @@ define({ "api": [
     },
     "filename": "routes/types.js",
     "groupTitle": "Types",
-    "name": "PostTypes",
+    "name": "GetTypesformenu",
     "header": {
       "fields": {
         "Header": [
@@ -518,6 +625,98 @@ define({ "api": [
     "filename": "routes/users.js",
     "groupTitle": "Users",
     "name": "PostUsersSignup",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>API key to access the server</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "put",
+    "url": "/users/:id/",
+    "title": "Update infomation of User",
+    "version": "1.0.0",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "fullname",
+            "description": "<p>User fullname</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>User password</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>User address</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>User phone</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "facebook_account",
+            "description": "<p>User facebook_account</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "twitter_account",
+            "description": "<p>User twitter_account</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "img_url",
+            "description": "<p>User img_url</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n}",
+          "type": "json"
+        },
+        {
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/users.js",
+    "groupTitle": "Users",
+    "name": "PutUsersId",
     "header": {
       "fields": {
         "Header": [
