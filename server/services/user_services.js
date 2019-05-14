@@ -135,15 +135,25 @@ exports.getUser = function (id) {
                 return resolve(user);
             })
             .catch(error => {
+                console.log(error);
                 logger.error(error);
                 return reject(error);
             });
     });
 };
 
-exports.updateUser = function (userId, fullname, password,address, phone, facebook_account, twitter_account, image_url)
+exports.updateUser = function (userId, fullname, password,address, phone, facebook_account, twitter_account, image_url,active)
 {
     return new Promise(function (resolve, reject) {
+        console.log(userId);
+        console.log(fullname);
+        console.log(password);
+        console.log(address);
+        console.log(phone);
+        console.log(facebook_account);
+        console.log(twitter_account);
+        console.log(image_url);
+        console.log(active);
         models.User.findOne({
             attributes: ['email'],
             where: {
@@ -152,17 +162,16 @@ exports.updateUser = function (userId, fullname, password,address, phone, facebo
 
         })
             .then(user => {
+                console.log(user);
                 if (user == null) {
                     throw {
                         message: errors.USER_02,
                         code: 'USER_02'
                     };
                 }
-                var dt = dateTime.create();
-                var formatted = dt.format('Y-m-d H:M:S');
                 return models.User.update({
-                    updated_ad:formatted,
-                    last_login: formatted,
+                    updated_at:new Date(),
+                    last_login: new Date(),
                     password: password,
                     fullname: fullname,
                     address: address,
@@ -170,7 +179,11 @@ exports.updateUser = function (userId, fullname, password,address, phone, facebo
                     facebook_account: facebook_account,
                     twitter_account: twitter_account,
                     image_url: image_url,
-                });
+                    active: active
+                },
+                    {
+                        where: { id: userId }
+                    });
             })
             .then(result => {
                 if (result == null) {

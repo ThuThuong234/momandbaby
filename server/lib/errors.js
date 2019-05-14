@@ -26,6 +26,7 @@ module.exports = {
 //    Errors for User Infomation
     USER_ACCOUNT: 'Account must be more than 5 characters',
     USER_FULLNAME: 'Fullname is not allowed null',
+    USER_ADDRESS: 'Address is not allowed null',
     USER_EMAIL: 'Invalid email format',
     USER_PASSWORD: 'Password must be more than 8 characters',
     USER_IMG_URL: 'Invalid URL',

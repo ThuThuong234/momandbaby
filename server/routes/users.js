@@ -173,12 +173,13 @@ router.get('/:id', auth_utils.authorizeAdmin, function (req, res) {
 router.put('/:id', [
     // if check, url, it can't be null?
     check('fullname').isLength({min: 1}).withMessage(errors.USER_FULLNAME),
+    check('address').isLength({min: 1}).withMessage(errors.USER_ADDRESS),
     check('password').isLength({min: 8}).withMessage(errors.USER_PASSWORD),
     check('phone').optional().isMobilePhone().isLength({min: 10, max: 10}).withMessage(errors.USER_PHONE),
     check('facebook_account').optional().isURL().withMessage(errors.USER_FB_ACCOUNT),
     check('twitter_account').optional().isURL().withMessage(errors.USER_TWITTER_ACCOUNT),
-    check('active').optional().isBoolean().withMessage(errors.USER_ACTIVE),
-    check('img_url').optional().isURL().withMessage(errors.USER_IMG_URL),
+    check('active').optional().isInt().withMessage(errors.USER_ACTIVE),
+    check('image_url').optional().isURL().withMessage(errors.USER_IMG_URL),
 ], auth_utils.authorizeAdminMember, function (req, res) {
     let userId = req.params.id;
     let password = req.body.password;
@@ -187,12 +188,13 @@ router.put('/:id', [
     let facebook_account = req.body.facebook_account;
     let twitter_account = req.body.twitter_account;
     let phone = req.body.phone;
-    let image_url = req.body.img_url;
+    let image_url = req.body.image_url;
+    let active = req.body.active;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.json(utils.failedResponse({errors: errors.array()}));
     }
-    userServices.updateUser(userId, fullname, password,address, phone, facebook_account, twitter_account, image_url)
+    userServices.updateUser(userId, fullname, password,address, phone, facebook_account, twitter_account, image_url, active)
         .then(data => {
             res.json(utils.successResponse(data));
         })

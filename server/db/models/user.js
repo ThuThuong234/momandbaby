@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
             email: DataTypes.STRING,
             facebook_account: DataTypes.STRING,
             twitter_account: DataTypes.STRING,
-            active: {type: DataTypes.BOOLEAN, defaultValue: true},
+            active: {type: DataTypes.INTEGER, defaultValue: 0},
             role_id: {type: DataTypes.INTEGER, defaultValue: 2},
             last_login: DataTypes.DATE,
             password: DataTypes.STRING,
