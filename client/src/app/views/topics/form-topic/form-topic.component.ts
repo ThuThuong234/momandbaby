@@ -66,7 +66,7 @@ export class FormTopicComponent implements OnInit {
     // upload image
     const file = this.selectedFiles.item(0);
     console.log("upload file: ");
-    this.uploadService.getuploadFile(file).subscribe( dataFile =>{
+    this.uploadService.uploadFile(file).subscribe( dataFile =>{
       // this.topicData.img = dataFile['Location'];
       console.log("RES  ");
       console.log(dataFile);
@@ -77,8 +77,8 @@ export class FormTopicComponent implements OnInit {
     if (currentUser != null) {
       const session = deserialize(SessionVM, currentUser);
       this.topicData.author= session.id;
-      this.topicData.img=  dataFile;
-      console.log(dataFile);
+      this.topicData.img=  "https://s3-us-west-2.amazonaws.com/babyandmom/" + dataFile["body"].name;
+      console.log(dataFile["body"].name);
       this.topicService.insertTopic(this.topicData).subscribe(
         res => {
           if (res.success) {

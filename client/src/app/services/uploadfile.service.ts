@@ -16,21 +16,9 @@ export class UploadFileService {
       this.session = data;
     });
   }
-  getuploadFile(file): Observable<string> {
+  uploadFile(file): Observable<ManagedUpload> {
     console.log(file);
     const contentType = file.type;
-
-    const params = {
-      Key: file.name,
-      Bucket: 'babyandmom',
-      Body: file,
-      ACL: 'public-read',
-      ContentType: contentType
-    };
-    return of(this.uploadFile(params));
-
-  };
-  uploadFile(params){
     const bucket = new S3(
       {
         accessKeyId: 'AKIA5PD4FRXIV4AAONM7',
@@ -38,14 +26,32 @@ export class UploadFileService {
         region: 'us-west-2'
       }
     );
-    return bucket.upload(params, function (err, data) {
+    const params = {
+      Key: file.name,
+      Bucket: 'babyandmom',
+      Body: file,
+      ACL: 'public-read',
+      ContentType: contentType
+    };
+    return of(bucket.upload(params, function (err, data) {
       if (err) {
         console.log('There was an error uploading your file: ', err);
         return err;
       }
       console.log('Successfully uploaded file.', data['Location']);
       return data['Location'];
-    });
+    }));
+//for upload progress
+    /*bucket.upload(params).on('httpUploadProgress', function (evt) {
+              console.log(evt.loaded + ' of ' + evt.total + ' Bytes');
+          }).send(function (err, data) {
+              if (err) {
+                  console.log('There was an error uploading your file: ', err);
+                  return false;
+              }
+              console.log('Successfully uploaded file.', data);
+              return true;
+          });*/
   }
 
 }
