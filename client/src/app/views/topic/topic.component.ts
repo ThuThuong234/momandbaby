@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {TopicService} from '../../services/reader/topic_services';
 import {Topic} from '../../view-model/topic/topic';
-// import { QuillEditorModule } from 'ngx-quill-editor';
 
 @Component({
   selector: 'app-topic',
