@@ -5,7 +5,7 @@ import {ContactComponent} from "./views/contact/contact.component";
 import {AboutComponent} from "./views/about/about.component";
 import {BlogComponent} from "./views/blog/blog.component";
 import {ErrorpageComponent} from "./views/errorpage/errorpage.component";
-import {BlogOneComponent} from "./views/blog-one/blog-one.component";
+import {TopicComponent} from './views/topic/topic.component';
 import {LoginComponent} from "./views/login/login.component";
 import {DefaultLayoutComponent} from './views/default-layout/default-layout.component';
 import {AuthorizeService} from './services/authorize.service';
@@ -57,8 +57,8 @@ export const routes: Routes = [
         }
       },
       {
-        path: 'BlogOne',
-        component: BlogOneComponent,
+        path: 'topic/:id',
+        component: TopicComponent,
         data: {
           title: 'BlogOne'
         }
@@ -75,7 +75,7 @@ export const routes: Routes = [
         path: 'topics/new',
         component: CreateTopicComponent,
         data: {
-          title: 'New Topic'
+          title: 'New topic'
         }
       },
       {

@@ -16,7 +16,7 @@ import { ContactComponent } from './views/contact/contact.component';
 import { AboutComponent } from './views/about/about.component';
 import { ErrorpageComponent } from './views/errorpage/errorpage.component';
 import { BlogComponent } from './views/blog/blog.component';
-import { BlogOneComponent } from './views/blog-one/blog-one.component';
+import { TopicComponent } from './views/topic/topic.component';
 import { CheckloginComponent } from './views/checklogin/checklogin.component';
 import { LoginComponent } from './views/login/login.component';
 import { DefaultLayoutComponent } from './views/default-layout/default-layout.component';
@@ -30,7 +30,8 @@ import { SearchTopicComponent } from './views/topics/search-topic/search-topic.c
 import {SharedModule} from "./views/shared/shared.module";
 import { SignupComponent } from './views/signup/signup.component';
 import { CreateTopicComponent } from './views/topics/create-topic/create-topic.component';
-import { QuillModule } from 'ngx-quill'
+import { QuillModule } from 'ngx-quill';
+// import { QuillEditorModule } from 'ngx-quill-editor';
 import {UserService} from "./services/user.service";
 import { FormTopicComponent } from './views/topics/form-topic/form-topic.component';
 import {UploadFileService} from "./services/uploadfile.service";
@@ -50,7 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AboutComponent,
     ErrorpageComponent,
     BlogComponent,
-    BlogOneComponent,
+    TopicComponent,
     CheckloginComponent,
     LoginComponent,
     DefaultLayoutComponent,
@@ -70,8 +71,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     HttpClientModule,
     SharedModule,
+    // QuillEditorModule,
     ToastrModule.forRoot({
-      timeOut: 500,
+      timeOut: 2000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),

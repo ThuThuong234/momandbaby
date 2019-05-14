@@ -38,10 +38,10 @@ export class FormTopicComponent implements OnInit {
 
   ngOnInit() {
     if(this.isEdit) {
-      this.title = 'Edit Topic';
+      this.title = 'Edit topic';
       this.buttonText = 'Update';
     } else {
-      this.title = 'Create Topic';
+      this.title = 'Create topic';
       this.buttonText = 'Post';
     }
     this.getAllType();

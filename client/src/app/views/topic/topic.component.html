@@ -1,0 +1,11 @@
+<div class="container" *ngIf="topic">
+  <div class="row">
+    <div class="col-6">
+      <img class="img-topic" src="{{topic.img}}">
+    </div>
+    <div class="col-6 title"><h1>{{topic.title}}</h1><h5>Tác giả: {{topic.User}}</h5><h5>Ngày tạo: {{topic.created_at}}</h5><h5>Lượt xem: {{topic.views}}</h5></div>
+  </div>
+  <div class="row">
+    <div class="col-12" [innerHTML]="topic.content">
+  </div>
+</div>

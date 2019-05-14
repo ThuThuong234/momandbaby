@@ -8,6 +8,7 @@
       <div class="col-lg-8" *ngIf="lastestTopic">
         <!--Blog-one -->
         <div class="about-agile-img " *ngFor="let topic of lastestTopic">
+          <a href="/topic/{{topic.id}}">
           <div class="row blog-bloged-about ">
             <div class="col-lg-7 col-md-7 about-wthree-info">
               <h4 class="my-3"> {{topic.title}}</h4>
@@ -45,6 +46,7 @@
             <!-- Just a image -->
             <img src="{{topic.img}}"/>
           </div>
+          </a>
         </div>
         <!--//Blog-one -->
         <!-- pagination-blog-->
