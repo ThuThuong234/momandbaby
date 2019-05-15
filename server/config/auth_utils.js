@@ -84,6 +84,56 @@ exports.authorizeAdminMember = function (req, res, next) {
     });
 };
 
+
+function auth(req){
+    return new Promise(function (resolve, reject) {
+        console.log("req");
+        console.log( req.params.id);
+        let token = req.headers['x-access-token'];
+        if (!token) {
+            reject({
+                message: errors.AUTHORIZE_01,
+                code: 'AUTHORIZE_01'
+            });
+        }
+
+        let verifySync = Promise.promisify(jwt.verify);
+        verifySync(token, constants.SECRET).then(userData => {
+
+            console.log(userData.role)
+            if(userData.id == req.params.id){
+                resolve();
+            }
+            else{
+                // if user is not authorized --> no access permitted
+                if (!userData || !userData.role || userData.role.code !='admin' ) {
+                    throw {
+                        message: errors.AUTHORIZE_01,
+                        code: 'AUTHORIZE_01'
+                    };
+
+                }
+            }
+
+            // if everything is good, save to request for use in other routes
+            req.current_user = userData;
+            resolve();
+        })
+            .catch(error => {
+                logger.error(error);
+                return reject(error);
+            });
+    });
+}
+exports.authorizeAdminUser = function (req, res, next) {
+    auth(req).then(() => {
+        next();
+    })
+        .catch(error => {
+            res.json(helper.failedResponse(error));
+        });
+};
+
 exports.authorizeHeader = function (req, res, next) {
   let apiKey = req.headers['x-api-key'];
   if (apiKey != constants.API_KEY) {

@@ -150,7 +150,7 @@ router.post('/login', function (req, res) {
  *  }
  * @apiUse FailedResponse
  */
-router.get('/:id', auth_utils.authorizeAdmin, function (req, res) {
+router.get('/:id', auth_utils.authorizeAdminUser, function (req, res) {
     let userId = req.params.id;
     userServices.getUser(userId)
         .then(data => {
