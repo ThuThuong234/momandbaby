@@ -5,7 +5,7 @@ export class UserResModel
   fullname: string;
   address: string;
   phone: string;
-  role: number;
+  role_id: number;
   email: string;
   facebook_account: string;
   twitter_account: string;

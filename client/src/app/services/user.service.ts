@@ -25,7 +25,7 @@ export class UserService extends APIService {
 
 
   public getUser(id: string) {
-    return super.apiGet<UserApiResult>('/users/'+id, null, false);
+    return super.apiGet<UserApiResult>('/users/'+id, null, true);
   }
 
 }

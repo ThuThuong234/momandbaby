@@ -12,14 +12,15 @@ import {Topic} from '../../view-model/topic/topic';
 export class TopicComponent implements OnInit {
 
   topic: Topic;
-  constructor(private  topicService: TopicService, private router: Router,  private toastr: ToastrService,private route: ActivatedRoute) { }
+  constructor(private  topicService: TopicService, private router: Router,
+              private toastr: ToastrService,private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getTopic();
   }
 
   getTopic(): void{
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     console.log(id);
     this.topicService.getLatestTopicById(id.toString()).subscribe(
       res=>{

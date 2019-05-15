@@ -5,6 +5,8 @@ import {SessionVM} from "../../view-model/session/session-vm";
 import {UserService} from "../../services/user.service";
 import {AuthenticateService} from "../../services/authenticate.service";
 import {Role} from "../../view-model/roles/role-vm";
+import {forEach} from '@angular/router/src/utils/collection';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginComponent implements OnInit {
   model: LoginModel = new LoginModel();
   session: SessionVM;
 
-  constructor( private router: Router, private authService: AuthenticateService, private userService: UserService ) { }
+  constructor( private router: Router, private toastr: ToastrService,
+               private authService: AuthenticateService, private userService: UserService ) { }
 
   ngOnInit() {
     this.authService.session$.subscribe(
@@ -41,8 +44,12 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/']);
             }
             else {
+              this.toastr.error('Lỗi dữ liệu');
               this.router.navigate(['/errorpage']);
             }
+          }
+          else {
+            this.toastr.error(res.message);
           }
         }
       )

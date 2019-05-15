@@ -3,9 +3,10 @@ import {SessionVM} from '../../view-model/session/session-vm';
 import {ToastrService} from 'ngx-toastr';
 import {User} from '../../view-model/user/user';
 import {AuthenticateService} from '../../services/authenticate.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Role} from '../../view-model/roles/role-vm';
 import {UserService} from '../../services/user.service';
+import {UserResModel} from '../../view-model/user/user-res-model';
 
 @Component({
   selector: 'app-user',
@@ -14,14 +15,17 @@ import {UserService} from '../../services/user.service';
 })
 
 export class UserComponent implements OnInit {
+  isEdit: boolean;
   user: User = new User();
+  userShow: UserResModel;
   public session: SessionVM;
 
   constructor(private authService: AuthenticateService, private router: Router,
-              private toastr: ToastrService, private userService: UserService) {
+              private toastr: ToastrService, private userService: UserService,private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.isEdit=true;
     this.authService.session$.subscribe(
       data => {
         this.session = data;
@@ -37,24 +41,31 @@ export class UserComponent implements OnInit {
       }
     );
   }
+  changeEdit(){
+    this.isEdit=!this.isEdit;
+    console.log(this.isEdit);
+  }
 
   getUser() {
-    if (this.user.id) {
-      this.userService.getUser(this.user.id.toString()).subscribe(
+
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+      this.userService.getUser(id.toString()).subscribe(
         res => {
           if (res.success && res.data) {
-            console.log(res.data);
-            this.toastr.success('Được rồi nè!');
+            this.userShow=res.data;
           } else {
-            this.toastr.error('Chưa đăng nhập!');
+            this.toastr.error('Lỗi hoặc không đủ quyền thực hiện!');
           }
         });
-
     }
     else {
-      this.toastr.error('Chưa đăng nhập!');
-      this.router.navigate(['/']);
+
+      this.toastr.error('Id lỗi!');
     }
+  }
+  doUpdateUser(){
 
   }
 }
