@@ -7,6 +7,7 @@ import {SessionVM} from "../../view-model/session/session-vm";
 import {Role} from "../../view-model/roles/role-vm";
 import {TypeService} from "../../services/reader/type_services";
 import {TypePaging} from "../../view-model/type/type-paging";
+import {User} from '../../view-model/user/user';
 
 @Component({
   selector: 'app-default-layout',
@@ -15,6 +16,7 @@ import {TypePaging} from "../../view-model/type/type-paging";
 })
 export class DefaultLayoutComponent implements OnInit {
   public navItems: TypePaging;
+  user: User = new User();
   private changes: MutationObserver;
   public element: HTMLElement = document.body;
   public session: SessionVM;
@@ -30,30 +32,16 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.authService.session$.subscribe(
-    //   data => {
-    //     this.session = data;
-    //     if (this.session && this.session.token != null && this.session.role != null) {
-    //       switch (this.session.role.code) {
-    //         case Role.ROLES.ADMIN: {
-    //           this.navItems = adminNavItems;
-    //           break;
-    //         }
-    //         case Role.ROLES.MEMBER: {
-    //           this.navItems = hrNavItems;
-    //           break;
-    //         }
-    //         default: {
-    //           this.navItems = employe;
-    //           break;
-    //         }
-    //       }
-    //     } else {
-    //       this.navItems = [];
-    //     }
-    //   }
-    // );
-
+    this.authService.session$.subscribe(
+      data => {
+        this.session = data;
+        console.log(this.session);
+        if (this.session && this.session.token != null && this.session.role != null) {
+          this.user.fullname = this.session.fullname;
+          this.user.id = this.session.id;
+        }
+      }
+    );
     this.getMenu();
   }
 

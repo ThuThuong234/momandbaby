@@ -33,7 +33,7 @@ import {SharedModule} from "./views/shared/shared.module";
 import { SignupComponent } from './views/signup/signup.component';
 import { CreateTopicComponent } from './views/topics/create-topic/create-topic.component';
 import { QuillModule } from 'ngx-quill';
-// import { QuillEditorModule } from 'ngx-quill-editor';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {UserService} from "./services/user.service";
 import { FormTopicComponent } from './views/topics/form-topic/form-topic.component';
 import {UploadFileService} from "./services/uploadfile.service";
@@ -78,6 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    AngularFontAwesomeModule,
     SharedModule,
     // QuillEditorModule,
     ToastrModule.forRoot({

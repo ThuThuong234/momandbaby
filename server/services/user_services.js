@@ -201,3 +201,36 @@ exports.updateUser = function (userId, fullname, password,address, phone, facebo
             });
     });
 };
+
+
+exports.getAllUsers = function () {
+    return new Promise(function (resolve, reject) {
+        models.User.findAll({
+            attributes: ['id', 'account', 'fullname', 'address', 'phone',
+                'role_id', 'email', 'facebook_account', 'twitter_account', 'image_url']
+        })
+            .then(result => {
+                let users = result.map(user=>{
+                   return{
+                       id: user.id,
+                    account: user.abort,
+                    fullname: user.fullname,
+                    address: user.address,
+                    phone: user.phone,
+                    role_id: user.role_id,
+                    email: user.email,
+                    facebook_account: user.facebook_account,
+                    twitter_account: user.twitter_account,
+                    img_url: user.image_url,
+                   };
+                });
+
+                return resolve(users);
+            })
+            .catch(error => {
+                console.log(error);
+                logger.error(error);
+                return reject(error);
+            });
+    });
+};

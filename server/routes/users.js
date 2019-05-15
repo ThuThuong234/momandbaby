@@ -21,9 +21,116 @@ const chatkit = new Chatkit.default({
 });
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.send('respond with a resource');
+
+/**
+ * @api {get} /uses/ Get All Users
+ * @apiVersion 1.0.0
+ * @apiGroup Users
+ *
+ * @apiUse AccessHeader
+ *
+ * @apiSuccessExample {json} Success Response
+ *  HTTP/1.1 200 OK
+ *  {
+ *  "success": true,
+ *  "data": [
+ *{
+            "id": 1,
+            "fullname": "Admin",
+            "address": "12 Nguyen Van Bao , phuong 4,  Go Vap, Ho Chi Minh",
+            "phone": "",
+            "role_id": 1,
+            "email": "admin@gmail.com",
+            "facebook_account": "",
+            "twitter_account": "",
+            "img_url": null
+        },
+        {
+            "id": 2,
+            "fullname": "Thuong Nguyen Thi Thu",
+            "address": "153 An Phu Dong 09, quan 12, Ho Chi Minh",
+            "phone": "0369615118",
+            "role_id": 2,
+            "email": "",
+            "facebook_account": null,
+            "twitter_account": null,
+            "img_url": null
+        },
+        {
+            "id": 3,
+            "fullname": "Lam Nguyen Ngoc",
+            "address": "55-57 Bau Cat 4, Tan Binh, Ho Chi Minh",
+            "phone": "",
+            "role_id": 2,
+            "email": "",
+            "facebook_account": null,
+            "twitter_account": null,
+            "img_url": null
+        },
+        {
+            "id": 4,
+            "fullname": "Nguyen Van A1",
+            "address": "go xoai",
+            "phone": "0987654321",
+            "role_id": 2,
+            "email": "user@gmail.com",
+            "facebook_account": null,
+            "twitter_account": null,
+            "img_url": "user1.jpg"
+        },
+        {
+            "id": 5,
+            "fullname": "Nguyen Van A1",
+            "address": "go xoai",
+            "phone": "0987654321",
+            "role_id": 2,
+            "email": "user2@gmail.com",
+            "facebook_account": null,
+            "twitter_account": null,
+            "img_url": null
+        },
+        {
+            "id": 6,
+            "fullname": "Nguyen Lam ne",
+            "address": "",
+            "phone": "1212121212",
+            "role_id": 2,
+            "email": "lamne@gmail.com",
+            "facebook_account": null,
+            "twitter_account": null,
+            "img_url": null
+        },
+        {
+            "id": 7,
+            "fullname": "Nguyen Lam Ne",
+            "address": "",
+            "phone": "1212121212",
+            "role_id": 2,
+            "email": "lamnehihi@gmai.com",
+            "facebook_account": null,
+            "twitter_account": null,
+            "img_url": null
+        }
+ *   ]
+ *}
+ * @apiSuccessExample {json} Success Response
+ *  HTTP/1.1 200 OK
+ *  {
+ *    "success": true,
+ *  }
+ *  @apiUse FailedResponse
+ */
+router.get('/',auth_utils.authorizeAdmin, function (req, res) {
+    userServices.getAllUsers()
+        .then(data => {
+            res.json(utils.successResponse(data));
+        })
+        .catch(error => {
+            res.json(utils.failedResponse(error));
+        });
 });
+
+
 /**
  * @api {post} /users/signup Sign up
  * @apiVersion 1.0.0
@@ -215,7 +322,6 @@ router.put('/:id', [
             res.json(utils.failedResponse(error));
         });
 });
-
 
 // router.use(cors());
 // router.use(bodyParser.json());

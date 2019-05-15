@@ -1,2 +1,29 @@
-<div class="container">
-</div>
+
+<section class="our-webcoderskull padding-lg"  >
+  <div class="container">
+    <div class="row heading heading-icon">
+     <div class="col-6">
+       <h2>Thành viên</h2>
+     </div>
+      <div class="col-6">
+        <a class="btn btn-primary" (click)="changeStyle(1)">Dạng lướt</a>
+        <a class="btn btn-primary" (click)="changeStyle(2)">Dạng list</a>
+      </div>
+    </div>
+    <ul class="row" *ngIf="userListShow && styleList%2==0">
+      <li class="col-12 col-md-6 col-lg-3"*ngFor="let user of userListShow">
+       <a href="/users/{{user.id}}">
+         <div class="cnt-block equal-hight" style="height: 349px;">
+           <figure><img src="../../../assets/img/user.png" class="img-responsive" alt=""></figure>
+           <h3><a href="http://www.webcoderskull.com/">{{user.fullname}}</a></h3>
+           <p>Freelance Web Developer</p>
+           <ul class="follow-us clearfix">
+             <li><a href="#" style="color:#F90CE5;"><i class="fab fa-facebook-f mr-2" aria-hidden="true"></i></a></li>
+             <li><a href="#" style="color:#F90CE5;"><i class="fab fa-twitter mr-2" aria-hidden="true"></i></a></li>
+           </ul>
+         </div>
+       </a>
+      </li>
+    </ul>
+  </div>
+</section>
