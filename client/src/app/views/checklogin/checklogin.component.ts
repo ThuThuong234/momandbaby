@@ -45,4 +45,7 @@ export class CheckloginComponent implements OnInit {
     this.authService.clearSession();
     this.router.navigate(['/']);
   }
+  viewMyAccount() {
+    this.router.navigate(['/users/'+this.user.id]);
+  }
 }

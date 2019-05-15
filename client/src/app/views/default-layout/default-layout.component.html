@@ -7,8 +7,6 @@
     window.scrollTo(0, 1);
   }
 </script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js">
-</script>
 <div class="header-outs fixed-top" id="header">
   <div class="headder-nav-icon">
     <div class="container mt-2">
@@ -21,6 +19,9 @@
         </div>
         <div class="col-8">
           <div class="row justify-content-end pt-2">
+            <div class="col-md-4">
+              <a class="btn-admin-baby"href="/users">Thành viên</a>
+            </div>
             <div class="col-md-4 icons pr-0">
               <form (submit)="search()">
                 <input type="text" class="form-control bg-light search-text input-sm" name="search_key" placeholder="enter title to search" [(ngModel)]="search_key">

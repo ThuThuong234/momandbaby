@@ -52,7 +52,7 @@ exports.authorizeRoles = function (roles) {
       next();
     })
       .catch(error => {
-        res.json(utils.failedResponse(error));
+        res.json(helper.failedResponse(error));
       });
   };
 };
@@ -62,7 +62,7 @@ exports.authorizeAdmin = function (req, res, next) {
     next();
   })
     .catch(error => {
-      res.json(utils.failedResponse(error));
+      res.json(helper.failedResponse(error));
     });
 };
 
@@ -71,7 +71,7 @@ exports.authorizeMember = function (req, res, next) {
     next();
   })
     .catch(error => {
-      res.json(utils.failedResponse(error));
+      res.json(helper.failedResponse(error));
     });
 };
 

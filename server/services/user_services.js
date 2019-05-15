@@ -126,6 +126,7 @@ exports.getUser = function (id) {
             attributes: ['id', 'account', 'fullname', 'address', 'phone', 'role_id', 'email', 'facebook_account', 'twitter_account', 'image_url']
         })
             .then(user => {
+                // t vo roi nha
                 if (user == null) {
                     throw {
                         message: errors.USER_02,

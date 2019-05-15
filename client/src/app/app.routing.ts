@@ -16,6 +16,8 @@ import {SearchTopicComponent} from "./views/topics/search-topic/search-topic.com
 import {SignupComponent} from "./views/signup/signup.component";
 import {CreateTopicComponent} from "./views/topics/create-topic/create-topic.component";
 import {EmbedComponent} from "./views/embed/embed.component";
+import {UserComponent} from './views/user/user.component';
+import {UsersComponent} from './views/users/users.component';
 
 export const routes: Routes = [
   {
@@ -61,7 +63,7 @@ export const routes: Routes = [
         path: 'topic/:id',
         component: TopicComponent,
         data: {
-          title: 'BlogOne'
+          title: 'Bài viết'
         }
       },
       {
@@ -98,6 +100,18 @@ export const routes: Routes = [
         component: EmbedComponent,
         data: {
           title: 'Embed'
+        }
+      },{
+        path: 'users/:id',
+        component: UserComponent,
+        data: {
+          title: 'Tài khoản'
+        }
+      },{
+        path: 'users',
+        component: UsersComponent,
+        data: {
+          title: 'Thành viên'
         }
       },
       // {
