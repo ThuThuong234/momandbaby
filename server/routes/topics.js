@@ -9,7 +9,7 @@ const {check, validationResult} = require('express-validator/check');
 
 
 /**
- * @api {post} /topics/ Comment Topic
+ * @api {post} /topics/ Add Topic
  * @apiVersion 1.0.0
  * @apiGroup Comments
  *
@@ -41,7 +41,7 @@ router.post('/', auth_utils.authorizeAdminMember, [
     let content = req.body.content;
     let summary = req.body.summary;
     let img = req.body.img;
-    let type_id = req.body.type_id;
+    let type_id = req.body.type;
     const errors = validationResult(req);
     console.log("content "+content);
     if (!errors.isEmpty()) {
@@ -218,7 +218,7 @@ router.get('/search/:search_key', function (req, res) {
  *  }
  *  @apiUse FailedResponse
  */
-router.get('/:id/comments', auth_utils.authorizeAdminMember, function (req, res) {
+router.get('/:id/comments', function (req, res) {
     let requestId = req.params.id;
     commentServices.getTopicCommentByTopicID(requestId)
         .then(data => {

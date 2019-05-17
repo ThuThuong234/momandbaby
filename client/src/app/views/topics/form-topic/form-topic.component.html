@@ -19,7 +19,8 @@
   </div>
   <div class="col-sm-2 pb-2">Content</div>
   <div class="col-sm-10 pb-2">
-    <quill-editor [(ngModel)]="topicData.content"></quill-editor>
+    <quill-editor [(ngModel)]="topicData.content" (onEditorCreated)="getEditorInstance($event)"></quill-editor>
+    <input type="file" style="display: none" id="fileInputField"/>
   </div>
   <div class="col-sm-2 pb-2">Thumbnail</div>
   <div class="col-sm-10 pb-2">

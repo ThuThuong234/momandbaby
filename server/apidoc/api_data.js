@@ -39,7 +39,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/topics/",
-    "title": "Comment Topic",
+    "title": "Add Topic",
     "version": "1.0.0",
     "group": "Comments",
     "parameter": {
@@ -471,6 +471,48 @@ define({ "api": [
             "optional": false,
             "field": "x-access-token",
             "description": "<p>User token string to authorize</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/uses/",
+    "title": "Get All Users",
+    "version": "1.0.0",
+    "group": "Users",
+    "success": {
+      "examples": [
+        {
+          "title": "Success Response",
+          "content": " HTTP/1.1 200 OK\n {\n \"success\": true,\n \"data\": [\n{\n            \"id\": 1,\n            \"fullname\": \"Admin\",\n            \"address\": \"12 Nguyen Van Bao , phuong 4,  Go Vap, Ho Chi Minh\",\n            \"phone\": \"\",\n            \"role_id\": 1,\n            \"email\": \"admin@gmail.com\",\n            \"facebook_account\": \"\",\n            \"twitter_account\": \"\",\n            \"img_url\": null\n        },\n        {\n            \"id\": 2,\n            \"fullname\": \"Thuong Nguyen Thi Thu\",\n            \"address\": \"153 An Phu Dong 09, quan 12, Ho Chi Minh\",\n            \"phone\": \"0369615118\",\n            \"role_id\": 2,\n            \"email\": \"\",\n            \"facebook_account\": null,\n            \"twitter_account\": null,\n            \"img_url\": null\n        },\n        {\n            \"id\": 3,\n            \"fullname\": \"Lam Nguyen Ngoc\",\n            \"address\": \"55-57 Bau Cat 4, Tan Binh, Ho Chi Minh\",\n            \"phone\": \"\",\n            \"role_id\": 2,\n            \"email\": \"\",\n            \"facebook_account\": null,\n            \"twitter_account\": null,\n            \"img_url\": null\n        },\n        {\n            \"id\": 4,\n            \"fullname\": \"Nguyen Van A1\",\n            \"address\": \"go xoai\",\n            \"phone\": \"0987654321\",\n            \"role_id\": 2,\n            \"email\": \"user@gmail.com\",\n            \"facebook_account\": null,\n            \"twitter_account\": null,\n            \"img_url\": \"user1.jpg\"\n        },\n        {\n            \"id\": 5,\n            \"fullname\": \"Nguyen Van A1\",\n            \"address\": \"go xoai\",\n            \"phone\": \"0987654321\",\n            \"role_id\": 2,\n            \"email\": \"user2@gmail.com\",\n            \"facebook_account\": null,\n            \"twitter_account\": null,\n            \"img_url\": null\n        },\n        {\n            \"id\": 6,\n            \"fullname\": \"Nguyen Lam ne\",\n            \"address\": \"\",\n            \"phone\": \"1212121212\",\n            \"role_id\": 2,\n            \"email\": \"lamne@gmail.com\",\n            \"facebook_account\": null,\n            \"twitter_account\": null,\n            \"img_url\": null\n        },\n        {\n            \"id\": 7,\n            \"fullname\": \"Nguyen Lam Ne\",\n            \"address\": \"\",\n            \"phone\": \"1212121212\",\n            \"role_id\": 2,\n            \"email\": \"lamnehihi@gmai.com\",\n            \"facebook_account\": null,\n            \"twitter_account\": null,\n            \"img_url\": null\n        }\n  ]\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n}",
+          "type": "json"
+        },
+        {
+          "title": "Failed Response",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": false,\n  \"message\": \"Something wrong\",\n  \"code\": \"ERROR_CODE\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "routes/users.js",
+    "groupTitle": "Users",
+    "name": "GetUses",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>API key to access the server</p>"
           }
         ]
       }

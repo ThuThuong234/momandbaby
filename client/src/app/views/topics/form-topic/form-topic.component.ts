@@ -25,6 +25,8 @@ export class FormTopicComponent implements OnInit {
   topicData: Topic = new Topic();
   thumbnail: File = null;
   selectedFiles: FileList;
+  quillEditorRef;
+  maxUploadFileSize = 10000000;
 
   constructor(
     private router: Router,
@@ -79,6 +81,7 @@ export class FormTopicComponent implements OnInit {
       this.topicData.author= session.id;
       this.topicData.img=  "https://s3-us-west-2.amazonaws.com/babyandmom/" + dataFile["body"].name;
       console.log(dataFile["body"].name);
+      console.log(this.topicData);
       this.topicService.insertTopic(this.topicData).subscribe(
         res => {
           if (res.success) {
@@ -88,9 +91,11 @@ export class FormTopicComponent implements OnInit {
           }
         },
         error => {
+          console.log("error" +error);
           this.toastr.error(this.translate.instant('COMMON.CREATE.FAILED'));
         });
     } else {
+      console.log("currentUser null");
       this.toastr.error(this.translate.instant('COMMON.CREATE.FAILED'));
     }
     } );
@@ -106,6 +111,50 @@ export class FormTopicComponent implements OnInit {
     this.thumbnail = files.item(0);
     console.log(this.thumbnail);
   }
+  getEditorInstance(editorInstance: any) {
+    this.quillEditorRef = editorInstance;
+    console.log("FSDfsds: ");
+    console.log(this.quillEditorRef)
+    const toolbar = editorInstance.getModule('toolbar');
+    toolbar.addHandler('image', this.imageHandler);
+  }
+
+  imageHandler = (image, callback) => {
+    const input = <HTMLInputElement> document.getElementById('fileInputField');
+    document.getElementById('fileInputField').onchange = () => {
+      console.log("adfafd");
+      let file: File;
+      file = input.files[0];
+      // file type is only image.
+      if (/^image\//.test(file.type)) {
+        if (file.size > this.maxUploadFileSize) {
+          alert('Image needs to be less than 1MB');
+        } else {
+          // const reader  = new FileReader();
+          // reader.onload = () =>  {
+          //   const range = this.quillEditorRef.getSelection();
+          //   const img = '<img src="' + reader.result + '" />';
+          //   this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
+          // };
+          // reader.readAsDataURL(file);
+          this.uploadService.uploadFile(file).subscribe( dataFile =>{
+            // this.topicData.img = dataFile['Location'];
+            console.log("RES  ");
+            console.log(dataFile);
+
+              const range = this.quillEditorRef.getSelection();
+              const img = '<img src="https://s3-us-west-2.amazonaws.com/babyandmom/' + dataFile["body"].name + '" />';
+            this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
+          } );
+        }
+      } else {
+        alert('You could only upload images.');
+      }
+    };
+// console.log(image);
+    input.click();
+  }
+
 
 
 }
