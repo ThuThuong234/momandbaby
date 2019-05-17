@@ -8,6 +8,17 @@ const models = require('../db/models');
 const errors = require('../lib/errors');
 const dateTime = require('node-datetime');
 
+const Chatkit = require('@pusher/chatkit-server');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+/**
+ * create chatkit.
+ */
+const chatkit = new Chatkit.default({
+    instanceLocator: 'v1:us1:d3b47aed-c439-4dc3-ae2a-06e6cf178edb',
+    key: '0a4c726a-991e-4c9e-8ff0-02b715f115d7:R0cMAfGfDoNMkNi23hOUMz8dHCbyzs476CEd4ZKqxMA=',
+});
 exports.signup = function (fullname, account, password, address, email, facebook_account, twitter_account, phone, img_url) {
     return new Promise(function (resolve, reject) {
         models.User.findOne({
@@ -61,6 +72,13 @@ exports.signup = function (fullname, account, password, address, email, facebook
                         code: 'CREATE'
                     };
                 }
+                console.log(result.account);
+                return chatkit.createUser({
+                    id: String(result.id),
+                    name: result.account,
+                });
+            })
+            .then( result => {
                 return resolve(result);
             })
             .catch(error => {

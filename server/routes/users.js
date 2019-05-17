@@ -330,21 +330,7 @@ router.put('/:id', [
 router.post('/newUserChat', (req, res) => {
     const { username } = req.body;
   
-    chatkit
-      .createUser({
-        id: username,
-        name: username,
-      })
-      .then(() => {
-        res.sendStatus(201);
-      })
-      .catch(err => {
-        if (err.error === 'services/chatkit/user_already_exists') {
-          res.sendStatus(200);
-        } else {
-          res.status(err.status).json(err);
-        }
-      });
+    // 
   });
   
   router.post('/auth', (req, res) => {

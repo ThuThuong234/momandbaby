@@ -37,6 +37,7 @@ const users_routes = require('./routes/users');
 const topics_routes = require('./routes/topics');
 const types_routes = require('./routes/types');
 const conversations_routes = require('./routes/conversations');
+const chat_routes = require('./routes/chatroom');
 
 
 /**
@@ -47,6 +48,7 @@ app.use('/', indexRouter);
 app.use('/users', auth_utils.authorizeHeader, users_routes);
 app.use('/topics', auth_utils.authorizeHeader, topics_routes);
 app.use('/types', auth_utils.authorizeHeader, types_routes);
+app.use('/chat', auth_utils.authorizeHeader, chat_routes);
 // app.use('/conversations', auth_utils.authorizeHeader, conversations_routes);
 
 // catch 404 and forward to error handler
