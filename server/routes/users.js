@@ -295,7 +295,6 @@ router.put('/:id', [
 
     check('fullname').isLength({min: 1}).withMessage(errors.USER_FULLNAME),
     check('address').isLength({min: 1}).withMessage(errors.USER_ADDRESS),
-    check('password').isLength({min: 8}).withMessage(errors.USER_PASSWORD),
     check('phone').optional().isMobilePhone().isLength({min: 10, max: 10}).withMessage(errors.USER_PHONE),
     check('facebook_account').optional().isURL().withMessage(errors.USER_FB_ACCOUNT),
     check('twitter_account').optional().isURL().withMessage(errors.USER_TWITTER_ACCOUNT),
@@ -303,7 +302,6 @@ router.put('/:id', [
     check('image_url').optional().isURL().withMessage(errors.USER_IMG_URL),
 ], auth_utils.authorizeAdminMember, function (req, res) {
     let userId = req.params.id;
-    let password = req.body.password;
     let fullname = req.body.fullname;
     let address = req.body.address;
     let facebook_account = req.body.facebook_account;
@@ -316,7 +314,7 @@ router.put('/:id', [
     if (!errors.isEmpty()) {
         return res.json(utils.failedResponse({errors: errors.array()}));
     }
-    userServices.updateUser(userId, fullname, password,address, phone,email, facebook_account, twitter_account, image_url, active)
+    userServices.updateUser(userId, fullname, address, phone,email, facebook_account, twitter_account, image_url, active)
         .then(data => {
             res.json(utils.successResponse(data));
         })

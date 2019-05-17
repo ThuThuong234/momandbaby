@@ -143,12 +143,11 @@ exports.getUser = function (id) {
     });
 };
 
-exports.updateUser = function (userId, fullname, password,address, phone,email, facebook_account, twitter_account, image_url,active)
+exports.updateUser = function (userId, fullname, address, phone,email, facebook_account, twitter_account, image_url,active)
 {
     return new Promise(function (resolve, reject) {
         console.log(userId);
         console.log(fullname);
-        console.log(password);
         console.log(address);
         console.log(phone);
         console.log(facebook_account);
@@ -173,7 +172,6 @@ exports.updateUser = function (userId, fullname, password,address, phone,email, 
                 return models.User.update({
                     updated_at:new Date(),
                     last_login: new Date(),
-                    password: password,
                     fullname: fullname,
                     address: address,
                     phone: phone,
