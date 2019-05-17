@@ -9,5 +9,5 @@ export class UserResModel
   email: string;
   facebook_account: string;
   twitter_account: string;
-  img_url: string;
+  image_url: string;
 }

@@ -8,6 +8,7 @@ import {SignupModel} from "../view-model/user/signup-model";
 import {ApiResult} from "../data-transfer/api-result";
 import {UserApiResult} from '../view-model/user/user.api-result';
 import {GetUsersApiResult} from '../data-transfer/users/getUsers.api-result';
+import {UserResModel} from '../view-model/user/user-res-model';
 
 @Injectable()
 export class UserService extends APIService {
@@ -29,5 +30,9 @@ export class UserService extends APIService {
 
   public getAllUser() {
     return super.apiGet<GetUsersApiResult>('/users', null, true);
+  }
+
+  public  updateUser( userModel: UserResModel ){
+    return super.apiPut<ApiResult>('/users/'+userModel.id, userModel,null,true);
   }
 }

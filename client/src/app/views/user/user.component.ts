@@ -18,6 +18,8 @@ export class UserComponent implements OnInit {
   isEdit: boolean;
   user: User = new User();
   userShow: UserResModel;
+  namefull: string;
+  id: string;
   public session: SessionVM;
 
   constructor(private authService: AuthenticateService, private router: Router,
@@ -26,14 +28,16 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.isEdit=true;
+    this.id = this.route.snapshot.paramMap.get('id');
+    
     this.authService.session$.subscribe(
       data => {
         this.session = data;
         if (this.session && this.session.token != null && this.session.role != null) {
           this.user.fullname = this.session.fullname;
           this.user.id = this.session.id;
+          this.user.role = this.session.role;
           this.getUser();
-          this.toastr.success('Xin chào ' + this.user.fullname);
         } else {
           this.toastr.error('Chưa đăng nhập!');
           this.router.navigate(['/']);
@@ -42,30 +46,39 @@ export class UserComponent implements OnInit {
     );
   }
   changeEdit(){
+    if(this.isEdit==false){
+      window.location.reload();
+    }
+    console.log(this.isEdit)
     this.isEdit=!this.isEdit;
-    console.log(this.isEdit);
   }
 
   getUser() {
-
-    const id = this.route.snapshot.paramMap.get('id');
-
-    if (id) {
-      this.userService.getUser(id.toString()).subscribe(
+    if (this.id) {
+      this.userService.getUser(this.id).subscribe(
         res => {
           if (res.success && res.data) {
             this.userShow=res.data;
+            this.namefull=res.data.fullname;
           } else {
             this.toastr.error('Lỗi hoặc không đủ quyền thực hiện!');
           }
         });
     }
     else {
-
       this.toastr.error('Id lỗi!');
     }
   }
   doUpdateUser(){
-
+    this.userService.updateUser(this.userShow).subscribe(
+      res => {
+        if (res.success && res.data) {
+          this.toastr.success('Cập nhật thành công!');
+          window.location.reload();
+        } else {
+          console.log(res);
+          this.toastr.error('Lỗi hoặc không đủ quyền thực hiện!');
+        }
+      });
   }
 }
