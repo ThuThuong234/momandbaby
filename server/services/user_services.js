@@ -143,7 +143,7 @@ exports.getUser = function (id) {
     });
 };
 
-exports.updateUser = function (userId, fullname, password,address, phone, facebook_account, twitter_account, image_url,active)
+exports.updateUser = function (userId, fullname, password,address, phone,email, facebook_account, twitter_account, image_url,active)
 {
     return new Promise(function (resolve, reject) {
         console.log(userId);
@@ -177,6 +177,7 @@ exports.updateUser = function (userId, fullname, password,address, phone, facebo
                     fullname: fullname,
                     address: address,
                     phone: phone,
+                    email: email,
                     facebook_account: facebook_account,
                     twitter_account: twitter_account,
                     image_url: image_url,

@@ -257,7 +257,7 @@ router.post('/login', function (req, res) {
  *  }
  * @apiUse FailedResponse
  */
-router.get('/:id', auth_utils.authorizeAdminUser, function (req, res) {
+router.get('/:id',  function (req, res) {
     let userId = req.params.id;
     userServices.getUser(userId)
         .then(data => {
@@ -292,6 +292,7 @@ router.get('/:id', auth_utils.authorizeAdminUser, function (req, res) {
  */
 router.put('/:id', [
     // if check, url, it can't be null?
+
     check('fullname').isLength({min: 1}).withMessage(errors.USER_FULLNAME),
     check('address').isLength({min: 1}).withMessage(errors.USER_ADDRESS),
     check('password').isLength({min: 8}).withMessage(errors.USER_PASSWORD),
@@ -308,13 +309,14 @@ router.put('/:id', [
     let facebook_account = req.body.facebook_account;
     let twitter_account = req.body.twitter_account;
     let phone = req.body.phone;
+    let email = req.body.email;
     let image_url = req.body.image_url;
     let active = req.body.active;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.json(utils.failedResponse({errors: errors.array()}));
     }
-    userServices.updateUser(userId, fullname, password,address, phone, facebook_account, twitter_account, image_url, active)
+    userServices.updateUser(userId, fullname, password,address, phone,email, facebook_account, twitter_account, image_url, active)
         .then(data => {
             res.json(utils.successResponse(data));
         })
