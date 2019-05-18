@@ -128,15 +128,8 @@ export class FormTopicComponent implements OnInit {
       // file type is only image.
       if (/^image\//.test(file.type)) {
         if (file.size > this.maxUploadFileSize) {
-          alert('Image needs to be less than 1MB');
+          alert('Image needs to be less than 10MB');
         } else {
-          // const reader  = new FileReader();
-          // reader.onload = () =>  {
-          //   const range = this.quillEditorRef.getSelection();
-          //   const img = '<img src="' + reader.result + '" />';
-          //   this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
-          // };
-          // reader.readAsDataURL(file);
           this.uploadService.uploadFile(file).subscribe( dataFile =>{
             // this.topicData.img = dataFile['Location'];
             console.log("RES  ");
