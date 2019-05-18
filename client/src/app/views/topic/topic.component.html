@@ -18,4 +18,21 @@
     </div>
     <div class="col-12" [innerHTML]="topic.content"></div>
    </div>
+  <hr/>
+  <div class="row" *ngIf="commentAdd&&isComment==1">
+    <div class="col-12">
+      <p>Bình luận</p>
+    </div>
+    <div class="col-8">
+      <input type="text"[(ngModel)]="commentAdd.content" name="content"/>
+    </div>
+    <div class="col-2">
+      <a class="btn btn-primary">Gửi</a>
+    </div>
+  </div>
+  <div class="row" *ngIf="isComment==0">
+    <div class="col-12 text-center">
+      <a class="btn btn-primary" href="/login">Đăng nhập để bình luận</a>
+    </div>
+  </div>
 </div>
