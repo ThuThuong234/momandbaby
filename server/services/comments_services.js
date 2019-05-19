@@ -95,7 +95,9 @@ exports.getTopicCommentByTopicID = function (topic_id) {
                     ],
                     where: {
                         topic_id: topic_id
-                    }
+                    },
+                    order: [['id']],
+
                 });
             })
             .then(results => {
@@ -106,7 +108,7 @@ exports.getTopicCommentByTopicID = function (topic_id) {
                             topic_id: comment.topic_id,
                             content: comment.content,
                             comment: comment.comment,
-                            User: comment.User.fullname,
+                            user: comment.User,
                         };
                 });
 
