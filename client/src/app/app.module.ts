@@ -43,11 +43,24 @@ import {CommentService} from "./services/reader/comment_services";
 
 import { EmbedComponent } from './views/embed/embed.component';
 import {ChatService} from "./services/chat.service";
-
+import {
+  Ng6SocialButtonModule,
+  SocialServiceConfig
+} from "ng6-social-button";
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
+};
+
+// Configs
+export function getAuthServiceConfigs() {
+  let config = new SocialServiceConfig()
+    .addFacebook("2296570640609951")
+    .addGoogle("492102139245-u83lgmshke8gkuj8sgm57o2n9pnv96kn.apps.googleusercontent.com");
+
+  return config;
 }
+//2296570640609951
 
 @NgModule({
   declarations: [
@@ -69,7 +82,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormTopicComponent,
     UsersComponent,
     UserComponent,
-    EmbedComponent
+    EmbedComponent,
   ],
   imports: [
     NgbModule.forRoot(),
@@ -82,6 +95,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     AngularFontAwesomeModule,
     SharedModule,
+    Ng6SocialButtonModule,
     // QuillEditorModule,
     ToastrModule.forRoot({
       timeOut: 2000,
@@ -100,7 +114,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     NgChatModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
 
   ],
   providers: [
@@ -112,7 +126,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthenticateService,
     UserService,
     UploadFileService,
-    ChatService,
+    ChatService,{
+      provide: SocialServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }
   ],
   bootstrap: [
     AppComponent

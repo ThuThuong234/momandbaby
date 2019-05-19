@@ -4,10 +4,12 @@
     <h4 class="card-title mt-3 text-center">Login</h4>
     <div class="row">
       <div class="col-sm-6">
-        <a href="" class="btn btn-fb-twitter  btn-twitter"> <i class="fab fa-twitter"></i> Login via Twitter</a>
+        <google-login-button (socialUser)="getSocialUser($event)"></google-login-button>
+<!--        <a href="" class="btn btn-fb-twitter  btn-twitter"> <i class="fab fa-twitter"></i> Login via Twitter</a>-->
       </div>
       <div class="col-sm-6">
-        <a href="" class="btn btn-fb-twitter btn-facebook"> <i class="fab fa-facebook-f"></i>Login via facebook</a>
+        <facebook-login-button (socialUser)="getSocialUser($event)"></facebook-login-button>
+<!--        <a (click)="socialSignIn('facebook')" class="btn btn-fb-twitter btn-facebook"> <i class="fab fa-facebook-f"></i>Login via facebook</a>-->
       </div>
     </div>
     <div (keyup.enter)="doLogin()">
@@ -28,6 +30,7 @@
         <a class="btn btn-primary btn-block" href="/signup"> Register  </a>
       </div> <!-- form-group// -->
       <p class="text-center">Forget password <a href="">Get password</a> </p>
+
     </div>
   </article>
 </div> <!-- card.// -->

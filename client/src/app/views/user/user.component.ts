@@ -70,6 +70,13 @@ export class UserComponent implements OnInit {
             this.userShow=res.data;
             this.namefull=res.data.fullname;
             this.image_user_old=res.data.image_url;
+            console.log(this.userShow);
+            if(this.userShow.facebook_account==null){
+              this.userShow.facebook_account="fb.com";
+            }
+            if(this.userShow.twitter_account==null){
+              this.userShow.twitter_account="fb.com";
+            }
           } else {
             this.toastr.error('Lỗi hoặc không đủ quyền thực hiện!');
           }
@@ -80,6 +87,7 @@ export class UserComponent implements OnInit {
     }
   }
   doUpdateUser(){
+    console.log(this.userShow);
     this.userService.updateUser(this.userShow).subscribe(
       res => {
         if (res.success && res.data) {

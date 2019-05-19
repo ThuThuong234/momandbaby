@@ -8,6 +8,9 @@ import {AuthenticateService} from '../../services/authenticate.service';
 import {SessionVM} from '../../view-model/session/session-vm';
 import {CommentService} from '../../services/reader/comment_services';
 import {CommentModelRes} from '../../view-model/comment/commentRes';
+import {
+  SocialService
+} from "ng6-social-button";
 
 @Component({
   selector: 'app-topic',
@@ -15,7 +18,10 @@ import {CommentModelRes} from '../../view-model/comment/commentRes';
   styleUrls: ['./topic.component.scss']
 })
 export class TopicComponent implements OnInit {
-
+  shareObj = {
+    href: "FACEBOOK-SHARE-LINK",
+    hashtag:"#FACEBOOK-SHARE-HASGTAG"
+  };
   topic: Topic;
   urlstring:string;
   user_name:string;
@@ -24,7 +30,7 @@ export class TopicComponent implements OnInit {
   public session: SessionVM;
   listComment:CommentModelRes[];
   isComment:number;
-  constructor(private authService: AuthenticateService,
+  constructor(private authService: AuthenticateService,private socialAuthService: SocialService,
               private  topicService: TopicService,
               private  commentService: CommentService,
               private router: Router,
@@ -35,6 +41,8 @@ export class TopicComponent implements OnInit {
     this.getTopic();
     this.getCommentByIdTopic();
     this.checkLogin();
+    this.shareObj.href="google.com.vn";
+
   }
 
   getTopic(): void{
@@ -46,6 +54,8 @@ export class TopicComponent implements OnInit {
           this.toastr.success('Lấy bài viết thành công!')
           this.topic= res.data;
           this.commentAdd.topic_id=this.topic.id;
+         //"localhost:4200/topic/"+this.topic.id;
+          this.shareObj.hashtag="Woww! "+this.topic.title;
           console.log(this.commentAdd);// this.getCommentByIdTopic(this.topic.id);
         }
         else{

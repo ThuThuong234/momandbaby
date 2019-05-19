@@ -9,6 +9,9 @@ export class SessionVM {
   id: number;
   @Type(() => Role)
   role: Role;
+  image_url:string;
+  email:string;
+  provider:string;
 
   constructor(id:number,token: string, role: Role, fullname: string, account: string) {
     this.id = id;

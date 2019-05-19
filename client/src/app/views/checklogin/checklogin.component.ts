@@ -5,6 +5,8 @@ import {AuthenticateService} from "../../services/authenticate.service";
 import {SessionVM} from "../../view-model/session/session-vm";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {SocialService} from 'ng6-social-button';
+
 
 @Component({
   selector: 'app-checklogin',
@@ -14,8 +16,9 @@ import {ToastrService} from "ngx-toastr";
 export class CheckloginComponent implements OnInit {
   user: User = new User();
   public session: SessionVM;
+  ischeck:boolean;
   constructor(private authService: AuthenticateService, private userService: UserService,
-              private router: Router,
+              private router: Router,private socialAuthService: SocialService,
               private toastr: ToastrService,) {
   }
 
@@ -28,6 +31,10 @@ export class CheckloginComponent implements OnInit {
           this.user.fullname = this.session.fullname;
           this.user.id = this.session.id;
           this.getUser(this.user.id);
+          if(this.ischeck==true){
+            this.session.image_url=this.user.image_url;//=this.session.image_url;
+          }
+
         }
       }
     );
@@ -47,6 +54,7 @@ export class CheckloginComponent implements OnInit {
   }
 
   logout() {
+    this.signOut();
     this.authService.clearSession();
     this.router.navigate(['/']);
   }
@@ -57,11 +65,24 @@ export class CheckloginComponent implements OnInit {
     if (id) {
       this.userService.getUser(id).subscribe(
         res => {
+          console.log(res);
           if (res.success && res.data) {
             this.user.account=res.data.account;
             this.user.image_url = res.data.image_url;
+            this.ischeck = true;
+          }
+          else {
+            this.ischeck = false;
           }
         });
     }
   }
+  signOut(){
+    if(this.socialAuthService.isSocialLoggedIn()){
+      this.socialAuthService.signOut().catch((err)=>{
+
+      });
+    }
+  }
+
 }
