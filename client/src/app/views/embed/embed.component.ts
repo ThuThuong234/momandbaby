@@ -271,62 +271,65 @@ export class EmbedComponent {
     }
   }
   chatGroup() {
-    const currentUser = localStorage.getItem('currentUser');
-    const session = deserialize(SessionVM, currentUser);
-    const tokenProvider = new Chatkit.TokenProvider({
-      url: 'http://localhost:3000/chat/auth',
-      headers: {
-        "x-api-key": "123@mom_and_baby_tool",
-        "x-access-token": session.token
-      }
-    });
-    const chatManager = new Chatkit.ChatManager({
-      instanceLocator: 'v1:us1:d3b47aed-c439-4dc3-ae2a-06e6cf178edb',
-      userId: session.account,
-      tokenProvider
-    });
-    this._nameRoom += "[";
-    this._nameRoom += session.account+",";
-    this._nameRoom += this.lstChecked.toString();
-    /*forEach(this.lstChecked, function(value, key){
-      this._nameRoom += value;
-    });*/
-    this._nameRoom += "]";
-    this.chatService.createRoom(session.account, this._nameRoom,this.lstChecked).subscribe(
-      res=> {
-        if (res.success) {
-          ///
-          return chatManager
-            .connect()
-            .then(currentUser => {
-              currentUser.subscribeToRoom({
-                roomId: res.data.id,
-                messageLimit: 100,
-                hooks: {
-                  onMessage: message => {
-                    this.messages.push(message);
-                  },
-                  onPresenceChanged: (state, user) => {
-                    this.users = currentUser.users.sort((a, b) => {
-                      if (a.presence.state === 'online') return -1;
-
-                      return 1;
-                    });
-                  },
-                },
-              });
-              this._nameRoom = "Room";
-              this.getListRoomsOfUser();
-              this.currentUser = currentUser;
-              this.users = currentUser.users;
-              //this.roomId = roomId;
-              //this.roomName = roomName;
-            });
-          ///////////
-        } else {
-
+    if(this.lstChecked.length > 0){
+      const currentUser = localStorage.getItem('currentUser');
+      const session = deserialize(SessionVM, currentUser);
+      const tokenProvider = new Chatkit.TokenProvider({
+        url: 'http://localhost:3000/chat/auth',
+        headers: {
+          "x-api-key": "123@mom_and_baby_tool",
+          "x-access-token": session.token
         }
-
       });
+      const chatManager = new Chatkit.ChatManager({
+        instanceLocator: 'v1:us1:d3b47aed-c439-4dc3-ae2a-06e6cf178edb',
+        userId: session.account,
+        tokenProvider
+      });
+      this._nameRoom += "[";
+      this._nameRoom += session.account+",";
+      this._nameRoom += this.lstChecked.toString();
+      /*forEach(this.lstChecked, function(value, key){
+        this._nameRoom += value;
+      });*/
+      this._nameRoom += "]";
+      this.chatService.createRoom(session.account, this._nameRoom,this.lstChecked).subscribe(
+        res=> {
+          if (res.success) {
+            ///
+            return chatManager
+              .connect()
+              .then(currentUser => {
+                currentUser.subscribeToRoom({
+                  roomId: res.data.id,
+                  messageLimit: 100,
+                  hooks: {
+                    onMessage: message => {
+                      this.messages.push(message);
+                    },
+                    onPresenceChanged: (state, user) => {
+                      this.users = currentUser.users.sort((a, b) => {
+                        if (a.presence.state === 'online') return -1;
+
+                        return 1;
+                      });
+                    },
+                  },
+                });
+                this._nameRoom = "Room";
+                this.getListRoomsOfUser();
+                this.currentUser = currentUser;
+                //this.users = currentUser.users;
+                //this.roomId = roomId;
+                //this.roomName = roomName;
+              });
+            ///////////
+          } else {
+
+          }
+
+        });
+    }
+
   }
 }
