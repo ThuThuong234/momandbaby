@@ -39,8 +39,7 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.isEdit=true;
     this.id = this.route.snapshot.paramMap.get('id');
-    
-    this.authService.session$.subscribe(
+      this.authService.session$.subscribe(
       data => {
         this.session = data;
         if (this.session && this.session.token != null && this.session.role != null) {
@@ -94,24 +93,26 @@ export class UserComponent implements OnInit {
   }
   selectFile(event) {
     const reader = new FileReader();
-    this.selectedFiles = event.target.files;
-    reader.readAsDataURL(event.target.files.item(0));
-    console.log(reader.result);
-    reader.onload = (e: any) =>this.imageSrc=e.target.result;
-    if(this.imageSrc){
+    if (event.target.files&&event.target.files.item(0)){
+      this.selectedFiles = event.target.files;
+      reader.readAsDataURL(event.target.files.item(0));
+      console.log(reader.result);
+      reader.onload = (e: any) =>this.imageSrc=e.target.result;
       this.isUpfile=true;
     }
     else {
+      this.imageSrc=null;
       this.isUpfile=false;
+      console.log(this.isUpfile);
     }
-
   }
+
   doUpFile(){
-    const file = this.selectedFiles.item(0);
-    console.log(this.selectedFiles.toString());
-    console.log(file);
-    console.log("upload file: ");
-    if(file){
+
+    if(this.selectedFiles&&this.selectedFiles.item(0)){
+      const file = this.selectedFiles.item(0);
+      console.log(file);
+      console.log("upload file: ");
       this.uploadService.uploadFile(file).subscribe(dataFile => {
         // this.topicData.img = dataFile['Location'];
         console.log("RES  ");

@@ -3,12 +3,8 @@
     <div class="row">
       <div class="col-md-4">
         <div class="profile-img">
-          <img src="{{image_user_old}}" alt=""/>
-<!--          <div class="btn-primary">-->
-
-            <input type="button" class=" file btn-lg btn btn-primary" data-toggle="modal" data-target="#myModal" value="Thay đổi ảnh đại diện"/>
-
-<!--          </div>-->
+          <img src="{{image_user_old||'../../../assets/img/user.png'}}" alt=""/>
+          <input type="button" class=" file btn-lg btn btn-primary" *ngIf="user.id==id || user.role.name=='Admin'" data-toggle="modal" data-target="#myModal" value="Thay đổi ảnh đại diện"/>
         </div>
       </div>
       <div class="col-md-6">
@@ -156,7 +152,7 @@
     </div>
   </form>
 </div>
-<div class="modal" id="myModal">
+<div class="modal" id="myModal" *ngIf="user.id==id || user.role.name=='Admin'" >
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -172,13 +168,13 @@
           <img  [src]="imageSrc||'../../../assets/img/user.png'" />
         </div>
         <div class="m-3">
-          <input type="file" name="user_img" (change)="selectFile($event)"/>
+          <input type="file" name="user_img" (change)="selectFile($event)" (click)="selectFile($event)"/>
         </div>
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" [disabled]="isUpfile" data-dismiss="modal"(click)="doUpFile()">Cập nhật</button>
+        <button type="button" class="btn btn-primary" [disabled]="!isUpfile" data-dismiss="modal"(click)="doUpFile()">Cập nhật</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
       </div>
 
