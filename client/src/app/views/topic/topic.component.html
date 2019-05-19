@@ -19,19 +19,37 @@
     <div class="col-12" [innerHTML]="topic.content"></div>
    </div>
   <hr/>
-  <div class="row" *ngIf="commentAdd&&isComment==1">
+  <div class="row">
     <div class="col-12">
-      <p>Bình luận</p>
+      <p class="ykien">Ý kiến bạn đọc</p>
     </div>
-    <div class="col-8">
-      <input type="text"[(ngModel)]="commentAdd.content" name="content"/>
+  </div>
+<!--   get comment by id topic-->
+  <div *ngIf="listComment">
+    <div class="row m-1"  *ngFor="let comment of listComment">
+
+      <div class="col-3 label-comment">
+        <a class="btn btn-info"href="/users/{{comment.user.id}}">{{comment.user.fullname}}</a>
+      </div>
+      <div class="col-7 text-comment">
+        <p>{{comment.content}}</p>
+      </div>
+      <hr/>
     </div>
-    <div class="col-2">
-      <a class="btn btn-primary">Gửi</a>
+  </div>
+
+<!--   do comment-->
+  <div class="row" *ngIf="commentAdd&&isComment==1">
+    <div class="form-group col-12">
+      <label>Ý kiến của tôi:</label>
+      <textarea class="form-control" rows="5" name="content" [(ngModel)]="commentAdd.content"></textarea>
+    </div>
+    <div class="col-12 text-center m-1">
+      <a class="btn btn-primary" (click)="commentTopic()">Gửi</a>
     </div>
   </div>
   <div class="row" *ngIf="isComment==0">
-    <div class="col-12 text-center">
+    <div class="col-12 text-center m-3">
       <a class="btn btn-primary" href="/login">Đăng nhập để bình luận</a>
     </div>
   </div>

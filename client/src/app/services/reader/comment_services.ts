@@ -4,9 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { APIService } from '../api.service';
 import { SpinService } from '../spin.service';
 import { ApiResult } from '../../data-transfer/api-result';
-import {GetTopicsApiResult} from '../../data-transfer/topics/getTopics.api-result';
-import {Topic} from "../../view-model/topic/topic";
-import {TopicApiResult} from '../../data-transfer/topics/topic.api-result';
+import {GetCommentsApiResult} from '../../data-transfer/comments/getComments.api-result';
 
 @Injectable()
 export class CommentService extends APIService {
@@ -14,12 +12,13 @@ export class CommentService extends APIService {
     super(http, spintService);
   }
 
-  // public getLatestTopics() {
-  //   return super.apiGet<GetTopicsApiResult>('/topics/latest', null, false);
-  // }
+  public  getListCommentByIdTopic(id){
+    const urlstring="topics/"+id+"/comments";
+    return super.apiGet<GetCommentsApiResult>(urlstring,null, false);
+  }
 
   public commentTopic(url,comment) {
-    return super.apiPost<ApiResult>(url, comment);
+    return super.apiPost<ApiResult>(url, comment,null,true);
   }
 
 }

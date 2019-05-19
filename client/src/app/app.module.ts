@@ -39,6 +39,7 @@ import { FormTopicComponent } from './views/topics/form-topic/form-topic.compone
 import {UploadFileService} from "./services/uploadfile.service";
 import { UsersComponent } from './views/users/users.component';
 import { UserComponent } from './views/user/user.component';
+import {CommentService} from "./services/reader/comment_services";
 
 import { EmbedComponent } from './views/embed/embed.component';
 
@@ -107,6 +108,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SpinService,
     TypeService,
     TopicService,
+    CommentService,
     AuthenticateService,
     UserService,
     UploadFileService,
