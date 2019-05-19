@@ -8,6 +8,6 @@ export class User {
   password: string;
   type: string;
   token:string;
-  img_url: string;
+  image_url: string;
   last_login: Date;
 }

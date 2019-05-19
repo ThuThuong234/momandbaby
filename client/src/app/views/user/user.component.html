@@ -3,11 +3,12 @@
     <div class="row">
       <div class="col-md-4">
         <div class="profile-img">
-          <img src="../../../assets/img/{{userShow.image_url||'user.png'}}" alt=""/>
-          <div class="file btn btn-lg btn-primary">
-            Thay đổi ảnh đại diện
-            <input type="file" name="file"/>
-          </div>
+          <img src="{{image_user_old}}" alt=""/>
+<!--          <div class="btn-primary">-->
+
+            <input type="button" class=" file btn-lg btn btn-primary" data-toggle="modal" data-target="#myModal" value="Thay đổi ảnh đại diện"/>
+
+<!--          </div>-->
         </div>
       </div>
       <div class="col-md-6">
@@ -154,4 +155,33 @@
       </div>
     </div>
   </form>
+</div>
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Thay đổi ảnh đại diện</h4>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <div class="profile-img">
+          <img  [src]="imageSrc||'../../../assets/img/user.png'" />
+        </div>
+        <div class="m-3">
+          <input type="file" name="user_img" (change)="selectFile($event)"/>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" [disabled]="isUpfile" data-dismiss="modal"(click)="doUpFile()">Cập nhật</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+      </div>
+
+    </div>
+  </div>
 </div>
