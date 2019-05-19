@@ -14,7 +14,7 @@ import {ToastrService} from "ngx-toastr";
 export class CheckloginComponent implements OnInit {
   user: User = new User();
   public session: SessionVM;
-  constructor(private authService: AuthenticateService,
+  constructor(private authService: AuthenticateService, private userService: UserService,
               private router: Router,
               private toastr: ToastrService,) {
   }
@@ -27,6 +27,7 @@ export class CheckloginComponent implements OnInit {
         if (this.session && this.session.token != null && this.session.role != null) {
           this.user.fullname = this.session.fullname;
           this.user.id = this.session.id;
+          this.getUser(this.user.id);
         }
       }
     );
@@ -51,5 +52,16 @@ export class CheckloginComponent implements OnInit {
   }
   viewMyAccount() {
     this.router.navigate(['/users/'+this.user.id]);
+  }
+  getUser(id) {
+    if (id) {
+      this.userService.getUser(id).subscribe(
+        res => {
+          if (res.success && res.data) {
+            this.user.account=res.data.account;
+            this.user.image_url = res.data.image_url;
+          }
+        });
+    }
   }
 }

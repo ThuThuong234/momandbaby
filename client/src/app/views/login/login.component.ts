@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   model: LoginModel = new LoginModel();
   session: SessionVM;
+  image_user:string;
 
   constructor( private router: Router, private toastr: ToastrService,
                private authService: AuthenticateService, private userService: UserService ) { }
