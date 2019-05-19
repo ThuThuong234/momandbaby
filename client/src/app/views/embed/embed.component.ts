@@ -107,6 +107,7 @@ export class EmbedComponent {
   }
 
   chat(roomId, roomName) {
+    this.messages = [];
     const currentUser = localStorage.getItem('currentUser');
     const session = deserialize(SessionVM, currentUser);
     const tokenProvider = new Chatkit.TokenProvider({
@@ -194,22 +195,21 @@ export class EmbedComponent {
   getListUsers(){
     const currentUser = localStorage.getItem('currentUser');
     const session = deserialize(SessionVM, currentUser);
-    const { username } = this;
-    const headers= {
-      "x-api-key":"123@mom_and_baby_tool",
-        "x-access-token":session.token
-    };
-    this.currentId = session.account;
-    this.chatService.getListUser().subscribe(
-      res=> {
-        if (res.success) {
-          this.listUsers= res.data;
 
-        } else {
-          //this.toastr.error('Đọc bài viết bị lỗi!')
-        }
+    if(session != null && session.account != null){
+      this.currentId = session.account;
+      this.chatService.getListUser().subscribe(
+        res=> {
+          if (res.success) {
+            this.listUsers= res.data;
 
-      });
+          } else {
+            //this.toastr.error('Đọc bài viết bị lỗi!')
+          }
+
+        });
+    }
+
     // axios.post('http://localhost:3000/chat/getListUsers')
     //   .then(currentUser=> {
     //     console.log(currentUser)
@@ -244,18 +244,18 @@ export class EmbedComponent {
     const currentUser = localStorage.getItem('currentUser');
     const session = deserialize(SessionVM, currentUser);
     const { username } = this;
-    console.log(currentUser);
-    console.log(username);
-    this.chatService.getListRoomOfUser(session.account).subscribe(
-      res=> {
-        console.log(res);
-        if (res.success) {
-          this.listRooms= res.data;
-        } else {
-          //this.toastr.error('Đọc bài viết bị lỗi!')
-        }
+    if(session != null && session.account != null){
+      this.chatService.getListRoomOfUser(session.account).subscribe(
+        res=> {
+          console.log(res);
+          if (res.success) {
+            this.listRooms= res.data;
+          } else {
+            //this.toastr.error('Đọc bài viết bị lỗi!')
+          }
 
-      });
+        });
+    }
 
   }
 
@@ -286,6 +286,7 @@ export class EmbedComponent {
       tokenProvider
     });
     this._nameRoom += "[";
+    this._nameRoom += session.account+",";
     this._nameRoom += this.lstChecked.toString();
     /*forEach(this.lstChecked, function(value, key){
       this._nameRoom += value;

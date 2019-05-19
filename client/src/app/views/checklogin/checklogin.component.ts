@@ -41,6 +41,10 @@ export class CheckloginComponent implements OnInit {
     this.router.navigate(['/topics/new']);
   }
 
+  redirectChat(){
+    this.router.navigate(['/embed']);
+  }
+
   logout() {
     this.authService.clearSession();
     this.router.navigate(['/']);
