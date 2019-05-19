@@ -42,6 +42,7 @@ import { UserComponent } from './views/user/user.component';
 import {CommentService} from "./services/reader/comment_services";
 
 import { EmbedComponent } from './views/embed/embed.component';
+import {ChatService} from "./services/chat.service";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -98,9 +99,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     HttpClientModule,
     NgChatModule,
-
-     BrowserModule,
-     FormsModule
+    BrowserModule,
+    FormsModule
 
   ],
   providers: [
@@ -112,10 +112,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     AuthenticateService,
     UserService,
     UploadFileService,
+    ChatService,
   ],
   bootstrap: [
     AppComponent
    
   ]
 })
-export class AppModule { }
+export class AppModule {}
+

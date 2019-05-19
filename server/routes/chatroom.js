@@ -57,5 +57,41 @@ router.get('/getListRoom', (req, res) =>{
         res.json(utils.failedResponse(error));
     });
 })
+
+router.get('/getListUsers', (req, res) =>{
+    chatServices.getListUsers()
+        .then(data => {
+            res.json(utils.successResponse(data));
+        })
+        .catch(error => {
+            res.json(utils.failedResponse(error));
+        });
+})
+
+router.get('/getListRoomOfUser/:id', (req, res) =>{
+    let userId = req.params.id;
+    chatServices.getListRoomOfUser(userId)
+        .then(data => {
+            res.json(utils.successResponse(data));
+        })
+        .catch(error => {
+            res.json(utils.failedResponse(error));
+        });
+})
+
+
+router.post('/createRoom/',(req, res) =>{
+    let userId = req.body.userId;
+    let name = req.body.name;
+    let listUserId = req.body.lstUserId;
+    console.log(req.body);
+    chatServices.createRoom(userId, name, listUserId)
+        .then(data => {
+            res.json(utils.successResponse(data));
+        })
+        .catch(error => {
+            res.json(utils.failedResponse(error));
+        });
+})
 module.exports = router;
       

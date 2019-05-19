@@ -28,15 +28,25 @@ html {
 
   .sidebar {
     flex-basis: 30%;
-    background-color: #ccc;
-    color: #fff;
+    //background-color: #ccc;
+    //color: #fff;
     padding: 5px 10px;
     border: 1px solid #F90CE5;
-    height:350px;
+    height:245px;
+    overflow-y: scroll;
+    //overflow-y:hidden;
   }
 
+  .sidebarRight {
+    flex-basis: 30%;
+    //background-color: white;
+    //color: #blac;
+    padding: 5px 10px;
+    border: 1px solid #F90CE5;
+    height:490px;
+  }
   .mainchat{
-    background-color: #ccc;
+   // background-color: #ccc;
     border: 1px solid #F90CE5;
   }
   .sidebar section {
@@ -58,7 +68,7 @@ html {
     display: inline-block;
     width: 20px;
     height: 20px;
-    background-color: #fff;
+    background-color: slategrey;
     margin-right: 10px;
     border-radius: 50%;
   }
@@ -123,6 +133,7 @@ html {
   }
 
   .anyClass {
-    height:350px;
+    height:400px;
     overflow-y: scroll;
+    //overflow-y:hidden;
   }

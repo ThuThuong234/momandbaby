@@ -21,7 +21,7 @@ const chatkit = new Chatkit.default({
 
 exports.getListRoom = function () {
     return new Promise(function (resolve, reject) {
-        chatkit.getRooms({})
+        chatkit.getRooms()
         .then(rooms => {
             return resolve(rooms);
         })
@@ -30,6 +30,33 @@ exports.getListRoom = function () {
         })
     });
     
+}
+
+exports.getListRoomOfUser = function (userId) {
+    return new Promise(function (resolve, reject) {
+        chatkit.getUserRooms({
+            userId: userId
+        })
+        .then(rooms => {
+            return resolve(rooms);
+        })
+        .catch(err => {
+            return reject(err);
+        })
+    });
+
+}
+exports.getListUsers = function () {
+    return new Promise(function (resolve, reject) {
+        chatkit.getUsers({})
+            .then(users => {
+                return resolve(users);
+            })
+            .catch(err => {
+                return reject(err);
+            })
+    });
+
 }
 
 exports.createUser = function (id, username) {
@@ -65,13 +92,27 @@ exports.auth = function(userId){
             userId: userId,
         });
         console.log(authData.body);
-        return resolve(authData.body).data;
+        return resolve(authData.body);
         //res.status(authData.status).send(authData.body);
     });
 
 }
 
-exports.createRoom = function(){
+exports.createRoom = function(userId, name,listUsersId){
+    console.log(listUsersId);
+    return new Promise(function (resolve, reject) {
+        chatkit.createRoom({
+            creatorId: userId,
+            name: name,
+            //userIds: ["Test"]
+            userIds: listUsersId
+            //customData: { foo: 42 },
+        }).then(room=> {
+            resolve(room);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
 
 }
 
