@@ -23,7 +23,7 @@ export class TopicService extends APIService {
   }
 
   public insertTopic(topic: Topic) {
-    return super.apiPost<ApiResult>('/topics/', topic, null,true);
+    return super.apiPost<TopicApiResult>('/topics/', topic, null,true);
   }
 
   public getLatestTopicById(id: string) {

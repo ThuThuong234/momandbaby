@@ -64,14 +64,23 @@ export class FormTopicComponent implements OnInit {
       });
   }
 
+  validateTopic() {
+    if (!this.selectedFiles) {
+      this.toastr.error('Please select thumbnail for this topic!');
+      return false;
+    }
+
+    return true;
+  }
+
   submitTopic(){
     // upload image
+    if(!this.validateTopic()) return;
+
     const file = this.selectedFiles.item(0);
     console.log("upload file: ");
     this.uploadService.uploadFile(file).subscribe( dataFile =>{
       // this.topicData.img = dataFile['Location'];
-      console.log("RES  ");
-      console.log(dataFile);
     // get current user
     const currentUser = localStorage.getItem('currentUser');
 
@@ -80,14 +89,16 @@ export class FormTopicComponent implements OnInit {
       const session = deserialize(SessionVM, currentUser);
       this.topicData.author= session.id;
       this.topicData.img=  "https://s3-us-west-2.amazonaws.com/babyandmom/" + dataFile["body"].name;
-      console.log(dataFile["body"].name);
+      this.topicData.content = this.quillEditorRef.root.innerHTML;
       console.log(this.topicData);
       this.topicService.insertTopic(this.topicData).subscribe(
         res => {
+          console.log(res);
           if (res.success) {
             this.toastr.success(this.translate.instant('COMMON.CREATE.SUCCESS'));
           } else {
-            this.toastr.error(res.message);
+            console.log(res.message);
+            this.toastr.error(res.message['errors'][0]['msg']);
           }
         },
         error => {
@@ -103,6 +114,8 @@ export class FormTopicComponent implements OnInit {
 
   }
 
+
+
   selectFile(event) {
     this.selectedFiles = event.target.files;
   }
@@ -113,16 +126,14 @@ export class FormTopicComponent implements OnInit {
   }
   getEditorInstance(editorInstance: any) {
     this.quillEditorRef = editorInstance;
-    console.log("FSDfsds: ");
-    console.log(this.quillEditorRef)
     const toolbar = editorInstance.getModule('toolbar');
     toolbar.addHandler('image', this.imageHandler);
   }
 
   imageHandler = (image, callback) => {
+    console.log('imageHandler');
     const input = <HTMLInputElement> document.getElementById('fileInputField');
     document.getElementById('fileInputField').onchange = () => {
-      console.log("adfafd");
       let file: File;
       file = input.files[0];
       // file type is only image.
@@ -137,7 +148,9 @@ export class FormTopicComponent implements OnInit {
 
               const range = this.quillEditorRef.getSelection();
               const img = '<img src="https://s3-us-west-2.amazonaws.com/babyandmom/' + dataFile["body"].name + '" />';
+              console.log(img);
             this.quillEditorRef.clipboard.dangerouslyPasteHTML(range.index, img);
+            console.log(this.quillEditorRef.root.innerHTML);
           } );
         }
       } else {

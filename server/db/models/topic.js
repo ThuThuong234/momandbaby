@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
             created_at: DataTypes.DATE,
             updated_at: DataTypes.DATE,
             title: DataTypes.STRING,
-            content: DataTypes.STRING,
+            content: DataTypes.STRING(100),
             summary: DataTypes.STRING,
             img: DataTypes.STRING,
             type_id: DataTypes.INTEGER,
