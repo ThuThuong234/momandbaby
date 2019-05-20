@@ -25,6 +25,9 @@ exports.getLatestTopics = async function () {
                     attributes: ['id', 'name']
                 }
             ],
+            where: {
+                status: 1
+            },
             limit: 10,
             order: [['created_at', 'DESC']],
         })
@@ -134,7 +137,8 @@ exports.searchTopic = function (search_key){
                 }
             ],
             where: {
-                title:{ [Op.like]: '%'+search_key+'%' }
+                title:{ [Op.like]: '%'+search_key+'%' },
+                status:1
             }
         })
             .then(topics => {
