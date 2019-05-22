@@ -162,11 +162,10 @@ router.post('/signup', [
     check('fullname').isLength({min: 1}).withMessage(errors.USER_FULLNAME),
     check('password').isLength({min: 8}).withMessage(errors.USER_PASSWORD),
     check('phone').optional().isMobilePhone().isLength({min: 10, max: 10}).withMessage(errors.USER_PHONE),
-    check('facebook_account').optional().isURL().withMessage(errors.USER_FB_ACCOUNT),
-    check('twitter_account').optional().isURL().withMessage(errors.USER_TWITTER_ACCOUNT),
+    check('facebook_account').optional().withMessage(errors.USER_FB_ACCOUNT),
+    check('twitter_account').optional().withMessage(errors.USER_TWITTER_ACCOUNT),
     check('active').optional().isBoolean().withMessage(errors.USER_ACTIVE),
-    check('img_url').optional().isURL().withMessage(errors.USER_IMG_URL),
-], (req, res) => {
+    check('img_url').optional().isURL().withMessage(errors.USER_IMG_URL), ], (req, res) => {
     let account = req.body.account;
     let password = req.body.password;
     let fullname = req.body.fullname;
@@ -296,8 +295,8 @@ router.put('/:id', [
     check('fullname').isLength({min: 1}).withMessage(errors.USER_FULLNAME),
     check('address').isLength({min: 1}).withMessage(errors.USER_ADDRESS),
     check('phone').optional().isMobilePhone().isLength({min: 10, max: 10}).withMessage(errors.USER_PHONE),
-    check('facebook_account').optional().isURL().withMessage(errors.USER_FB_ACCOUNT),
-    check('twitter_account').optional().isURL().withMessage(errors.USER_TWITTER_ACCOUNT),
+    check('facebook_account').optional().withMessage(errors.USER_FB_ACCOUNT),
+    check('twitter_account').optional().withMessage(errors.USER_TWITTER_ACCOUNT),
     check('active').optional().isInt().withMessage(errors.USER_ACTIVE),
     check('image_url').optional().isURL().withMessage(errors.USER_IMG_URL),
 ], auth_utils.authorizeAdminMember, function (req, res) {
@@ -333,11 +332,91 @@ router.post('/newUserChat', (req, res) => {
     // 
   });
   
-  router.post('/auth', (req, res) => {
+router.post('/auth', (req, res) => {
     const authData = chatkit.authenticate({
       userId: req.query.user_id,
     });
     res.status(authData.status).send(authData.body);
   });
+
+/**
+ * @api {get} /users/:id Get User by facebook id
+ * @apiVersion 1.0.0
+ * @apiPermission Admin
+ * @apiGroup Users
+ *
+ * @apiUse TokenHeader
+ *
+ * @apiParam {Number} id facebook Id
+ *
+ * @apiSuccessExample {json} Success Response
+ *  HTTP/1.1 200 OK
+ *  {
+ *    "success": true,
+ *    "data": {
+ *      "id": 1,
+ *      "account": "admin",
+ *      "fullname": "Admin",
+ *      "address": "12 Nguyen Van Bao , phuong 4,  Go Vap, Ho Chi Minh",
+ *      "phone": "",
+ *      "role_id": 1,
+ *      "email": "admin@gmail.com",
+ *      "facebook_account": "",
+ *      "twitter_account": "",
+ *      "image_url": null
+ *    }
+ *  }
+ * @apiUse FailedResponse
+ */
+router.get('/facebook/:id',  function (req, res) {
+    let facebook_id = req.params.id;
+    userServices.getUserByIdFb(facebook_id)
+        .then(data => {
+            res.json(utils.successResponse(data));
+        })
+        .catch(error => {
+            res.json(utils.failedResponse(error));
+        });
+});
+
+/**
+ * @api {get} /users/:id Get User by email
+ * @apiVersion 1.0.0
+ * @apiPermission Admin
+ * @apiGroup Users
+ *
+ * @apiUse TokenHeader
+ *
+ * @apiParam {String} email
+ *
+ * @apiSuccessExample {json} Success Response
+ *  HTTP/1.1 200 OK
+ *  {
+ *    "success": true,
+ *    "data": {
+ *      "id": 1,
+ *      "account": "admin",
+ *      "fullname": "Admin",
+ *      "address": "12 Nguyen Van Bao , phuong 4,  Go Vap, Ho Chi Minh",
+ *      "phone": "",
+ *      "role_id": 1,
+ *      "email": "admin@gmail.com",
+ *      "facebook_account": "",
+ *      "twitter_account": "",
+ *      "image_url": null
+ *    }
+ *  }
+ * @apiUse FailedResponse
+ */
+router.get('/email/:email',  function (req, res) {
+    let email = req.params.email;
+    userServices.getUserByEmail(email)
+        .then(data => {
+            res.json(utils.successResponse(data));
+        })
+        .catch(error => {
+            res.json(utils.failedResponse(error));
+        });
+});
 
 module.exports = router;

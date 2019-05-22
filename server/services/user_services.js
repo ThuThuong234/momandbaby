@@ -161,8 +161,7 @@ exports.getUser = function (id) {
     });
 };
 
-exports.updateUser = function (userId, fullname, address, phone,email, facebook_account, twitter_account, image_url,active)
-{
+exports.updateUser = function (userId, fullname, address, phone,email, facebook_account, twitter_account, image_url,active) {
     return new Promise(function (resolve, reject) {
         console.log(userId);
         console.log(fullname);
@@ -219,7 +218,6 @@ exports.updateUser = function (userId, fullname, address, phone,email, facebook_
     });
 };
 
-
 exports.getAllUsers = function () {
     return new Promise(function (resolve, reject) {
         models.User.findAll({
@@ -251,3 +249,57 @@ exports.getAllUsers = function () {
             });
     });
 };
+
+exports.getUserByIdFb = function (id) {
+    return new Promise(function (resolve, reject) {
+        models.User.findOne({
+            where: {
+                facebook_account: id
+            },
+            attributes: ['id', 'account', 'fullname', 'address', 'phone', 'role_id', 'email', 'facebook_account', 'twitter_account', 'image_url']
+        })
+            .then(user => {
+                // t vo roi nha
+                if (user == null) {
+                    throw {
+                        message: errors.USER_02,
+                        code: 'USER_02'
+                    };
+                }
+                return resolve(user);
+            })
+            .catch(error => {
+                console.log(error);
+                logger.error(error);
+                return reject(error);
+            });
+    });
+};
+
+exports.getUserByEmail = function (email) {
+    return new Promise(function (resolve, reject) {
+        models.User.findOne({
+            where: {
+                email: email
+            },
+            attributes: ['id', 'account', 'fullname', 'address', 'phone', 'role_id', 'email', 'facebook_account', 'twitter_account', 'image_url']
+        })
+            .then(user => {
+                // t vo roi nha
+                if (user == null) {
+                    throw {
+                        message: errors.USER_02,
+                        code: 'USER_02'
+                    };
+                }
+                return resolve(user);
+            })
+            .catch(error => {
+                console.log(error);
+                logger.error(error);
+                return reject(error);
+            });
+    });
+};
+
+
