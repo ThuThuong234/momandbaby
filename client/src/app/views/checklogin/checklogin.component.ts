@@ -26,7 +26,6 @@ export class CheckloginComponent implements OnInit {
     this.authService.session$.subscribe(
       data => {
         this.session = data;
-        console.log(this.session);
         if (this.session && this.session.token != null && this.session.role != null) {
           this.user.fullname = this.session.fullname;
           this.user.id = this.session.id;
@@ -65,7 +64,6 @@ export class CheckloginComponent implements OnInit {
     if (id) {
       this.userService.getUser(id).subscribe(
         res => {
-          console.log(res);
           if (res.success && res.data) {
             this.user.account=res.data.account;
             this.user.image_url = res.data.image_url;
@@ -77,6 +75,7 @@ export class CheckloginComponent implements OnInit {
         });
     }
   }
+
   signOut(){
     if(this.socialAuthService.isSocialLoggedIn()){
       this.socialAuthService.signOut().catch((err)=>{

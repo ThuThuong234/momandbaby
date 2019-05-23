@@ -34,7 +34,6 @@ export class IndexComponent implements OnInit {
     this.topicServices.getLatestTopics().subscribe(
       res => {
         if (res.success && res.data) {
-          console.log(res.data);
           this.lastestTopic =  res.data;
         } else {
           this.toastr.error(res.message);

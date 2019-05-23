@@ -9,6 +9,8 @@ import {ToastrService} from 'ngx-toastr';
 import {
   SocialService
 } from "ng6-social-button";
+import {UserResModel} from '../../view-model/user/user-res-model';
+import {SignupModel} from '../../view-model/user/signup-model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,11 +23,21 @@ export class LoginComponent implements OnInit {
   };
   model: LoginModel = new LoginModel();
   session: SessionVM;
+  id:number;
+  facebook_id:string;
+  image_url:string;
+  name_facebook:string;
+  email:string;
+  modelSignup: SignupModel = new SignupModel();
+  isUser:boolean;
+
+  userShow: UserResModel;
 
   constructor( private router: Router, private toastr: ToastrService,private socialAuthService: SocialService,
                private authService: AuthenticateService, private userService: UserService ) { }
 
   ngOnInit() {
+    this.isUser=false;
     this.authService.session$.subscribe(
       data => {
         this.session = data;
@@ -61,60 +73,132 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
-  // public socialSignIn(socialPlatform : string) {
-  //   let socialPlatformProvider;
-  //   if(socialPlatform == "facebook"){
-  //     socialPlatformProvider = FacebookLoginProvider.PROVIDER_TYPE;
-  //   }else if(socialPlatform == "google"){
-  //     socialPlatformProvider = GoogleLoginProvider.PROVIDER_TYPE;
-  //   }
-  //
-  //   this.socialAuthService.signIn(socialPlatformProvider).then(
-  //     (socialUser) => {
-  //       console.log(socialPlatform+" sign in data : " , socialUser);
-  //       if( socialUser && socialUser.accessToken ){
-  //         const newSession = new SessionVM(+(socialUser.id), socialUser.accessToken, new Role(null,'Member','member'), socialUser.name,socialUser.email);
-  //         newSession.image_url=socialUser.image;
-  //         newSession.email=socialUser.email;
-  //         this.authService.setSession(newSession);
-  //         // console.log(newSession);
-  //         // if(newSession.role.code === Role.ROLES.ADMIN || newSession.role.code === Role.ROLES.MEMBER){
-  //         this.router.navigate(['/']);
-  //         // }
-  //         // else {
-  //         //   this.toastr.error('Lỗi dữ liệu');
-  //         //   this.router.navigate(['/errorpage']);
-  //         // }
-  //         this.toastr.success("Đăng nhập facebook thành công!")
-  //       }
-  //       else {
-  //         this.toastr.error("Đăng nhập facebook không thành công!");
-  //       }
-  //
-  //     });
-  // }
   getSocialUser(socialUser){
     console.log(socialUser);
     if( socialUser && socialUser.accessToken ){
-              const newSession = new SessionVM(+(socialUser.id), socialUser.accessToken, new Role(null,'Member','member'), socialUser.name,socialUser.email);
-              newSession.image_url=socialUser.image;
-              newSession.email=socialUser.email;
-              newSession.provider=socialUser.provider;
-              this.authService.setSession(newSession);
-              // console.log(newSession);
-              // if(newSession.role.code === Role.ROLES.ADMIN || newSession.role.code === Role.ROLES.MEMBER){
-              this.router.navigate(['/']);
-              // }
-              // else {
-              //   this.toastr.error('Lỗi dữ liệu');
-              //   this.router.navigate(['/errorpage']);
-              // }
+      this.facebook_id=socialUser.id;
+      this.email=socialUser.email;
+      this.image_url=socialUser.image;
+      console.log(this.image_url);
+      this.name_facebook=socialUser.name;
+              this.getUserByFaceBookId();
               this.toastr.success("Đăng nhập facebook thành công!")
             }
             else {
               this.toastr.error("Đăng nhập facebook không thành công!");
             }
+  }
+
+  getUserByFaceBookId() {
+    if (this.facebook_id) {
+      this.userService.getUserByFacebookId(this.facebook_id).subscribe(
+        res => {
+          if (res.success && res.data) {
+            const newSession = new SessionVM(res.data.id, res.data.token, res.data.role, res.data.fullname, res.data.account);
+            this.authService.setSession(newSession);
+            this.id=res.data.id;
+            console.log(this.id);
+            this.getUser();
+            this.isUser=true;
+          } else {
+            if(this.email)
+            {
+              console.log("email");
+              this.getUserByEmail();
+            }
+            else{
+              this.doSignUp();
+            }
+            this.isUser=false;
+          }
+        });
+    }
+  }
+
+  getUserByEmail() {
+    if (this.email) {
+      this.userService.getUserByEmail(this.email).subscribe(
+        res => {
+          if (res.success && res.data) {
+            const newSession = new SessionVM(res.data.id, res.data.token, res.data.role, res.data.fullname, res.data.account);
+            this.authService.setSession(newSession);
+            this.id=res.data.id;
+            this.getUser();
+            this.isUser=true;
+          } else {
+            this.doSignUp();
+            this.isUser=false;
+          }
+        });
+    }
+  }
+
+  doUpdateUser(){
+    console.log(this.userShow);
+    this.userService.updateUser(this.userShow).subscribe(
+      res => {
+        if (res.success && res.data) {
+        }
+      });
+  }
+
+  doSignUp() {
+    if(this.name_facebook==null){
+      this.name_facebook=this.facebook_id;
+    }
+    if(this.email==null){
+      this.email="email"+this.facebook_id+"@momandbaby.com";
+      this.modelSignup.account=this.facebook_id;
+    }
+    else{
+      this.modelSignup.account=this.email;
+    }
+    this.modelSignup.fullname=this.name_facebook;
+    this.modelSignup.email=this.email;
+    this.modelSignup.password="12345678";
+    this.modelSignup.phone="0000000000";
+    this.modelSignup.address="facebook";
+    this.userService.signup(this.modelSignup).subscribe(
+      res => {
+        if (res.success == true) {
+          this.getUserByFaceBookId();
+        } else {
+          console.log(res);
+        }
+      });
+  }
+
+  getUser() {
+    if (this.id) {
+      this.userService.getUser(this.id.toString()).subscribe(
+        res => {
+          if (res.success && res.data) {
+            this.userShow=res.data;
+            console.log(this.userShow);
+            if(this.userShow.facebook_account==null){
+              this.userShow.facebook_account="fb.com";
+            }
+            if(this.userShow.twitter_account==null){
+              this.userShow.twitter_account="fb.com";
+            }
+            if(this.facebook_id!=null&&this.userShow.facebook_account=="fb.com"){
+              this.userShow.facebook_account=this.facebook_id;
+            }
+            if(this.email!=null&&(this.userShow.email==""||this.userShow.email=="email"+this.facebook_id+"@momandbaby.com")){
+              this.userShow.email=this.email;
+            }
+            if(this.name_facebook!=null&&(this.userShow.fullname==""||this.userShow.fullname==this.facebook_id)){
+              this.userShow.fullname=this.name_facebook;
+            }
+            console.log(this.image_url);
+            console.log(this.userShow.image_url);
+            if(this.image_url!=null&&(this.userShow.image_url==""||this.userShow.image_url==null)){
+              this.userShow.image_url=this.image_url;
+            }
+            this.doUpdateUser();
+          }
+        });
+    }
   }
 
 }

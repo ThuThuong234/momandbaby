@@ -5,7 +5,7 @@
 <div *ngIf="session && session.token!=null">
   <div class="dropdown">
     <button type="button" class="btn-profile btn bg-white btn-sm dropdown-toggle" data-toggle="dropdown">
-      <img class="rounded-circle" width="45" height="45" [src]="session.image_url||'../../../assets/img/user.png'">
+      <img class="rounded-circle" width="45" height="45" [src]="user.image_url||'../../../assets/img/user.png'">
     </button>
     <div class="dropdown-menu user-menu">
       <a class="dropdown-item" (click)="viewMyAccount()"><i class="post-topic fas fa-user"></i> {{ user.account||"Tài khoản" }}  </a>

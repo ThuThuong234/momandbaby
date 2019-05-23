@@ -1,15 +1,13 @@
 
 <div class="card bg-light">
   <article class="card-body mx-auto" style="max-width: 400px;">
-    <h4 class="card-title mt-3 text-center">Login</h4>
+    <h4 class="card-title lam mt-3 text-center">Login</h4>
     <div class="row">
-      <div class="col-sm-6">
-        <google-login-button (socialUser)="getSocialUser($event)"></google-login-button>
-<!--        <a href="" class="btn btn-fb-twitter  btn-twitter"> <i class="fab fa-twitter"></i> Login via Twitter</a>-->
+      <div class="col-sm-6 add-font-size-button">
+        <google-login-button  (socialUser)="getSocialUser($event)"></google-login-button>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-6 add-font-size-button">
         <facebook-login-button (socialUser)="getSocialUser($event)"></facebook-login-button>
-<!--        <a (click)="socialSignIn('facebook')" class="btn btn-fb-twitter btn-facebook"> <i class="fab fa-facebook-f"></i>Login via facebook</a>-->
       </div>
     </div>
     <div (keyup.enter)="doLogin()">

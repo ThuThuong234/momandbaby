@@ -48,7 +48,6 @@ export class UserComponent implements OnInit {
           this.user.role = this.session.role;
           this.getUser();
         } else {
-          this.toastr.error('Chưa đăng nhập!');
           this.router.navigate(['/']);
         }
       }
@@ -70,20 +69,14 @@ export class UserComponent implements OnInit {
             this.userShow=res.data;
             this.namefull=res.data.fullname;
             this.image_user_old=res.data.image_url;
-            console.log(this.userShow);
             if(this.userShow.facebook_account==null){
               this.userShow.facebook_account="fb.com";
             }
             if(this.userShow.twitter_account==null){
               this.userShow.twitter_account="fb.com";
             }
-          } else {
-            this.toastr.error('Lỗi hoặc không đủ quyền thực hiện!');
           }
         });
-    }
-    else {
-      this.toastr.error('Id lỗi!');
     }
   }
   doUpdateUser(){

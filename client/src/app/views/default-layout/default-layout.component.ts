@@ -35,7 +35,6 @@ export class DefaultLayoutComponent implements OnInit {
     this.authService.session$.subscribe(
       data => {
         this.session = data;
-        console.log(this.session);
         if (this.session && this.session.token != null && this.session.role != null) {
           this.user.fullname = this.session.fullname;
           this.user.id = this.session.id;
@@ -49,7 +48,6 @@ export class DefaultLayoutComponent implements OnInit {
     this.typeService.getTypesforMenu().subscribe(
       res => {
         if (res.success && res.data) {
-          console.log(res.data);
           this.navItems = res.data;
         } else {
           this.toastr.error(res.message);
@@ -59,7 +57,6 @@ export class DefaultLayoutComponent implements OnInit {
         this.toastr.error(this.translate.instant('COMMON.GET.FAILED'));
       });
   }
-
 
   search(){
     console.log(this.search_key);

@@ -35,4 +35,13 @@ export class UserService extends APIService {
   public  updateUser( userModel: UserResModel ){
     return super.apiPut<ApiResult>('/users/'+userModel.id, userModel,null,true);
   }
+
+  public getUserByFacebookId(id: string) {
+    return super.apiGet<LoginApiResult>('/users/facebook/'+id, null, true);
+  }
+
+  public getUserByEmail(email: string) {
+    return super.apiGet<LoginApiResult>('/users/email/'+email, null, true);
+  }
+
 }
