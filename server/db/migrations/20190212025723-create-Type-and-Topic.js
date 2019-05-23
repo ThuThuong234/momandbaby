@@ -18,7 +18,7 @@ module.exports = {
                   created_at: Sequelize.DATE,
                   updated_at: Sequelize.DATE,
                   title: {type: Sequelize.STRING, allowNull: false},
-                  content: {type: Sequelize.STRING(1000000), allowNull: false},
+                  content: {type: Sequelize.TEXT, allowNull: false},
                   summary: {type: Sequelize.STRING, allowNull: false},
                   img: {type: Sequelize.STRING, allowNull: false},
                   status: Sequelize.INTEGER,

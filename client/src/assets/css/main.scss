@@ -13,7 +13,6 @@ body {
   margin: 0;
   background: #fff;
   letter-spacing: 1px;
-  font-family: 'Open Sans', sans-serif;
 }
 body a {
   outline: none;
@@ -1736,7 +1735,8 @@ $background-white: #fff;
   color: $title_color;
 }
 .content{
-  margin-top: 100px;
+  margin-top: 150px;
+  min-height: 850px;
 }
 
 .navbar-light {
@@ -1752,7 +1752,7 @@ $background-white: #fff;
   }
 }
 .page-name{
-  color: $title_color;
+  color: $title_color !important;
   font-family: cursive;
 }
 .fas.fa-search {
@@ -1813,4 +1813,12 @@ quill-editor{
 }
 quill-editor img{
   max-width: 100%;
+}
+.loginBtn{
+  font-size: 11px !important;
+  width: auto;
+}
+body{
+
+  font-family: cursive !important;
 }

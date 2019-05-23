@@ -5,11 +5,7 @@ html {
   *, *::before, *::after {
     box-sizing: inherit;
     margin: 0;
-    padding: 0;
-  }
-
-  body {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    padding: 0px;
   }
 
   .App {
@@ -20,6 +16,8 @@ html {
     display: flex;
     border: 1px solid #ccc;
     margin-top: 30px;
+    font-family: cursive;
+    color: #F90CE5 !important;
   }
 
   ul {
@@ -31,9 +29,10 @@ html {
     //background-color: #ccc;
     //color: #fff;
     padding: 5px 10px;
-    border: 1px solid #F90CE5;
-    height:245px;
+    //border-right: 1px solid #F90CE5;
+    height:260px;
     overflow-y: scroll;
+    background-color: #F0F4F8;
     //overflow-y:hidden;
   }
 
@@ -43,7 +42,8 @@ html {
     //color: #blac;
     padding: 5px 10px;
     border: 1px solid #F90CE5;
-    height:490px;
+    background-color: #F0F4F8;
+    height:520px;
   }
   .mainchat{
    // background-color: #ccc;
@@ -94,7 +94,8 @@ html {
   }
 
   .chat-header {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #F90CE5;
+    background-color: #F0F4F8;
   }
 
   .chat-session {
