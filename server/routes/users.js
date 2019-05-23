@@ -298,7 +298,7 @@ router.put('/:id', [
     check('facebook_account').optional().withMessage(errors.USER_FB_ACCOUNT),
     check('twitter_account').optional().withMessage(errors.USER_TWITTER_ACCOUNT),
     check('active').optional().isInt().withMessage(errors.USER_ACTIVE),
-    check('image_url').optional().isURL().withMessage(errors.USER_IMG_URL),
+    check('image_url').optional().withMessage(errors.USER_IMG_URL),
 ], auth_utils.authorizeAdminMember, function (req, res) {
     let userId = req.params.id;
     let fullname = req.body.fullname;

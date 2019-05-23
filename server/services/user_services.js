@@ -256,7 +256,15 @@ exports.getUserByIdFb = function (id) {
             where: {
                 facebook_account: id
             },
-            attributes: ['id', 'account', 'fullname', 'address', 'phone', 'role_id', 'email', 'facebook_account', 'twitter_account', 'image_url']
+            attributes: ['id', 'account', 'fullname', 'address', 'phone', 'role_id', 'email', 'facebook_account',
+                'twitter_account', 'image_url'],
+            include: [
+                {
+                    model: models.Role,
+                    required: false,
+                    attributes: ['code', 'name']
+                }
+            ]
         })
             .then(user => {
                 // t vo roi nha
@@ -266,7 +274,21 @@ exports.getUserByIdFb = function (id) {
                         code: 'USER_02'
                     };
                 }
-                return resolve(user);
+                let resultData = {
+                    id: user.id,
+                    account: user.account,
+                    fullname: user.fullname,
+                    role: user.Role,
+                };
+                let token = auth_utils.getToken(resultData);
+                resultData.token = token;
+
+                user.last_login = new Date();
+                return Promise.all([resultData, user.save()]);
+
+            })
+            .then(([resultData]) => {
+                return resolve(resultData);
             })
             .catch(error => {
                 console.log(error);
@@ -282,7 +304,15 @@ exports.getUserByEmail = function (email) {
             where: {
                 email: email
             },
-            attributes: ['id', 'account', 'fullname', 'address', 'phone', 'role_id', 'email', 'facebook_account', 'twitter_account', 'image_url']
+            attributes: ['id', 'account', 'fullname', 'address', 'phone', 'role_id',
+                'email', 'facebook_account', 'twitter_account', 'image_url'],
+            include: [
+                {
+                    model: models.Role,
+                    required: false,
+                    attributes: ['code', 'name']
+                }
+            ]
         })
             .then(user => {
                 // t vo roi nha
@@ -292,7 +322,21 @@ exports.getUserByEmail = function (email) {
                         code: 'USER_02'
                     };
                 }
-                return resolve(user);
+                let resultData = {
+                    id: user.id,
+                    account: user.account,
+                    fullname: user.fullname,
+                    role: user.Role,
+                };
+                let token = auth_utils.getToken(resultData);
+                resultData.token = token;
+
+                user.last_login = new Date();
+                return Promise.all([resultData, user.save()]);
+
+            })
+            .then(([resultData]) => {
+                return resolve(resultData);
             })
             .catch(error => {
                 console.log(error);
