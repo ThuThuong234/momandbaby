@@ -19,9 +19,6 @@
         </div>
         <div class="col-8">
           <div class="row justify-content-end pt-2">
-            <div class="col-md-4 pt-top-50" *ngIf="session && session.role.code=='admin'">
-              <a class="pt-top-admin"href="/users">Thành viên</a>
-            </div>
             <div class="col-md-4 icons pr-0">
               <form (submit)="search()">
                 <input type="text" class="form-control bg-light search-text input-sm" name="search_key" placeholder="enter title to search" [(ngModel)]="search_key">
@@ -85,7 +82,14 @@
     </div>
   </div>
 </div>
-<div class="content"><router-outlet></router-outlet></div>
+
+<div class="content" *ngIf="!isAdmin">
+  <router-outlet></router-outlet>
+</div>
+<div class="content" *ngIf="isAdmin">
+  <app-defaul-admin-layout></app-defaul-admin-layout>
+</div>
+
 
 <footer>
   <div class="footer-bottom py-lg-4 py-3 text-center">

@@ -10,4 +10,5 @@ export class LoginResVM
   token: string;
   @Type(() => Role)
   role: Role;
+  image_url:string;
 }

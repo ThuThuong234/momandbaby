@@ -30,11 +30,13 @@ export class UsersComponent implements OnInit {
         if (this.session && this.session.token != null && this.session.role != null) {
           this.user.fullname = this.session.fullname;
           this.user.id = this.session.id;
-          console.log(this.session.role);
-          this.getAllUsers();
-          this.toastr.success('Xin chào ' + this.user.fullname);
+          if(this.session.role.code!='admin'){
+            this.router.navigate(['/']);
+          }
+          else{
+            this.getAllUsers();
+          }
         } else {
-          this.toastr.error('Chưa đăng nhập!');
           this.router.navigate(['/']);
         }
       }

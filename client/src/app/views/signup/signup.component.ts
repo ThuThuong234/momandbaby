@@ -74,7 +74,7 @@ export class SignupComponent implements OnInit {
             this.userService.login(this.modellogin).subscribe(
               res2 =>{
                 if( res2.data && res2.data.token ){
-                  const newSession = new SessionVM(res2.data.id, res2.data.token, res2.data.role, res2.data.fullname, res2.data.account);
+                  const newSession = new SessionVM(res2.data.id, res2.data.token, res2.data.role, res2.data.fullname, res2.data.account, res2.data.image_url);
                   this.authService.setSession(newSession);
                   console.log(newSession);
                   if(newSession.role.code === Role.ROLES.ADMIN || newSession.role.code === Role.ROLES.MEMBER){

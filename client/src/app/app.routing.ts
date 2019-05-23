@@ -113,7 +113,13 @@ export const routes: Routes = [
         data: {
           title: 'Thành viên'
         }
-      },
+      },{
+        path: 'admin',
+        component: DefaulAdminLayoutComponent,
+        data: {
+          title: 'Quản lý'
+        }
+      }
       // {
       //   path: 'types/:id/topics/',
       //   // component: ListComponent,

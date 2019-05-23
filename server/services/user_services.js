@@ -95,7 +95,7 @@ exports.login = function (account, password) {
                 account: account,
                 password: password
             },
-            attributes: ['id', 'account', 'fullname'],
+            attributes: ['id', 'account', 'fullname', 'image_url'],
             include: [
                 {
                     model: models.Role,
@@ -117,6 +117,7 @@ exports.login = function (account, password) {
                     id: user.id,
                     account: user.account,
                     fullname: user.fullname,
+                    image_url: user.image_url,
                     role: user.Role,
                 };
                 let token = auth_utils.getToken(resultData);
@@ -279,6 +280,7 @@ exports.getUserByIdFb = function (id) {
                     account: user.account,
                     fullname: user.fullname,
                     role: user.Role,
+                    img_url: user.image_url
                 };
                 let token = auth_utils.getToken(resultData);
                 resultData.token = token;
@@ -327,6 +329,7 @@ exports.getUserByEmail = function (email) {
                     account: user.account,
                     fullname: user.fullname,
                     role: user.Role,
+                    img_url: user.image_url
                 };
                 let token = auth_utils.getToken(resultData);
                 resultData.token = token;

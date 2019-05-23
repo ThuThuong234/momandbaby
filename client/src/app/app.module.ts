@@ -47,6 +47,7 @@ import {
   Ng6SocialButtonModule,
   SocialServiceConfig
 } from "ng6-social-button";
+import {CollapseModule} from 'ngx-bootstrap';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -115,6 +116,7 @@ export function getAuthServiceConfigs() {
     NgChatModule,
     BrowserModule,
     FormsModule,
+    CollapseModule,
 
   ],
   providers: [

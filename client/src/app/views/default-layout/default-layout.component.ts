@@ -22,6 +22,7 @@ export class DefaultLayoutComponent implements OnInit {
   public session: SessionVM;
   public showBanner: boolean = false;
   search_key: String;
+  isAdmin:boolean;
 
 
   constructor(private authService: AuthenticateService,
@@ -32,12 +33,16 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isAdmin=false;
     this.authService.session$.subscribe(
       data => {
         this.session = data;
         if (this.session && this.session.token != null && this.session.role != null) {
           this.user.fullname = this.session.fullname;
           this.user.id = this.session.id;
+          if(this.session.role&&this.session.role.code=="admin"){
+            this.isAdmin=true;
+          }
         }
       }
     );

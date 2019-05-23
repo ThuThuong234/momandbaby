@@ -13,12 +13,13 @@ export class SessionVM {
   email:string;
   provider:string;
 
-  constructor(id:number,token: string, role: Role, fullname: string, account: string) {
+  constructor(id:number,token: string, role: Role, fullname: string, account: string,image_url: string) {
     this.id = id;
     this.token = token;
     this.role = role;
     this.fullname = fullname;
     this.account = account;
+    this.image_url = image_url;
   }
 
   updateToken(newToken: string) {
