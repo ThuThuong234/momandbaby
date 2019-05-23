@@ -56,7 +56,9 @@ export class LoginComponent implements OnInit {
         res => {
           console.log(res);
           if (res.data && res.data.token) {
+            console.log(res.data.image_url);
             this.session = new SessionVM(res.data.id, res.data.token, res.data.role, res.data.fullname, res.data.account,res.data.image_url);
+            console.log(this.session);
             this.authService.setSession(this.session);
             console.log(this.session);
             if (this.session.role.code === Role.ROLES.ADMIN || this.session.role.code === Role.ROLES.MEMBER) {

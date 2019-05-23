@@ -25,7 +25,9 @@ export class DefaulAdminLayoutComponent implements OnInit {
         if (this.session && this.session.token != null && this.session.role != null) {
           this.user.fullname = this.session.fullname;
           this.user.id = this.session.id;
-          this.user.image_url=this.session.image_url;
+          this.user.image_url=this.session.imagex;
+          console.log(this.session);
+          console.log(this.user);
         }
       }
     );

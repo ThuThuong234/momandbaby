@@ -5,7 +5,7 @@
       <div class="text-left item-admin"><a (click)="isOpen=!isOpen;"><i class="fa fa-fw fa-bars"></i>Chức năng quản trị</a></div>
       <div class="text-center item-admin">
         <a href="/users/{{user.id}}">
-          <img src="user.image_url||'../../../../assets/img/user.png'" style="width: 50px;" class="m-3">
+          <img [src]="user.image_url||'../../../../assets/img/user.png'" style="width: 50px;" class="m-3">
           <div class="m-1"><i class="far fa-address-card"></i>{{user.fullname||'Admin'}}</div>
         </a>
       </div>

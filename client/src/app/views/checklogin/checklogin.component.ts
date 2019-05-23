@@ -30,7 +30,6 @@ export class CheckloginComponent implements OnInit {
           this.user.fullname = this.session.fullname;
           this.user.id = this.session.id;
           this.getUser(this.user.id);
-          this.session.image_url=this.user.image_url;//=this.session.image_url;
         }
       }
     );

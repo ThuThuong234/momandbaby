@@ -8,7 +8,7 @@ export class LoginResVM
   account: string;
   fullname: string;
   token: string;
+  image_url:string;
   @Type(() => Role)
   role: Role;
-  image_url:string;
 }

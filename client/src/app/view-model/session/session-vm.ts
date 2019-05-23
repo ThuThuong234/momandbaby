@@ -9,17 +9,17 @@ export class SessionVM {
   id: number;
   @Type(() => Role)
   role: Role;
-  image_url:string;
+  imagex:string;
   email:string;
   provider:string;
 
-  constructor(id:number,token: string, role: Role, fullname: string, account: string,image_url: string) {
+  constructor(id:number,token: string, role: Role, fullname: string, account: string,imagex: string) {
     this.id = id;
     this.token = token;
     this.role = role;
     this.fullname = fullname;
     this.account = account;
-    this.image_url = image_url;
+    this.imagex = imagex;
   }
 
   updateToken(newToken: string) {
